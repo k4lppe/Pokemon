@@ -1,0 +1,191 @@
+﻿
+namespace pokemon
+{
+    partial class SelectPokemon
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnStartGame = new System.Windows.Forms.Button();
+            this.btnMachamp = new System.Windows.Forms.Button();
+            this.btnGengar = new System.Windows.Forms.Button();
+            this.btnSnorlax = new System.Windows.Forms.Button();
+            this.btnZapdos = new System.Windows.Forms.Button();
+            this.btnCharizard = new System.Windows.Forms.Button();
+            this.btnGyarados = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(280, 23);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(291, 35);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Choose 3 Pokémon";
+            // 
+            // btnStartGame
+            // 
+            this.btnStartGame.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.btnStartGame.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnStartGame.FlatAppearance.BorderColor = System.Drawing.Color.Red;
+            this.btnStartGame.FlatAppearance.BorderSize = 6;
+            this.btnStartGame.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.btnStartGame.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.btnStartGame.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnStartGame.Font = new System.Drawing.Font("Unispace", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnStartGame.Location = new System.Drawing.Point(339, 593);
+            this.btnStartGame.Name = "btnStartGame";
+            this.btnStartGame.Size = new System.Drawing.Size(142, 55);
+            this.btnStartGame.TabIndex = 7;
+            this.btnStartGame.Text = "Start";
+            this.btnStartGame.UseVisualStyleBackColor = false;
+            this.btnStartGame.Click += new System.EventHandler(this.btnStartGame_Click);
+            // 
+            // btnMachamp
+            // 
+            this.btnMachamp.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnMachamp.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnMachamp.FlatAppearance.BorderSize = 4;
+            this.btnMachamp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMachamp.Image = global::pokemon.Properties.Resources.machamp;
+            this.btnMachamp.Location = new System.Drawing.Point(563, 336);
+            this.btnMachamp.Name = "btnMachamp";
+            this.btnMachamp.Size = new System.Drawing.Size(258, 240);
+            this.btnMachamp.TabIndex = 5;
+            this.btnMachamp.UseVisualStyleBackColor = true;
+            this.btnMachamp.Click += new System.EventHandler(this.btnMachamp_Click);
+            // 
+            // btnGengar
+            // 
+            this.btnGengar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnGengar.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnGengar.FlatAppearance.BorderSize = 4;
+            this.btnGengar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnGengar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnGengar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGengar.Image = global::pokemon.Properties.Resources.gengar;
+            this.btnGengar.Location = new System.Drawing.Point(286, 336);
+            this.btnGengar.Name = "btnGengar";
+            this.btnGengar.Size = new System.Drawing.Size(258, 240);
+            this.btnGengar.TabIndex = 4;
+            this.btnGengar.UseVisualStyleBackColor = true;
+            this.btnGengar.Click += new System.EventHandler(this.btnGengar_Click);
+            // 
+            // btnSnorlax
+            // 
+            this.btnSnorlax.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSnorlax.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnSnorlax.FlatAppearance.BorderSize = 4;
+            this.btnSnorlax.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSnorlax.Image = global::pokemon.Properties.Resources.snorlax;
+            this.btnSnorlax.Location = new System.Drawing.Point(12, 336);
+            this.btnSnorlax.Name = "btnSnorlax";
+            this.btnSnorlax.Size = new System.Drawing.Size(258, 240);
+            this.btnSnorlax.TabIndex = 3;
+            this.btnSnorlax.UseVisualStyleBackColor = true;
+            this.btnSnorlax.Click += new System.EventHandler(this.btnSnorlax_Click);
+            // 
+            // btnZapdos
+            // 
+            this.btnZapdos.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnZapdos.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnZapdos.FlatAppearance.BorderSize = 4;
+            this.btnZapdos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnZapdos.Image = global::pokemon.Properties.Resources.zapdos;
+            this.btnZapdos.Location = new System.Drawing.Point(563, 75);
+            this.btnZapdos.Name = "btnZapdos";
+            this.btnZapdos.Size = new System.Drawing.Size(258, 240);
+            this.btnZapdos.TabIndex = 2;
+            this.btnZapdos.UseVisualStyleBackColor = true;
+            this.btnZapdos.Click += new System.EventHandler(this.btnZapdos_Click);
+            // 
+            // btnCharizard
+            // 
+            this.btnCharizard.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCharizard.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnCharizard.FlatAppearance.BorderSize = 4;
+            this.btnCharizard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCharizard.Image = global::pokemon.Properties.Resources.charizard;
+            this.btnCharizard.Location = new System.Drawing.Point(286, 75);
+            this.btnCharizard.Name = "btnCharizard";
+            this.btnCharizard.Size = new System.Drawing.Size(258, 240);
+            this.btnCharizard.TabIndex = 1;
+            this.btnCharizard.UseVisualStyleBackColor = true;
+            this.btnCharizard.Click += new System.EventHandler(this.btnCharizard_Click);
+            // 
+            // btnGyarados
+            // 
+            this.btnGyarados.BackColor = System.Drawing.Color.White;
+            this.btnGyarados.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnGyarados.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnGyarados.FlatAppearance.BorderSize = 4;
+            this.btnGyarados.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnGyarados.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnGyarados.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGyarados.Image = global::pokemon.Properties.Resources.gyarados;
+            this.btnGyarados.Location = new System.Drawing.Point(12, 75);
+            this.btnGyarados.Name = "btnGyarados";
+            this.btnGyarados.Size = new System.Drawing.Size(258, 240);
+            this.btnGyarados.TabIndex = 0;
+            this.btnGyarados.UseVisualStyleBackColor = false;
+            this.btnGyarados.Click += new System.EventHandler(this.btnGyarados_Click);
+            // 
+            // SelectPokemon
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(859, 660);
+            this.Controls.Add(this.btnStartGame);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.btnMachamp);
+            this.Controls.Add(this.btnGengar);
+            this.Controls.Add(this.btnSnorlax);
+            this.Controls.Add(this.btnZapdos);
+            this.Controls.Add(this.btnCharizard);
+            this.Controls.Add(this.btnGyarados);
+            this.Name = "SelectPokemon";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Form1";
+            this.Load += new System.EventHandler(this.SelectPokemon_Load_1);
+            this.ResumeLayout(false);
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.Button btnGyarados;
+        private System.Windows.Forms.Button btnCharizard;
+        private System.Windows.Forms.Button btnZapdos;
+        private System.Windows.Forms.Button btnSnorlax;
+        private System.Windows.Forms.Button btnGengar;
+        private System.Windows.Forms.Button btnMachamp;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnStartGame;
+    }
+}
+

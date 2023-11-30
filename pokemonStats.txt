@@ -1,0 +1,6 @@
+Gyarados,Water,Flying, 95, 125, 79, 81, 1
+Charizard,Fire,Flying, 78, 84, 78, 100, 2
+Zapdos,Electric,Flying,90,90,85,100, 3
+Snorlax,Normal,,160,110,65,30, 4
+Gengar,Ghost,Poison,60,65,60,110, 5
+Machamp,Fighting,,90,130,80,55, 6
