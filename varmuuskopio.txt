@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
@@ -28,7 +28,7 @@ namespace pokemon
                     while ((line = reader.ReadLine()) != null)
                     {
                         string[] stats = line.Split(',');
-                        if (stats.Length == 10)
+                        if (stats.Length == 8)
                         {
                             Pokemon pokemon = new Pokemon(
                                 stats[0].Trim(), // name
@@ -38,9 +38,7 @@ namespace pokemon
                                 int.Parse(stats[4].Trim()), // attack
                                 int.Parse(stats[5].Trim()), // defense
                                 int.Parse(stats[6].Trim()), // speed
-                                int.Parse(stats[7].Trim()),  // index
-                                stats[8].Trim(), //imageFile
-                                int.Parse(stats[9].Trim()) //starting health
+                                int.Parse(stats[7].Trim())  // index
                             );
                             pokemons.Add(pokemon);
                         }
@@ -71,8 +69,7 @@ namespace pokemon
                         btnGyarados.Enabled = false;
                         pokemonSelected++;
                         pokemonIndex++;
-                        selectedPokemons.Add(pokemonGyarados);
-                        LoadImageForSelectedPokemon($"C:/pokemon/Pokemon-master/pictures/gyarados.png");
+
                     }
                     else
                     {
@@ -103,7 +100,7 @@ namespace pokemon
                         btnMachamp.Enabled = false;
                         pokemonSelected++;
                         pokemonIndex++;
-                        selectedPokemons.Add(pokemonMachamp);
+
                     }
                     else
                     {
@@ -165,7 +162,7 @@ namespace pokemon
                         btnZapdos.Enabled = false;
                         pokemonSelected++;
                         pokemonIndex++;
-                        selectedPokemons.Add(pokemonZapdos);
+
                     }
                     else
                     {
@@ -196,7 +193,7 @@ namespace pokemon
                         btnSnorlax.Enabled = false;
                         pokemonSelected++;
                         pokemonIndex++;
-                        selectedPokemons.Add(pokemonSnorlax);
+
                     }
                     else
                     {
@@ -226,7 +223,7 @@ namespace pokemon
                         btnGengar.Enabled = false;
                         pokemonSelected++;
                         pokemonIndex++;
-                        selectedPokemons.Add(pokemonGengar);
+
                     }
                     else
                     {
@@ -244,25 +241,14 @@ namespace pokemon
             }
         }
 
-        public string GetSelectedPokemonImageFileName()
-        {
-            if (selectedPokemons.Count > 0)
-            {
-                return selectedPokemons[0].ImageFileName;
-            }
-            return null;
-        }
 
         private void btnStartGame_Click(object sender, EventArgs e)
         {
             if (pokemonSelected == 3)
             {
                 MessageBox.Show("Starting game");
-                string selectedPokemonImageFileName = GetSelectedPokemonImageFileName();
-                Battle BattleScreen = new Battle(selectedPokemons, selectedPokemonImageFileName);
+                Battle BattleScreen = new Battle(selectedPokemons[0]);
                 BattleScreen.ShowDialog();
-                this.Close();
-                BattleScreen.Close();
             }
             else
             {
@@ -270,10 +256,6 @@ namespace pokemon
             }
             
 
-        }
-        private void LoadImageForSelectedPokemon(string imageFileName)
-        {
-         
         }
 
         private void SelectPokemon_Load_1(object sender, EventArgs e)
@@ -286,9 +268,6 @@ namespace pokemon
 
     public class Pokemon
     {
-
-        public string ImageFileName { get; set; }
-
         public string pokemonName;
         public int pokemonHealth;
         public string pokemonType;
@@ -297,9 +276,8 @@ namespace pokemon
         public int attack;
         public int speed;
         public int index;
-        public int pokemonStartHealth;
 
-        public Pokemon(string pokemonName, string pokemonType, string pokemonType2, int pokemonHealth, int attack, int defense, int speed, int index, string imageFile, int pokemonStartHealth)
+        public Pokemon(string pokemonName, string pokemonType, string pokemonType2, int pokemonHealth, int attack, int defense, int speed, int index)
         {
             this.pokemonName = pokemonName;
             this.pokemonHealth = pokemonHealth;
@@ -309,8 +287,6 @@ namespace pokemon
             this.attack = attack;
             this.speed = speed;
             this.index = index;
-            this.ImageFileName = imageFile;
-            this.pokemonStartHealth = pokemonStartHealth;
         }
     }
 }
