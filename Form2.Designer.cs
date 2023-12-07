@@ -29,6 +29,7 @@ namespace pokemon
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Battle));
             this.listView1 = new System.Windows.Forms.ListView();
             this.button1 = new System.Windows.Forms.Button();
             this.btnPokemon = new System.Windows.Forms.Button();
@@ -47,6 +48,9 @@ namespace pokemon
             this.playerPokemonHealthBar = new System.Windows.Forms.ProgressBar();
             this.btnDamage = new System.Windows.Forms.Button();
             this.btnHeal = new System.Windows.Forms.Button();
+            this.lblHP2 = new System.Windows.Forms.Label();
+            this.enemyPokemonHealthBar = new System.Windows.Forms.ProgressBar();
+            this.lblEnemyPokemonHealth = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -164,7 +168,6 @@ namespace pokemon
             // pictureBox2
             // 
             this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox2.Image = global::pokemon.Properties.Resources.zapdos;
             this.pictureBox2.Location = new System.Drawing.Point(501, 12);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(358, 288);
@@ -184,25 +187,25 @@ namespace pokemon
             // 
             this.lblEnemyPokemon.BackColor = System.Drawing.Color.White;
             this.lblEnemyPokemon.Font = new System.Drawing.Font("Unispace", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEnemyPokemon.Location = new System.Drawing.Point(495, 327);
+            this.lblEnemyPokemon.Location = new System.Drawing.Point(23, 24);
             this.lblEnemyPokemon.Name = "lblEnemyPokemon";
-            this.lblEnemyPokemon.Size = new System.Drawing.Size(364, 86);
+            this.lblEnemyPokemon.Size = new System.Drawing.Size(364, 84);
             this.lblEnemyPokemon.TabIndex = 11;
             this.lblEnemyPokemon.Text = "pokemonName";
             // 
             // lblBackground
             // 
             this.lblBackground.BackColor = System.Drawing.Color.White;
-            this.lblBackground.Location = new System.Drawing.Point(26, 22);
+            this.lblBackground.Location = new System.Drawing.Point(494, 330);
             this.lblBackground.Name = "lblBackground";
-            this.lblBackground.Size = new System.Drawing.Size(365, 86);
+            this.lblBackground.Size = new System.Drawing.Size(365, 77);
             this.lblBackground.TabIndex = 12;
             // 
             // lblPlayerPokemonName
             // 
             this.lblPlayerPokemonName.BackColor = System.Drawing.Color.White;
             this.lblPlayerPokemonName.Font = new System.Drawing.Font("Unispace", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPlayerPokemonName.Location = new System.Drawing.Point(26, 22);
+            this.lblPlayerPokemonName.Location = new System.Drawing.Point(495, 330);
             this.lblPlayerPokemonName.Name = "lblPlayerPokemonName";
             this.lblPlayerPokemonName.Size = new System.Drawing.Size(326, 44);
             this.lblPlayerPokemonName.TabIndex = 13;
@@ -212,7 +215,7 @@ namespace pokemon
             // 
             this.lblHP.BackColor = System.Drawing.Color.White;
             this.lblHP.Font = new System.Drawing.Font("Unispace", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHP.Location = new System.Drawing.Point(82, 66);
+            this.lblHP.Location = new System.Drawing.Point(564, 365);
             this.lblHP.Name = "lblHP";
             this.lblHP.Size = new System.Drawing.Size(58, 42);
             this.lblHP.TabIndex = 14;
@@ -222,7 +225,7 @@ namespace pokemon
             // 
             this.lblPlayerPokemonHealth.BackColor = System.Drawing.Color.White;
             this.lblPlayerPokemonHealth.Font = new System.Drawing.Font("Unispace", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPlayerPokemonHealth.Location = new System.Drawing.Point(127, 87);
+            this.lblPlayerPokemonHealth.Location = new System.Drawing.Point(604, 386);
             this.lblPlayerPokemonHealth.Name = "lblPlayerPokemonHealth";
             this.lblPlayerPokemonHealth.Size = new System.Drawing.Size(145, 21);
             this.lblPlayerPokemonHealth.TabIndex = 15;
@@ -232,14 +235,14 @@ namespace pokemon
             // 
             this.playerPokemonHealthBar.BackColor = System.Drawing.Color.Lime;
             this.playerPokemonHealthBar.ForeColor = System.Drawing.Color.Lime;
-            this.playerPokemonHealthBar.Location = new System.Drawing.Point(130, 66);
+            this.playerPokemonHealthBar.Location = new System.Drawing.Point(608, 365);
             this.playerPokemonHealthBar.Name = "playerPokemonHealthBar";
-            this.playerPokemonHealthBar.Size = new System.Drawing.Size(186, 18);
+            this.playerPokemonHealthBar.Size = new System.Drawing.Size(242, 18);
             this.playerPokemonHealthBar.TabIndex = 16;
             // 
             // btnDamage
             // 
-            this.btnDamage.Location = new System.Drawing.Point(408, 224);
+            this.btnDamage.Location = new System.Drawing.Point(408, 94);
             this.btnDamage.Name = "btnDamage";
             this.btnDamage.Size = new System.Drawing.Size(75, 76);
             this.btnDamage.TabIndex = 17;
@@ -249,13 +252,42 @@ namespace pokemon
             // 
             // btnHeal
             // 
-            this.btnHeal.Location = new System.Drawing.Point(408, 135);
+            this.btnHeal.Location = new System.Drawing.Point(408, 12);
             this.btnHeal.Name = "btnHeal";
             this.btnHeal.Size = new System.Drawing.Size(75, 76);
             this.btnHeal.TabIndex = 18;
             this.btnHeal.Text = "heal";
             this.btnHeal.UseVisualStyleBackColor = true;
             this.btnHeal.Click += new System.EventHandler(this.btnHeal_Click);
+            // 
+            // lblHP2
+            // 
+            this.lblHP2.BackColor = System.Drawing.Color.White;
+            this.lblHP2.Font = new System.Drawing.Font("Unispace", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHP2.Location = new System.Drawing.Point(91, 66);
+            this.lblHP2.Name = "lblHP2";
+            this.lblHP2.Size = new System.Drawing.Size(58, 42);
+            this.lblHP2.TabIndex = 19;
+            this.lblHP2.Text = "HP";
+            // 
+            // enemyPokemonHealthBar
+            // 
+            this.enemyPokemonHealthBar.BackColor = System.Drawing.Color.Lime;
+            this.enemyPokemonHealthBar.ForeColor = System.Drawing.Color.Lime;
+            this.enemyPokemonHealthBar.Location = new System.Drawing.Point(133, 66);
+            this.enemyPokemonHealthBar.Name = "enemyPokemonHealthBar";
+            this.enemyPokemonHealthBar.Size = new System.Drawing.Size(239, 18);
+            this.enemyPokemonHealthBar.TabIndex = 20;
+            // 
+            // lblEnemyPokemonHealth
+            // 
+            this.lblEnemyPokemonHealth.BackColor = System.Drawing.Color.White;
+            this.lblEnemyPokemonHealth.Font = new System.Drawing.Font("Unispace", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEnemyPokemonHealth.Location = new System.Drawing.Point(129, 87);
+            this.lblEnemyPokemonHealth.Name = "lblEnemyPokemonHealth";
+            this.lblEnemyPokemonHealth.Size = new System.Drawing.Size(145, 21);
+            this.lblEnemyPokemonHealth.TabIndex = 21;
+            this.lblEnemyPokemonHealth.Text = "PokemonHP";
             // 
             // Battle
             // 
@@ -264,6 +296,9 @@ namespace pokemon
             this.BackgroundImage = global::pokemon.Properties.Resources.background;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(886, 592);
+            this.Controls.Add(this.lblEnemyPokemonHealth);
+            this.Controls.Add(this.enemyPokemonHealthBar);
+            this.Controls.Add(this.lblHP2);
             this.Controls.Add(this.btnHeal);
             this.Controls.Add(this.btnDamage);
             this.Controls.Add(this.playerPokemonHealthBar);
@@ -282,9 +317,10 @@ namespace pokemon
             this.Controls.Add(this.btnPokemon);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.listView1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Battle";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Form2";
+            this.Text = "Battle";
             this.Load += new System.EventHandler(this.Form2_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -312,5 +348,8 @@ namespace pokemon
         private System.Windows.Forms.ProgressBar playerPokemonHealthBar;
         private System.Windows.Forms.Button btnDamage;
         private System.Windows.Forms.Button btnHeal;
+        private System.Windows.Forms.Label lblHP2;
+        private System.Windows.Forms.ProgressBar enemyPokemonHealthBar;
+        private System.Windows.Forms.Label lblEnemyPokemonHealth;
     }
 }

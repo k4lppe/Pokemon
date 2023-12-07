@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace pokemon
 {
@@ -9,6 +10,7 @@ namespace pokemon
     {
         private List<Pokemon> pokemons;
         private List<Pokemon> selectedPokemons = new List<Pokemon>();
+        private List<Pokemon> EnemyPokemons = new List<Pokemon>();
 
         public SelectPokemon()
         {
@@ -46,7 +48,7 @@ namespace pokemon
                         }
                         else
                         {
-                            MessageBox.Show("Virheellinen tietomuoto tiedostossa");
+                            MessageBox.Show("Incorrect data format in the file");
                         }
                     }
                 }
@@ -67,7 +69,7 @@ namespace pokemon
                     Pokemon pokemonGyarados = pokemons.Find(p => p.pokemonName == "Gyarados");
                     if (pokemonGyarados != null)
                     {
-                        MessageBox.Show($"Valittu Pokemon: {pokemonGyarados.pokemonName}");
+                        //MessageBox.Show($"Valittu Pokemon: {pokemonGyarados.pokemonName}");
                         btnGyarados.Enabled = false;
                         pokemonSelected++;
                         pokemonIndex++;
@@ -76,17 +78,17 @@ namespace pokemon
                     }
                     else
                     {
-                        MessageBox.Show("Gyarados ei löytynyt.");
+                        MessageBox.Show("Gyarados could not be found.");
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Pokemon-statistiikat eivät ole ladattu onnistuneesti.");
+                    MessageBox.Show("Pokemon stats have not been loaded successfully.");
                 }
             }
             else
             {
-                MessageBox.Show("Voit valita enintään kolme Pokemonia");
+                MessageBox.Show("You can choose up to three Pokémon.");
             }
 
         }
@@ -99,7 +101,7 @@ namespace pokemon
                     Pokemon pokemonMachamp = pokemons.Find(p => p.pokemonName == "Machamp");
                     if (pokemonMachamp != null)
                     {
-                        MessageBox.Show($"Valittu Pokemon: {pokemonMachamp.pokemonName}");
+                        //MessageBox.Show($"Valittu Pokemon: {pokemonMachamp.pokemonName}");
                         btnMachamp.Enabled = false;
                         pokemonSelected++;
                         pokemonIndex++;
@@ -107,17 +109,17 @@ namespace pokemon
                     }
                     else
                     {
-                        MessageBox.Show("Machamp ei löytynyt.");
+                        MessageBox.Show("Machamp could not be found.");
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Pokemon-statistiikat eivät ole ladattu onnistuneesti.");
+                    MessageBox.Show("Pokemon stats have not been loaded successfully.");
                 }
             }
             else
             {
-                MessageBox.Show("Voit valita enintään kolme Pokemonia");
+                MessageBox.Show("You can choose up to three Pokémon.");
             }
 
         }
@@ -130,7 +132,7 @@ namespace pokemon
                     Pokemon pokemonCharizard = pokemons.Find(p => p.pokemonName == "Charizard");
                     if (pokemonCharizard != null)
                     {
-                        MessageBox.Show($"Valittu Pokemon: {pokemonCharizard.pokemonName}");
+                        //MessageBox.Show($"Valittu Pokemon: {pokemonCharizard.pokemonName}");
                         btnCharizard.Enabled = false;
                         pokemonSelected++;
                         pokemonIndex++;
@@ -138,17 +140,17 @@ namespace pokemon
                     }
                     else
                     {
-                        MessageBox.Show("Charizardia ei löytynyt.");
+                        MessageBox.Show("Charizard could not be found.");
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Pokemon-statistiikat eivät ole ladattu onnistuneesti.");
+                    MessageBox.Show("Pokemon stats have not been loaded successfully.");
                 }
             }
             else
             {
-                MessageBox.Show("Voit valita enintään kolme Pokemonia");
+                MessageBox.Show("You can choose up to three Pokémon.");
             }
 
         }
@@ -161,7 +163,7 @@ namespace pokemon
                     Pokemon pokemonZapdos = pokemons.Find(p => p.pokemonName == "Zapdos");
                     if (pokemonZapdos != null)
                     {
-                        MessageBox.Show($"Valittu Pokemon: {pokemonZapdos.pokemonName}");
+                        //MessageBox.Show($"Valittu Pokemon: {pokemonZapdos.pokemonName}");
                         btnZapdos.Enabled = false;
                         pokemonSelected++;
                         pokemonIndex++;
@@ -169,18 +171,18 @@ namespace pokemon
                     }
                     else
                     {
-                        MessageBox.Show("Zapdosia ei löytynyt.");
+                        MessageBox.Show("Zapdos could not be found.");
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Pokemon-statistiikat eivät ole ladattu onnistuneesti.");
+                    MessageBox.Show("Pokemon stats have not been loaded successfully.");
                 }
 
             }
             else
             {
-                MessageBox.Show("Voit valita enintään kolme Pokemonia");
+                MessageBox.Show("You can choose up to three Pokémon.");
             }
         }
         private void btnSnorlax_Click(object sender, EventArgs e)
@@ -192,7 +194,7 @@ namespace pokemon
                     Pokemon pokemonSnorlax = pokemons.Find(p => p.pokemonName == "Snorlax");
                     if (pokemonSnorlax != null)
                     {
-                        MessageBox.Show($"Valittu Pokemon: {pokemonSnorlax.pokemonName}");
+                        //MessageBox.Show($"Valittu Pokemon: {pokemonSnorlax.pokemonName}");
                         btnSnorlax.Enabled = false;
                         pokemonSelected++;
                         pokemonIndex++;
@@ -200,17 +202,17 @@ namespace pokemon
                     }
                     else
                     {
-                        MessageBox.Show("Snorlax ei löytynyt.");
+                        MessageBox.Show("Snorlax could not be found.");
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Pokemon-statistiikat eivät ole ladattu onnistuneesti.");
+                    MessageBox.Show("Pokemon stats have not been loaded successfully.");
                 }
             }
             else
             {
-                MessageBox.Show("Voit valita enintään kolme Pokemonia");
+                MessageBox.Show("You can choose up to three Pokémon.");
             }
         }
         private void btnGengar_Click(object sender, EventArgs e)
@@ -222,7 +224,7 @@ namespace pokemon
                     Pokemon pokemonGengar = pokemons.Find(p => p.pokemonName == "Gengar");
                     if (pokemonGengar != null)
                     {
-                        MessageBox.Show($"Valittu Pokemon: {pokemonGengar.pokemonName}");
+                        //MessageBox.Show($"Valittu Pokemon: {pokemonGengar.pokemonName}");
                         btnGengar.Enabled = false;
                         pokemonSelected++;
                         pokemonIndex++;
@@ -230,17 +232,17 @@ namespace pokemon
                     }
                     else
                     {
-                        MessageBox.Show("Gengar ei löytynyt.");
+                        MessageBox.Show("Gengar could not be found.");
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Pokemon-statistiikat eivät ole ladattu onnistuneesti.");
+                    MessageBox.Show("Pokemon stats have not been loaded successfully.");
                 }
             }
             else
             {
-                MessageBox.Show("Voit valita enintään kolme Pokemonia");
+                MessageBox.Show("You can choose up to three Pokémon.");
             }
         }
 
@@ -258,15 +260,18 @@ namespace pokemon
             if (pokemonSelected == 3)
             {
                 MessageBox.Show("Starting game");
+
                 string selectedPokemonImageFileName = GetSelectedPokemonImageFileName();
                 Battle BattleScreen = new Battle(selectedPokemons, selectedPokemonImageFileName);
+
+               
                 BattleScreen.ShowDialog();
                 this.Close();
                 BattleScreen.Close();
             }
             else
             {
-                MessageBox.Show("Valitse kolme Pokemonia niin voit aloittaa pelin");
+                MessageBox.Show("Choose three Pokémon to start the game.");
             }
             
 
@@ -281,10 +286,75 @@ namespace pokemon
             const string path = @"C:\pokemon\Pokemon-master\pokemonStats.txt";
             ImportPokemonStats(path);
         }
-    }
-   
 
-    public class Pokemon
+        private void btnGyarados_MouseHover(object sender, EventArgs e)
+        {
+            lblHover.Text = "Current Pokemon: Gyarados";
+            lblStats.Text = "Type: Water, Flying, HP: 95, ATK: 125, DEF: 79, SPD: 81";
+        }
+
+        private void btnCharizard_MouseHover(object sender, EventArgs e)
+        {
+            lblHover.Text = "Current Pokemon: Charizard";
+            lblStats.Text = "Type: Fire, Flying, HP: 78, ATK: 84, DEF: 78, SPD: 100";
+        }
+
+        private void btnZapdos_MouseHover(object sender, EventArgs e)
+        {
+            lblHover.Text = "Current Pokemon: Zapdos";
+            lblStats.Text = "Type: Electric, Flying, HP: 90, ATK: 90, DEF: 85, SPD: 100";
+        }
+
+        private void btnSnorlax_MouseHover(object sender, EventArgs e)
+        {
+            lblHover.Text = "Current Pokemon: Snorlax";
+            lblStats.Text = "Type: Normal, HP: 160, ATK 110, DEF: 65, SPD: 30";
+        }
+
+        private void btnGengar_MouseHover(object sender, EventArgs e)
+        {
+            lblHover.Text = "Current Pokemon: Gengar";
+            lblStats.Text = "Type: Ghost, Poison, HP: 60, ATK: 65, DEF: 60, SPD: 110";
+        }
+
+        private void btnMachamp_MouseHover(object sender, EventArgs e)
+        {
+            lblHover.Text = "Current Pokemon: Machamp";
+            lblStats.Text = "Type: Fighting, HP: 90, ATK: 130, DEF: 80, \nSPD: 55";
+        }
+
+        private void SelectPokemon_MouseHover(object sender, EventArgs e)
+        {
+            lblHover.Text = "";
+            lblStats.Text = "";
+        }
+
+        private void btnStartGame_MouseHover(object sender, EventArgs e)
+        {
+            lblHover.Text = "Start the Game!";
+            lblStats.Text = "";
+        }
+
+        private void lblStats_MouseHover(object sender, EventArgs e)
+        {
+            lblHover.Text = "";
+            lblStats.Text = "";
+        }
+
+        private void lblHover_MouseHover(object sender, EventArgs e)
+        {
+            lblHover.Text = "";
+            lblStats.Text = "";
+        }
+
+        private void label1_MouseHover(object sender, EventArgs e)
+        {
+
+        }
+    }
+
+
+    public class Pokemon : IEquatable<Pokemon>
     {
 
         public string ImageFileName { get; set; }
@@ -299,6 +369,11 @@ namespace pokemon
         public int index;
         public int pokemonStartHealth;
 
+        public bool Equals(Pokemon other)
+        {
+            return this.pokemonName.Equals(other.pokemonName, StringComparison.OrdinalIgnoreCase);
+        }
+
         public Pokemon(string pokemonName, string pokemonType, string pokemonType2, int pokemonHealth, int attack, int defense, int speed, int index, string imageFile, int pokemonStartHealth)
         {
             this.pokemonName = pokemonName;
@@ -312,5 +387,9 @@ namespace pokemon
             this.ImageFileName = imageFile;
             this.pokemonStartHealth = pokemonStartHealth;
         }
+
     }
+   
+
+
 }

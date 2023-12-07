@@ -15,20 +15,38 @@ namespace pokemon
     {
         private List<Pokemon> selectedPokemons;
         private string selectedPokemonImageFileName;
+      
+        
+        
 
         public Battle(List<Pokemon> selectedPokemons, string selectedPokemonImageName)
         {
             InitializeComponent();
             this.selectedPokemons = selectedPokemons;
             this.selectedPokemonImageFileName = selectedPokemonImageName;
+         
 
+   
             if (selectedPokemons.Count > 0)
             {
                 string imageFileName = @"C:\pokemon\Pokemon-master\pictures\" + selectedPokemons[0].ImageFileName + ".png";
                 LoadImageForSelectedPokemon(imageFileName);
             }
+           
         }
+        public class IndexedPokemon
+        {
+            public Pokemon Pokemon { get; }
+            public int Index { get; }
 
+            public IndexedPokemon(Pokemon pokemon, int index)
+            {
+                Pokemon = pokemon;
+                Index = index;
+            }
+        }
+       
+     
         private void LoadImageForSelectedPokemon(string imageFileName)
         {
             try
@@ -47,6 +65,8 @@ namespace pokemon
                 MessageBox.Show($"Virhe kuvan lataamisessa: {e.Message}");
             }
         }
+      
+
 
         private void ChangePictureBoxImage(string imageName)
         {
@@ -58,13 +78,28 @@ namespace pokemon
             }
         }
 
+        private void UpdateProgressBar()
+        {
+                if (selectedPokemons[0].pokemonHealth >= 0)
+                {
+                    playerPokemonHealthBar.Value = selectedPokemons[0].pokemonHealth;
+                }
+                else
+                {
+                    playerPokemonHealthBar.Value = 0;
+                }
+
+        }
+
         private void Form2_Load(object sender, EventArgs e)
         {
+         
             lblPlayerPokemonName.Text = $"{selectedPokemons[0].pokemonName}";
             lblPlayerPokemonHealth.Text = $"{selectedPokemons[0].pokemonHealth}/{selectedPokemons[0].pokemonStartHealth}";
             playerPokemonHealthBar.Minimum = 0;
             playerPokemonHealthBar.Maximum = selectedPokemons[0].pokemonHealth;
             playerPokemonHealthBar.Value = selectedPokemons[0].pokemonHealth;
+  
             
         }
 
@@ -77,15 +112,16 @@ namespace pokemon
 
         private void btnDamage_Click(object sender, EventArgs e)
         {
-            selectedPokemons[0].pokemonHealth = selectedPokemons[0].pokemonHealth - 10;
+            selectedPokemons[0].pokemonHealth = Math.Max(selectedPokemons[0].pokemonHealth - 10, 0);
             lblPlayerPokemonHealth.Text = $"{selectedPokemons[0].pokemonHealth}/{selectedPokemons[0].pokemonStartHealth}";
-          
+            UpdateProgressBar();
         }
 
         private void btnHeal_Click(object sender, EventArgs e)
         {
-            selectedPokemons[0].pokemonHealth = selectedPokemons[0].pokemonHealth + 10;
+            selectedPokemons[0].pokemonHealth = Math.Min(selectedPokemons[0].pokemonHealth + 10, selectedPokemons[0].pokemonStartHealth);
             lblPlayerPokemonHealth.Text = $"{selectedPokemons[0].pokemonHealth}/{selectedPokemons[0].pokemonStartHealth}";
+            UpdateProgressBar();
         }
     }
 }
