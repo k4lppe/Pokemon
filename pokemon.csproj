@@ -113,5 +113,11 @@
   <ItemGroup>
     <None Include="pictures\background.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="pictures\customObject1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="pictures\customObject2.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

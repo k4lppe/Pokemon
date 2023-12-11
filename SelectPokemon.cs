@@ -10,7 +10,10 @@ namespace pokemon
     {
         private List<Pokemon> pokemons;
         private List<Pokemon> selectedPokemons = new List<Pokemon>();
-        private List<Pokemon> EnemyPokemons = new List<Pokemon>();
+        private List<Pokemon> enemyPokemons = new List<Pokemon>();
+        
+  
+        
 
         public SelectPokemon()
         {
@@ -74,6 +77,7 @@ namespace pokemon
                         pokemonSelected++;
                         pokemonIndex++;
                         selectedPokemons.Add(pokemonGyarados);
+                       
                         LoadImageForSelectedPokemon($"C:/pokemon/Pokemon-master/pictures/gyarados.png");
                     }
                     else
@@ -256,18 +260,24 @@ namespace pokemon
         }
 
         private void btnStartGame_Click(object sender, EventArgs e)
-        {
+        {         
             if (pokemonSelected == 3)
             {
-                MessageBox.Show("Starting game");
+                enemyPokemons = pokemons.Except(selectedPokemons).ToList();
 
-                string selectedPokemonImageFileName = GetSelectedPokemonImageFileName();
-                Battle BattleScreen = new Battle(selectedPokemons, selectedPokemonImageFileName);
+                if(enemyPokemons.Count >= 3)
+                {
+                    MessageBox.Show("Starting game");
 
-               
-                BattleScreen.ShowDialog();
-                this.Close();
-                BattleScreen.Close();
+                    string selectedPokemonImageFileName = GetSelectedPokemonImageFileName();
+                    Battle BattleScreen = new Battle(selectedPokemons, selectedPokemonImageFileName, enemyPokemons);
+
+
+                    BattleScreen.ShowDialog();
+                    this.Close();
+                    BattleScreen.Close();
+                }
+              
             }
             else
             {
@@ -285,41 +295,43 @@ namespace pokemon
         {
             const string path = @"C:\pokemon\Pokemon-master\pokemonStats.txt";
             ImportPokemonStats(path);
+
+
         }
 
         private void btnGyarados_MouseHover(object sender, EventArgs e)
         {
-            lblHover.Text = "Current Pokemon: Gyarados";
-            lblStats.Text = "Type: Water, Flying, HP: 95, ATK: 125, DEF: 79, SPD: 81";
+            lblHover.Text = "Current Pokémon: Gyarados";
+            lblStats.Text = $"Type: Water, Flying, HP: 95, ATK: 125, DEF: 79, SPD: 81";
         }
 
         private void btnCharizard_MouseHover(object sender, EventArgs e)
         {
-            lblHover.Text = "Current Pokemon: Charizard";
+            lblHover.Text = "Current Pokémon: Charizard";
             lblStats.Text = "Type: Fire, Flying, HP: 78, ATK: 84, DEF: 78, SPD: 100";
         }
 
         private void btnZapdos_MouseHover(object sender, EventArgs e)
         {
-            lblHover.Text = "Current Pokemon: Zapdos";
+            lblHover.Text = "Current Pokémon: Zapdos";
             lblStats.Text = "Type: Electric, Flying, HP: 90, ATK: 90, DEF: 85, SPD: 100";
         }
 
         private void btnSnorlax_MouseHover(object sender, EventArgs e)
         {
-            lblHover.Text = "Current Pokemon: Snorlax";
+            lblHover.Text = "Current Pokémon: Snorlax";
             lblStats.Text = "Type: Normal, HP: 160, ATK 110, DEF: 65, SPD: 30";
         }
 
         private void btnGengar_MouseHover(object sender, EventArgs e)
         {
-            lblHover.Text = "Current Pokemon: Gengar";
+            lblHover.Text = "Current Pokémon: Gengar";
             lblStats.Text = "Type: Ghost, Poison, HP: 60, ATK: 65, DEF: 60, SPD: 110";
         }
 
         private void btnMachamp_MouseHover(object sender, EventArgs e)
         {
-            lblHover.Text = "Current Pokemon: Machamp";
+            lblHover.Text = "Current Pokémon: Machamp";
             lblStats.Text = "Type: Fighting, HP: 90, ATK: 130, DEF: 80, \nSPD: 55";
         }
 
@@ -349,14 +361,15 @@ namespace pokemon
 
         private void label1_MouseHover(object sender, EventArgs e)
         {
-
+            lblHover.Text = "";
+            lblStats.Text = "";
         }
     }
 
 
     public class Pokemon : IEquatable<Pokemon>
     {
-
+        
         public string ImageFileName { get; set; }
 
         public string pokemonName;
