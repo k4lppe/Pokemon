@@ -60,6 +60,9 @@ namespace pokemon
             this.btnMove2 = new System.Windows.Forms.Button();
             this.btnMove3 = new System.Windows.Forms.Button();
             this.btnMove4 = new System.Windows.Forms.Button();
+            this.btnPotion = new System.Windows.Forms.Button();
+            this.btnSPotion = new System.Windows.Forms.Button();
+            this.btnHPotion = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -125,6 +128,7 @@ namespace pokemon
             this.btnBag.TabIndex = 3;
             this.btnBag.Text = "Bag";
             this.btnBag.UseVisualStyleBackColor = false;
+            this.btnBag.Click += new System.EventHandler(this.btnBag_Click);
             // 
             // btnFight
             // 
@@ -411,6 +415,60 @@ namespace pokemon
             this.btnMove4.Visible = false;
             this.btnMove4.Click += new System.EventHandler(this.btnMove4_Click);
             // 
+            // btnPotion
+            // 
+            this.btnPotion.BackColor = System.Drawing.Color.White;
+            this.btnPotion.FlatAppearance.BorderSize = 0;
+            this.btnPotion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPotion.Font = new System.Drawing.Font("Unispace", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPotion.Image = global::pokemon.Properties.Resources.potion;
+            this.btnPotion.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnPotion.Location = new System.Drawing.Point(12, 507);
+            this.btnPotion.Name = "btnPotion";
+            this.btnPotion.Size = new System.Drawing.Size(303, 62);
+            this.btnPotion.TabIndex = 31;
+            this.btnPotion.Text = "potion";
+            this.btnPotion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnPotion.UseVisualStyleBackColor = false;
+            this.btnPotion.Visible = false;
+            this.btnPotion.Click += new System.EventHandler(this.btnPotion_Click);
+            // 
+            // btnSPotion
+            // 
+            this.btnSPotion.BackColor = System.Drawing.Color.White;
+            this.btnSPotion.FlatAppearance.BorderSize = 0;
+            this.btnSPotion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSPotion.Font = new System.Drawing.Font("Unispace", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSPotion.Image = global::pokemon.Properties.Resources.superpotion;
+            this.btnSPotion.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSPotion.Location = new System.Drawing.Point(315, 507);
+            this.btnSPotion.Name = "btnSPotion";
+            this.btnSPotion.Size = new System.Drawing.Size(303, 62);
+            this.btnSPotion.TabIndex = 32;
+            this.btnSPotion.Text = "super potion";
+            this.btnSPotion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSPotion.UseVisualStyleBackColor = false;
+            this.btnSPotion.Visible = false;
+            this.btnSPotion.Click += new System.EventHandler(this.btnSPotion_Click);
+            // 
+            // btnHPotion
+            // 
+            this.btnHPotion.BackColor = System.Drawing.Color.White;
+            this.btnHPotion.FlatAppearance.BorderSize = 0;
+            this.btnHPotion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnHPotion.Font = new System.Drawing.Font("Unispace", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHPotion.Image = global::pokemon.Properties.Resources.hyperpotion1;
+            this.btnHPotion.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnHPotion.Location = new System.Drawing.Point(12, 564);
+            this.btnHPotion.Name = "btnHPotion";
+            this.btnHPotion.Size = new System.Drawing.Size(303, 71);
+            this.btnHPotion.TabIndex = 33;
+            this.btnHPotion.Text = "hyper potion";
+            this.btnHPotion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnHPotion.UseVisualStyleBackColor = false;
+            this.btnHPotion.Visible = false;
+            this.btnHPotion.Click += new System.EventHandler(this.btnHPotion_Click);
+            // 
             // Battle
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -419,6 +477,9 @@ namespace pokemon
             this.BackgroundImage = global::pokemon.Properties.Resources.background;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(964, 649);
+            this.Controls.Add(this.btnHPotion);
+            this.Controls.Add(this.btnSPotion);
+            this.Controls.Add(this.btnPotion);
             this.Controls.Add(this.btnMove4);
             this.Controls.Add(this.btnMove3);
             this.Controls.Add(this.btnMove2);
@@ -493,5 +554,8 @@ namespace pokemon
         private System.Windows.Forms.Button btnMove2;
         private System.Windows.Forms.Button btnMove3;
         private System.Windows.Forms.Button btnMove4;
+        private System.Windows.Forms.Button btnPotion;
+        private System.Windows.Forms.Button btnSPotion;
+        private System.Windows.Forms.Button btnHPotion;
     }
 }

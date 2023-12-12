@@ -12,9 +12,6 @@ namespace pokemon
         private List<Pokemon> selectedPokemons = new List<Pokemon>();
         private List<Pokemon> enemyPokemons = new List<Pokemon>();
         
-  
-        
-
         public SelectPokemon()
         {
             InitializeComponent();
@@ -367,7 +364,7 @@ namespace pokemon
     }
 
 
-    public class Pokemon : IEquatable<Pokemon>
+    public class Pokemon  
     {
         
         public string ImageFileName { get; set; }
@@ -382,10 +379,7 @@ namespace pokemon
         public int index;
         public int pokemonStartHealth;
 
-        public bool Equals(Pokemon other)
-        {
-            return this.pokemonName.Equals(other.pokemonName, StringComparison.OrdinalIgnoreCase);
-        }
+ 
 
         public Pokemon(string pokemonName, string pokemonType, string pokemonType2, int pokemonHealth, int attack, int defense, int speed, int index, string imageFile, int pokemonStartHealth)
         {

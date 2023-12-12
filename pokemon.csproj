@@ -119,5 +119,14 @@
   <ItemGroup>
     <None Include="pictures\customObject2.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="pictures\potion.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="pictures\superpotion.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="pictures\hyperpotion.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
