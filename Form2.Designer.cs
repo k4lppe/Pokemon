@@ -63,6 +63,7 @@ namespace pokemon
             this.btnPotion = new System.Windows.Forms.Button();
             this.btnSPotion = new System.Windows.Forms.Button();
             this.btnHPotion = new System.Windows.Forms.Button();
+            this.lblInfo = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -177,7 +178,6 @@ namespace pokemon
             this.lblText.Size = new System.Drawing.Size(606, 128);
             this.lblText.TabIndex = 9;
             this.lblText.Text = "label1";
-            this.lblText.Click += new System.EventHandler(this.label1_Click);
             // 
             // pictureBox2
             // 
@@ -358,6 +358,7 @@ namespace pokemon
             // btnMove1
             // 
             this.btnMove1.BackColor = System.Drawing.Color.White;
+            this.btnMove1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnMove1.FlatAppearance.BorderSize = 0;
             this.btnMove1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMove1.Font = new System.Drawing.Font("Unispace", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -369,10 +370,13 @@ namespace pokemon
             this.btnMove1.UseVisualStyleBackColor = false;
             this.btnMove1.Visible = false;
             this.btnMove1.Click += new System.EventHandler(this.btnMove1_Click);
+            this.btnMove1.MouseLeave += new System.EventHandler(this.btnMove1_MouseLeave);
+            this.btnMove1.MouseHover += new System.EventHandler(this.btnMove1_MouseHover);
             // 
             // btnMove2
             // 
             this.btnMove2.BackColor = System.Drawing.Color.White;
+            this.btnMove2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnMove2.FlatAppearance.BorderSize = 0;
             this.btnMove2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMove2.Font = new System.Drawing.Font("Unispace", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -384,10 +388,13 @@ namespace pokemon
             this.btnMove2.UseVisualStyleBackColor = false;
             this.btnMove2.Visible = false;
             this.btnMove2.Click += new System.EventHandler(this.btnMove2_Click);
+            this.btnMove2.MouseLeave += new System.EventHandler(this.btnMove2_MouseLeave);
+            this.btnMove2.MouseHover += new System.EventHandler(this.btnMove2_MouseHover);
             // 
             // btnMove3
             // 
             this.btnMove3.BackColor = System.Drawing.Color.White;
+            this.btnMove3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnMove3.FlatAppearance.BorderSize = 0;
             this.btnMove3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMove3.Font = new System.Drawing.Font("Unispace", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -399,10 +406,13 @@ namespace pokemon
             this.btnMove3.UseVisualStyleBackColor = false;
             this.btnMove3.Visible = false;
             this.btnMove3.Click += new System.EventHandler(this.btnMove3_Click);
+            this.btnMove3.MouseLeave += new System.EventHandler(this.btnMove3_MouseLeave);
+            this.btnMove3.MouseHover += new System.EventHandler(this.btnMove3_MouseHover);
             // 
             // btnMove4
             // 
             this.btnMove4.BackColor = System.Drawing.Color.White;
+            this.btnMove4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnMove4.FlatAppearance.BorderSize = 0;
             this.btnMove4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMove4.Font = new System.Drawing.Font("Unispace", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -414,16 +424,19 @@ namespace pokemon
             this.btnMove4.UseVisualStyleBackColor = false;
             this.btnMove4.Visible = false;
             this.btnMove4.Click += new System.EventHandler(this.btnMove4_Click);
+            this.btnMove4.MouseLeave += new System.EventHandler(this.btnMove4_MouseLeave);
+            this.btnMove4.MouseHover += new System.EventHandler(this.btnMove4_MouseHover);
             // 
             // btnPotion
             // 
             this.btnPotion.BackColor = System.Drawing.Color.White;
+            this.btnPotion.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnPotion.FlatAppearance.BorderSize = 0;
             this.btnPotion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPotion.Font = new System.Drawing.Font("Unispace", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPotion.Image = global::pokemon.Properties.Resources.potion;
             this.btnPotion.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnPotion.Location = new System.Drawing.Point(12, 507);
+            this.btnPotion.Location = new System.Drawing.Point(12, 508);
             this.btnPotion.Name = "btnPotion";
             this.btnPotion.Size = new System.Drawing.Size(303, 62);
             this.btnPotion.TabIndex = 31;
@@ -432,16 +445,19 @@ namespace pokemon
             this.btnPotion.UseVisualStyleBackColor = false;
             this.btnPotion.Visible = false;
             this.btnPotion.Click += new System.EventHandler(this.btnPotion_Click);
+            this.btnPotion.MouseLeave += new System.EventHandler(this.btnPotion_MouseLeave);
+            this.btnPotion.MouseHover += new System.EventHandler(this.btnPotion_MouseHover);
             // 
             // btnSPotion
             // 
             this.btnSPotion.BackColor = System.Drawing.Color.White;
+            this.btnSPotion.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSPotion.FlatAppearance.BorderSize = 0;
             this.btnSPotion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSPotion.Font = new System.Drawing.Font("Unispace", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSPotion.Image = global::pokemon.Properties.Resources.superpotion;
             this.btnSPotion.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSPotion.Location = new System.Drawing.Point(315, 507);
+            this.btnSPotion.Location = new System.Drawing.Point(315, 508);
             this.btnSPotion.Name = "btnSPotion";
             this.btnSPotion.Size = new System.Drawing.Size(303, 62);
             this.btnSPotion.TabIndex = 32;
@@ -450,16 +466,19 @@ namespace pokemon
             this.btnSPotion.UseVisualStyleBackColor = false;
             this.btnSPotion.Visible = false;
             this.btnSPotion.Click += new System.EventHandler(this.btnSPotion_Click);
+            this.btnSPotion.MouseLeave += new System.EventHandler(this.btnSPotion_MouseLeave);
+            this.btnSPotion.MouseHover += new System.EventHandler(this.btnSPotion_MouseHover);
             // 
             // btnHPotion
             // 
             this.btnHPotion.BackColor = System.Drawing.Color.White;
+            this.btnHPotion.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnHPotion.FlatAppearance.BorderSize = 0;
             this.btnHPotion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnHPotion.Font = new System.Drawing.Font("Unispace", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnHPotion.Image = global::pokemon.Properties.Resources.hyperpotion1;
             this.btnHPotion.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnHPotion.Location = new System.Drawing.Point(12, 564);
+            this.btnHPotion.Location = new System.Drawing.Point(13, 565);
             this.btnHPotion.Name = "btnHPotion";
             this.btnHPotion.Size = new System.Drawing.Size(303, 71);
             this.btnHPotion.TabIndex = 33;
@@ -468,6 +487,19 @@ namespace pokemon
             this.btnHPotion.UseVisualStyleBackColor = false;
             this.btnHPotion.Visible = false;
             this.btnHPotion.Click += new System.EventHandler(this.btnHPotion_Click);
+            this.btnHPotion.MouseLeave += new System.EventHandler(this.btnHPotion_MouseLeave);
+            this.btnHPotion.MouseHover += new System.EventHandler(this.btnHPotion_MouseHover);
+            // 
+            // lblInfo
+            // 
+            this.lblInfo.BackColor = System.Drawing.Color.White;
+            this.lblInfo.Font = new System.Drawing.Font("Unispace", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInfo.Location = new System.Drawing.Point(9, 373);
+            this.lblInfo.Name = "lblInfo";
+            this.lblInfo.Size = new System.Drawing.Size(504, 108);
+            this.lblInfo.TabIndex = 34;
+            this.lblInfo.Text = "Info";
+            this.lblInfo.Visible = false;
             // 
             // Battle
             // 
@@ -477,6 +509,7 @@ namespace pokemon
             this.BackgroundImage = global::pokemon.Properties.Resources.background;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(964, 649);
+            this.Controls.Add(this.lblInfo);
             this.Controls.Add(this.btnHPotion);
             this.Controls.Add(this.btnSPotion);
             this.Controls.Add(this.btnPotion);
@@ -557,5 +590,6 @@ namespace pokemon
         private System.Windows.Forms.Button btnPotion;
         private System.Windows.Forms.Button btnSPotion;
         private System.Windows.Forms.Button btnHPotion;
+        private System.Windows.Forms.Label lblInfo;
     }
 }

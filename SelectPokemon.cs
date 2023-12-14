@@ -30,7 +30,7 @@ namespace pokemon
                     while ((line = reader.ReadLine()) != null)
                     {
                         string[] stats = line.Split(',');
-                        if (stats.Length == 10)
+                        if (stats.Length == 23)
                         {
                             Pokemon pokemon = new Pokemon(
                                 stats[0].Trim(), // name
@@ -42,7 +42,20 @@ namespace pokemon
                                 int.Parse(stats[6].Trim()), // speed
                                 int.Parse(stats[7].Trim()),  // index
                                 stats[8].Trim(), //imageFile
-                                int.Parse(stats[9].Trim()) //starting health
+                                int.Parse(stats[9].Trim()), //starting health
+                                stats[10].Trim(), //move1
+                                stats[11].Trim(), //move2
+                                stats[12].Trim(), //move3
+                                stats[13].Trim(), //move4
+                                int.Parse(stats[14].Trim()), //move1Damage
+                                int.Parse(stats[15].Trim()), //move2Damage
+                                int.Parse(stats[16].Trim()), //move3Damage
+                                int.Parse(stats[17].Trim()),  //move4Damage
+                                bool.Parse(stats[18].Trim()), //pokemonParalyzed
+                                bool.Parse(stats[19].Trim()), //pokemonConfused
+                                bool.Parse(stats[20].Trim()), //pokemonCriticalHit
+                                bool.Parse(stats[21].Trim()), //pokemonFlinch
+                                bool.Parse(stats[22].Trim()) //pokemonBurning
                             );
                             pokemons.Add(pokemon);
                         }
@@ -75,7 +88,7 @@ namespace pokemon
                         pokemonIndex++;
                         selectedPokemons.Add(pokemonGyarados);
                        
-                        LoadImageForSelectedPokemon($"C:/pokemon/Pokemon-master/pictures/gyarados.png");
+                        
                     }
                     else
                     {
@@ -264,8 +277,6 @@ namespace pokemon
 
                 if(enemyPokemons.Count >= 3)
                 {
-                    MessageBox.Show("Starting game");
-
                     string selectedPokemonImageFileName = GetSelectedPokemonImageFileName();
                     Battle BattleScreen = new Battle(selectedPokemons, selectedPokemonImageFileName, enemyPokemons);
 
@@ -282,10 +293,6 @@ namespace pokemon
             }
             
 
-        }
-        private void LoadImageForSelectedPokemon(string imageFileName)
-        {
-         
         }
 
         private void SelectPokemon_Load_1(object sender, EventArgs e)
@@ -378,10 +385,21 @@ namespace pokemon
         public int speed;
         public int index;
         public int pokemonStartHealth;
+        public string move1;
+        public string move2;
+        public string move3;
+        public string move4;
+        public int move1Damage;
+        public int move2Damage;
+        public int move3Damage;
+        public int move4Damage;
+        public bool pokemonParalyzed;
+        public bool pokemonConfused;
+        public bool pokemonCriticalHit;
+        public bool pokemonFlinch;
+        public bool pokemonBurning;
 
- 
-
-        public Pokemon(string pokemonName, string pokemonType, string pokemonType2, int pokemonHealth, int attack, int defense, int speed, int index, string imageFile, int pokemonStartHealth)
+        public Pokemon(string pokemonName, string pokemonType, string pokemonType2, int pokemonHealth, int attack, int defense, int speed, int index, string imageFile, int pokemonStartHealth, string move1, string move2, string move3, string move4, int move1Damage, int move2Damage, int move3Damage, int move4Damage, bool pokemonParalyzed, bool pokemonConfused, bool pokemonCriticalHit, bool pokemonFlinch, bool pokemonBurning)
         {
             this.pokemonName = pokemonName;
             this.pokemonHealth = pokemonHealth;
@@ -393,6 +411,19 @@ namespace pokemon
             this.index = index;
             this.ImageFileName = imageFile;
             this.pokemonStartHealth = pokemonStartHealth;
+            this.move1 = move1;
+            this.move2 = move2;
+            this.move3 = move3;
+            this.move4 = move4;
+            this.move1Damage = move1Damage;
+            this.move2Damage = move2Damage;
+            this.move3Damage = move3Damage;
+            this.move4Damage = move4Damage;
+            this.pokemonParalyzed = pokemonParalyzed;
+            this.pokemonConfused = pokemonConfused;
+            this.pokemonCriticalHit = pokemonCriticalHit;
+            this.pokemonFlinch = pokemonFlinch;
+            this.pokemonBurning = pokemonBurning;
         }
 
     }

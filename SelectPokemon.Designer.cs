@@ -187,7 +187,7 @@ namespace pokemon
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(859, 660);
+            this.ClientSize = new System.Drawing.Size(837, 660);
             this.Controls.Add(this.lblStats);
             this.Controls.Add(this.lblHover);
             this.Controls.Add(this.btnStartGame);
