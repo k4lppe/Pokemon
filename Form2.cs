@@ -33,6 +33,9 @@ namespace pokemon
         Random flinch = new Random();
         int flinchChance;
 
+        Random sleep = new Random();
+        int sleepingChance;
+
         Random burn = new Random();
         int burningChance;
 
@@ -46,6 +49,7 @@ namespace pokemon
         int potions = 5;
         int superPotions = 3;
         int hyperPotions = 1;
+        int lumBerries = 1;
 
         bool pokemon0Alive = true;
         bool pokemon1Alive = false;
@@ -178,12 +182,14 @@ namespace pokemon
             btnPotion.Visible = false;
             btnSPotion.Visible = false;
             btnHPotion.Visible = false;
+            btnLumberry.Visible = false;
         }
         private void ShowBag()
         {
             btnPotion.Visible = true;
             btnSPotion.Visible = true;
             btnHPotion.Visible = true;
+            btnLumberry.Visible = true;
         }
 
         private void Form2_Load(object sender, EventArgs e)
@@ -202,8 +208,7 @@ namespace pokemon
             enemyPokemonHealthBar.Maximum = enemyPokemons[enemyRandomIndex].pokemonHealth;
             enemyPokemonHealthBar.Value = enemyPokemons[enemyRandomIndex].pokemonHealth;
 
-
-
+      
 
 
         }
@@ -223,6 +228,7 @@ namespace pokemon
                 HideBag();
                 MoveButtonsHidden();
                 SwitchToNextPokemon();
+                
             }
         }
 
@@ -253,6 +259,12 @@ namespace pokemon
 
                 HideBag();
                 MoveButtonsHidden();
+                criticalIncreased = false;
+                enemyPokemons[enemyIndex].move1Damage = enemyPokemons[enemyIndex].move1Damage;
+                enemyPokemons[enemyIndex].move2Damage = enemyPokemons[enemyIndex].move2Damage;
+                enemyPokemons[enemyIndex].move3Damage = enemyPokemons[enemyIndex].move3Damage;
+                enemyPokemons[enemyIndex].move4Damage = enemyPokemons[enemyIndex].move4Damage;
+                selectedPokemons[0].defense = selectedPokemons[0].defense;
                 if (enemyPokemons.Count > 0)
                 {
                     EnemySwitchToNextPokemon();
@@ -287,7 +299,11 @@ namespace pokemon
             HideBag();
             MoveButtonsVisible();
         }
-   
+        bool defenceUp = false;
+        bool criticalIncreased = false;
+        bool attackFell = false;
+        bool usedLeer = false;
+        bool speedFell = false;
         private void btnMove1_Click(object sender, EventArgs e)
         {
 
@@ -324,11 +340,15 @@ namespace pokemon
                         moveTimer.Interval = 1000;
                         moveTimer.Tick += MoveTimer_Tick;
                         moveTimer.Start();
+                        lblParalyzed2.Visible = true;
                     }
                     break;
 
                 case "Confuse Ray":
                     enemyPokemons[enemyIndex].pokemonConfused = true;
+                    moveTimer.Interval = 1000;
+                    moveTimer.Tick += MoveTimer_Tick;
+                    moveTimer.Start();
                     break;
 
                 case "Karate Chop":
@@ -352,8 +372,7 @@ namespace pokemon
                     break;
             }
         }
-        bool usedLeer = false;
-        bool speedFell = false; 
+        
         private void btnMove2_Click(object sender, EventArgs e)
         {
             MoveButtonsHidden();
@@ -387,7 +406,7 @@ namespace pokemon
                         moveTimer.Interval = 1000;
                         moveTimer.Tick += MoveTimer_Tick;
                         moveTimer.Start();
-                        
+                        lblBurning2.Visible = true;
                     }
                     break;
 
@@ -402,6 +421,7 @@ namespace pokemon
                         moveTimer.Interval = 1000;
                         moveTimer.Tick += MoveTimer_Tick;
                         moveTimer.Start();
+                        lblParalyzed2.Visible = true;
                     }
                     break;
 
@@ -424,6 +444,7 @@ namespace pokemon
                         moveTimer.Interval = 1000;
                         moveTimer.Tick += MoveTimer_Tick;
                         moveTimer.Start();
+                        lblParalyzed2.Visible = true;
                     }
                     break;
 
@@ -439,7 +460,7 @@ namespace pokemon
                     break;
             }
         }
-
+       
         private void btnMove3_Click(object sender, EventArgs e)
         {
             MoveButtonsHidden();
@@ -458,6 +479,7 @@ namespace pokemon
                         moveTimer.Interval = 1000;
                         moveTimer.Tick += MoveTimer_Tick;
                         moveTimer.Start();
+                        lblParalyzed2.Visible = true;
                     }
                     break;
 
@@ -473,7 +495,48 @@ namespace pokemon
                         moveTimer.Interval = 1000;
                         moveTimer.Tick += MoveTimer_Tick;
                         moveTimer.Start();
+                        lblParalyzed2.Visible = true;
                     }
+                    break;
+
+                case "Thunder Wave":
+                    enemyPokemons[enemyIndex].pokemonParalyzed = true;
+                    moveTimer.Interval = 1000;
+                    moveTimer.Tick += MoveTimer_Tick;
+                    moveTimer.Start();
+                    break;
+
+                case "Double-Edge":
+                    enemyPokemons[enemyIndex].pokemonHealth = Math.Max(enemyPokemons[enemyIndex].pokemonHealth - selectedPokemons[0].move3Damage, 0);
+                    lblEnemyPokemonHealth.Text = $"{enemyPokemons[enemyRandomIndex].pokemonHealth}/{enemyPokemons[enemyRandomIndex].pokemonStartHealth}";
+                    UpdateEnemyProgressBar();
+                    selectedPokemons[0].pokemonHealth = Math.Max(selectedPokemons[0].pokemonHealth - selectedPokemons[0].move3Damage / 4, 0);
+                    lblPlayerPokemonHealth.Text = $"{selectedPokemons[0].pokemonHealth}/{selectedPokemons[0].pokemonStartHealth}";
+                    UpdateProgressBar();
+                    break;
+
+                case "Hypnosis":
+                    sleepingChance = sleep.Next(0, 3);
+                    if (sleepingChance == 0)
+                    {
+                        enemyPokemons[enemyIndex].pokemonSleeping = true;
+                        moveTimer.Interval = 1000;
+                        moveTimer.Tick += MoveTimer_Tick;
+                        moveTimer.Start();
+                        lblSleeping2.Visible = true;
+                    }
+                    else
+                    {
+                        lblText.Text = $"{selectedPokemons[0].pokemonName} missed!";
+                    }       
+                    break;
+
+                case "Focus Energy":
+                    criticalIncreased = true;
+                    enemyPokemons[enemyIndex].pokemonSleeping = true;
+                    moveTimer.Interval = 1000;
+                    moveTimer.Tick += MoveTimer_Tick;
+                    moveTimer.Start();
                     break;
             }
         }
@@ -482,11 +545,60 @@ namespace pokemon
         {
             MoveButtonsHidden();
             lblText.Text = $"{selectedPokemons[0].pokemonName} used {selectedPokemons[0].move4}!";
+            switch(selectedPokemons[0].move4)
+            {
+                case "Hydro Pump":
+                    enemyPokemons[enemyIndex].pokemonHealth = Math.Max(enemyPokemons[enemyIndex].pokemonHealth - selectedPokemons[0].move4Damage, 0);
+                    lblEnemyPokemonHealth.Text = $"{enemyPokemons[enemyRandomIndex].pokemonHealth}/{enemyPokemons[enemyRandomIndex].pokemonStartHealth}";
+                    UpdateEnemyProgressBar();
+                    break;
+
+                case "Growl":
+                    enemyPokemons[enemyIndex].move1Damage = enemyPokemons[enemyIndex].move1Damage - 10;
+                    enemyPokemons[enemyIndex].move2Damage = enemyPokemons[enemyIndex].move2Damage - 10;
+                    enemyPokemons[enemyIndex].move3Damage = enemyPokemons[enemyIndex].move3Damage - 10;
+                    enemyPokemons[enemyIndex].move4Damage = enemyPokemons[enemyIndex].move4Damage - 10;
+                    attackFell = true;
+                    moveTimer.Interval = 1000;
+                    moveTimer.Tick += MoveTimer_Tick;
+                    moveTimer.Start();
+                    break;
+
+                case "Charge":
+                    selectedPokemons[0].defense = selectedPokemons[0].defense + 10;
+                    moveTimer.Interval = 1000;
+                    moveTimer.Tick += MoveTimer_Tick;
+                    moveTimer.Start();
+                    break;
+
+                case "Rest":
+                    btnFight.Enabled = false;
+                    break;
+
+                case "Hex":
+                    if(enemyPokemons[enemyIndex].pokemonParalyzed || enemyPokemons[enemyIndex].pokemonBurning || enemyPokemons[enemyIndex].pokemonSleeping || enemyPokemons[enemyIndex].pokemonConfused)
+                    {
+                        enemyPokemons[enemyIndex].pokemonHealth = Math.Max(enemyPokemons[enemyIndex].pokemonHealth - selectedPokemons[0].move4Damage * 2, 0);
+                        lblEnemyPokemonHealth.Text = $"{enemyPokemons[enemyRandomIndex].pokemonHealth}/{enemyPokemons[enemyRandomIndex].pokemonStartHealth}";
+                        UpdateEnemyProgressBar();
+                    }
+                    else
+                    {
+                        enemyPokemons[enemyIndex].pokemonHealth = Math.Max(enemyPokemons[enemyIndex].pokemonHealth - selectedPokemons[0].move4Damage, 0);
+                        lblEnemyPokemonHealth.Text = $"{enemyPokemons[enemyRandomIndex].pokemonHealth}/{enemyPokemons[enemyRandomIndex].pokemonStartHealth}";
+                        UpdateEnemyProgressBar();
+                    }
+                    break;
+            }
         }
         private void MoveTimer_Tick(object sender, EventArgs e)
         {
             moveTimer.Stop();
 
+            if(enemyPokemons[enemyIndex].pokemonConfused)
+            {
+                lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} is confused!";
+            }
             if(enemyPokemons[enemyIndex].pokemonParalyzed)
             {
                 lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} is fully paralyzed!";
@@ -505,13 +617,32 @@ namespace pokemon
             }
             if(usedLeer)
             {
-                lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} defence fell!";
+                lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName}'s defence fell!";
+                usedLeer = false;
             }
             if(speedFell)
             {
                 lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} speed fell!";
+                speedFell = false;
             }
-
+            if(enemyPokemons[enemyIndex].pokemonSleeping)
+            {
+                lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} is fully asleep!";
+            }
+            if (criticalIncreased)
+            {
+                lblText.Text = $"{selectedPokemons[0].pokemonName} critical hit ratio increased!";
+            }
+            if(attackFell)
+            {
+                lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName}'s attack fell!";
+                attackFell = false;
+            }
+            if(defenceUp)
+            {
+                lblText.Text = $"{selectedPokemons[0].pokemonName}'s defence increased";
+                defenceUp = false;
+            }
         }
 
         private void btnBag_Click(object sender, EventArgs e)
@@ -521,6 +652,7 @@ namespace pokemon
             btnPotion.Text = $"Potions x{potions}";
             btnSPotion.Text = $"Super Potions x{superPotions}";
             btnHPotion.Text = $"Hyper Potions x{hyperPotions}";
+            btnLumberry.Text = $"Lum Berries x{lumBerries}";
         }
 
         private void btnPotion_Click(object sender, EventArgs e)
@@ -767,17 +899,17 @@ namespace pokemon
                     break;
 
                 case "Double-Edge":
-                    lblInfo.Text = "Double-Edge deals a lot of damage, but the user receives 1⁄3 of the damage it inflicted in recoil.";
+                    lblInfo.Text = "Double-Edge deals a lot of damage, but the user receives 1⁄4 of the damage it inflicted in recoil.";
                     break;
 
                 case "Hypnosis":
                     lblInfo.Size = new Size(504, 108);
                     lblInfo.Location = new System.Drawing.Point(9, 373);
-                    lblInfo.Text = "Hypnosis puts the target to sleep, if it hits. Sleeping Pokémon cannot move. Sleep lasts for 1-3 turns.";
+                    lblInfo.Text = "Hypnosis puts the target to sleep, but it has 1/3 chance of missing. Sleeping Pokémon cannot move. Sleep lasts for 1-3 turns.";
                     break;
 
                 case "Focus Energy":
-                    lblInfo.Text = "Increases critical hit ratio by 4.";
+                    lblInfo.Text = "Increases critical hit ratio from 1/16 to 1/4";
                     break;
             }
             
@@ -853,6 +985,50 @@ namespace pokemon
         }
 
         private void btnHPotion_MouseLeave(object sender, EventArgs e)
+        {
+            lblInfo.Visible = false;
+        }
+
+        private void btnLumberry_Click(object sender, EventArgs e)
+        {
+            if (lumBerries > 0)
+            {
+                if (selectedPokemons[0].pokemonBurning || selectedPokemons[0].pokemonConfused || selectedPokemons[0].pokemonParalyzed || selectedPokemons[0].pokemonSleeping)
+                {
+                    HideBag();
+                    lblText.Text = $"Used Lum Berry on {selectedPokemons[0].pokemonName}!";
+                    RestorePokemonsCondition();
+                    lumBerries--;
+                    btnPotion.Text = $"Lum berries x{lumBerries}";
+                   
+                }
+                else
+                {
+                    HideBag();
+                    lblText.Text = $"{selectedPokemons[0].pokemonName} is not affected by any non-volatile status condition.";
+                }
+            }
+            else
+            {
+                HideBag();
+                lblText.Text = $"You're all out of Lum Berries!";
+            }
+        }
+        private void RestorePokemonsCondition()
+        {
+            selectedPokemons[0].pokemonSleeping = false;
+            selectedPokemons[0].pokemonParalyzed = false;
+            selectedPokemons[0].pokemonBurning = false;
+            selectedPokemons[0].pokemonConfused = false;
+        }
+
+        private void btnLumberry_MouseHover(object sender, EventArgs e)
+        {
+            lblInfo.Visible = true;
+            lblInfo.Text = "Lum Berry cures its users non-volatile status condition. (Sleeping, Paralysis, Confusion, Burning)";
+        }
+
+        private void btnLumberry_MouseLeave(object sender, EventArgs e)
         {
             lblInfo.Visible = false;
         }

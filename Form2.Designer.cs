@@ -64,6 +64,15 @@ namespace pokemon
             this.btnSPotion = new System.Windows.Forms.Button();
             this.btnHPotion = new System.Windows.Forms.Button();
             this.lblInfo = new System.Windows.Forms.Label();
+            this.lblParalyzed = new System.Windows.Forms.Label();
+            this.lblSleeping = new System.Windows.Forms.Label();
+            this.lblConfused = new System.Windows.Forms.Label();
+            this.lblBurning = new System.Windows.Forms.Label();
+            this.lblParalyzed2 = new System.Windows.Forms.Label();
+            this.lblSleeping2 = new System.Windows.Forms.Label();
+            this.lblConfused2 = new System.Windows.Forms.Label();
+            this.lblBurning2 = new System.Windows.Forms.Label();
+            this.btnLumberry = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -501,6 +510,123 @@ namespace pokemon
             this.lblInfo.Text = "Info";
             this.lblInfo.Visible = false;
             // 
+            // lblParalyzed
+            // 
+            this.lblParalyzed.BackColor = System.Drawing.Color.Yellow;
+            this.lblParalyzed.Font = new System.Drawing.Font("Unispace", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblParalyzed.ForeColor = System.Drawing.Color.Black;
+            this.lblParalyzed.Location = new System.Drawing.Point(829, 397);
+            this.lblParalyzed.Name = "lblParalyzed";
+            this.lblParalyzed.Size = new System.Drawing.Size(100, 23);
+            this.lblParalyzed.TabIndex = 35;
+            this.lblParalyzed.Text = "Paralyzed";
+            this.lblParalyzed.Visible = false;
+            // 
+            // lblSleeping
+            // 
+            this.lblSleeping.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.lblSleeping.Font = new System.Drawing.Font("Unispace", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSleeping.ForeColor = System.Drawing.Color.Black;
+            this.lblSleeping.Location = new System.Drawing.Point(829, 397);
+            this.lblSleeping.Name = "lblSleeping";
+            this.lblSleeping.Size = new System.Drawing.Size(100, 23);
+            this.lblSleeping.TabIndex = 36;
+            this.lblSleeping.Text = "Sleeping";
+            this.lblSleeping.Visible = false;
+            // 
+            // lblConfused
+            // 
+            this.lblConfused.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.lblConfused.Font = new System.Drawing.Font("Unispace", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblConfused.ForeColor = System.Drawing.Color.Black;
+            this.lblConfused.Location = new System.Drawing.Point(829, 397);
+            this.lblConfused.Name = "lblConfused";
+            this.lblConfused.Size = new System.Drawing.Size(100, 23);
+            this.lblConfused.TabIndex = 37;
+            this.lblConfused.Text = "Confused";
+            this.lblConfused.Visible = false;
+            // 
+            // lblBurning
+            // 
+            this.lblBurning.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblBurning.Font = new System.Drawing.Font("Unispace", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBurning.ForeColor = System.Drawing.Color.Black;
+            this.lblBurning.Location = new System.Drawing.Point(829, 397);
+            this.lblBurning.Name = "lblBurning";
+            this.lblBurning.Size = new System.Drawing.Size(100, 23);
+            this.lblBurning.TabIndex = 38;
+            this.lblBurning.Text = "Burning";
+            this.lblBurning.Visible = false;
+            // 
+            // lblParalyzed2
+            // 
+            this.lblParalyzed2.BackColor = System.Drawing.Color.Yellow;
+            this.lblParalyzed2.Font = new System.Drawing.Font("Unispace", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblParalyzed2.ForeColor = System.Drawing.Color.Black;
+            this.lblParalyzed2.Location = new System.Drawing.Point(272, 34);
+            this.lblParalyzed2.Name = "lblParalyzed2";
+            this.lblParalyzed2.Size = new System.Drawing.Size(100, 23);
+            this.lblParalyzed2.TabIndex = 39;
+            this.lblParalyzed2.Text = "Paralyzed";
+            this.lblParalyzed2.Visible = false;
+            // 
+            // lblSleeping2
+            // 
+            this.lblSleeping2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.lblSleeping2.Font = new System.Drawing.Font("Unispace", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSleeping2.ForeColor = System.Drawing.Color.Black;
+            this.lblSleeping2.Location = new System.Drawing.Point(272, 35);
+            this.lblSleeping2.Name = "lblSleeping2";
+            this.lblSleeping2.Size = new System.Drawing.Size(100, 23);
+            this.lblSleeping2.TabIndex = 40;
+            this.lblSleeping2.Text = "Sleeping";
+            this.lblSleeping2.Visible = false;
+            // 
+            // lblConfused2
+            // 
+            this.lblConfused2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.lblConfused2.Font = new System.Drawing.Font("Unispace", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblConfused2.ForeColor = System.Drawing.Color.Black;
+            this.lblConfused2.Location = new System.Drawing.Point(272, 35);
+            this.lblConfused2.Name = "lblConfused2";
+            this.lblConfused2.Size = new System.Drawing.Size(100, 23);
+            this.lblConfused2.TabIndex = 41;
+            this.lblConfused2.Text = "Confused";
+            this.lblConfused2.Visible = false;
+            // 
+            // lblBurning2
+            // 
+            this.lblBurning2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblBurning2.Font = new System.Drawing.Font("Unispace", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBurning2.ForeColor = System.Drawing.Color.Black;
+            this.lblBurning2.Location = new System.Drawing.Point(272, 34);
+            this.lblBurning2.Name = "lblBurning2";
+            this.lblBurning2.Size = new System.Drawing.Size(100, 23);
+            this.lblBurning2.TabIndex = 42;
+            this.lblBurning2.Text = "Burning";
+            this.lblBurning2.Visible = false;
+            // 
+            // btnLumberry
+            // 
+            this.btnLumberry.BackColor = System.Drawing.Color.White;
+            this.btnLumberry.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnLumberry.FlatAppearance.BorderSize = 0;
+            this.btnLumberry.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLumberry.Font = new System.Drawing.Font("Unispace", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLumberry.Image = ((System.Drawing.Image)(resources.GetObject("btnLumberry.Image")));
+            this.btnLumberry.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnLumberry.Location = new System.Drawing.Point(315, 573);
+            this.btnLumberry.Name = "btnLumberry";
+            this.btnLumberry.Size = new System.Drawing.Size(303, 62);
+            this.btnLumberry.TabIndex = 43;
+            this.btnLumberry.Text = "lum berry";
+            this.btnLumberry.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnLumberry.UseVisualStyleBackColor = false;
+            this.btnLumberry.Visible = false;
+            this.btnLumberry.Click += new System.EventHandler(this.btnLumberry_Click);
+            this.btnLumberry.MouseLeave += new System.EventHandler(this.btnLumberry_MouseLeave);
+            this.btnLumberry.MouseHover += new System.EventHandler(this.btnLumberry_MouseHover);
+            // 
             // Battle
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -509,6 +635,15 @@ namespace pokemon
             this.BackgroundImage = global::pokemon.Properties.Resources.background;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(964, 649);
+            this.Controls.Add(this.btnLumberry);
+            this.Controls.Add(this.lblBurning2);
+            this.Controls.Add(this.lblConfused2);
+            this.Controls.Add(this.lblSleeping2);
+            this.Controls.Add(this.lblParalyzed2);
+            this.Controls.Add(this.lblBurning);
+            this.Controls.Add(this.lblConfused);
+            this.Controls.Add(this.lblSleeping);
+            this.Controls.Add(this.lblParalyzed);
             this.Controls.Add(this.lblInfo);
             this.Controls.Add(this.btnHPotion);
             this.Controls.Add(this.btnSPotion);
@@ -591,5 +726,14 @@ namespace pokemon
         private System.Windows.Forms.Button btnSPotion;
         private System.Windows.Forms.Button btnHPotion;
         private System.Windows.Forms.Label lblInfo;
+        private System.Windows.Forms.Label lblParalyzed;
+        private System.Windows.Forms.Label lblSleeping;
+        private System.Windows.Forms.Label lblConfused;
+        private System.Windows.Forms.Label lblBurning;
+        private System.Windows.Forms.Label lblParalyzed2;
+        private System.Windows.Forms.Label lblSleeping2;
+        private System.Windows.Forms.Label lblConfused2;
+        private System.Windows.Forms.Label lblBurning2;
+        private System.Windows.Forms.Button btnLumberry;
     }
 }

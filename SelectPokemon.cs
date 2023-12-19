@@ -30,7 +30,7 @@ namespace pokemon
                     while ((line = reader.ReadLine()) != null)
                     {
                         string[] stats = line.Split(',');
-                        if (stats.Length == 23)
+                        if (stats.Length == 24)
                         {
                             Pokemon pokemon = new Pokemon(
                                 stats[0].Trim(), // name
@@ -55,7 +55,8 @@ namespace pokemon
                                 bool.Parse(stats[19].Trim()), //pokemonConfused
                                 bool.Parse(stats[20].Trim()), //pokemonCriticalHit
                                 bool.Parse(stats[21].Trim()), //pokemonFlinch
-                                bool.Parse(stats[22].Trim()) //pokemonBurning
+                                bool.Parse(stats[22].Trim()), //pokemonBurning
+                                bool.Parse(stats[23].Trim()) //pokemonSleeping
                             );
                             pokemons.Add(pokemon);
                         }
@@ -398,8 +399,9 @@ namespace pokemon
         public bool pokemonCriticalHit;
         public bool pokemonFlinch;
         public bool pokemonBurning;
+        public bool pokemonSleeping;
 
-        public Pokemon(string pokemonName, string pokemonType, string pokemonType2, int pokemonHealth, int attack, int defense, int speed, int index, string imageFile, int pokemonStartHealth, string move1, string move2, string move3, string move4, int move1Damage, int move2Damage, int move3Damage, int move4Damage, bool pokemonParalyzed, bool pokemonConfused, bool pokemonCriticalHit, bool pokemonFlinch, bool pokemonBurning)
+        public Pokemon(string pokemonName, string pokemonType, string pokemonType2, int pokemonHealth, int attack, int defense, int speed, int index, string imageFile, int pokemonStartHealth, string move1, string move2, string move3, string move4, int move1Damage, int move2Damage, int move3Damage, int move4Damage, bool pokemonParalyzed, bool pokemonConfused, bool pokemonCriticalHit, bool pokemonFlinch, bool pokemonBurning, bool pokemonSleeping)
         {
             this.pokemonName = pokemonName;
             this.pokemonHealth = pokemonHealth;
@@ -424,6 +426,7 @@ namespace pokemon
             this.pokemonCriticalHit = pokemonCriticalHit;
             this.pokemonFlinch = pokemonFlinch;
             this.pokemonBurning = pokemonBurning;
+            this.pokemonSleeping = pokemonSleeping;
         }
 
     }
