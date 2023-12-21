@@ -8,7 +8,6 @@ C:\Users\s3keka03\source\repos\pokemon\obj\Debug\pokemon.csproj.CoreCompileInput
 C:\Users\s3keka03\source\repos\pokemon\obj\Debug\pokemon.exe
 C:\Users\s3keka03\source\repos\pokemon\obj\Debug\pokemon.pdb
 C:\Users\s3keka03\source\repos\pokemon\obj\Debug\pokemon.SelectPokemon.resources
-C:\Users\s3keka03\source\repos\pokemon\obj\Debug\pokemon.Form2.resources
 C:\pokemon\Pokemon-master\bin\Debug\pokemon.exe.config
 C:\pokemon\Pokemon-master\bin\Debug\pokemon.exe
 C:\pokemon\Pokemon-master\bin\Debug\pokemon.pdb
@@ -20,3 +19,4 @@ C:\pokemon\Pokemon-master\obj\Debug\pokemon.csproj.CoreCompileInputs.cache
 C:\pokemon\Pokemon-master\obj\Debug\pokemon.exe
 C:\pokemon\Pokemon-master\obj\Debug\pokemon.pdb
 C:\pokemon\Pokemon-master\obj\Debug\pokemon.Battle.resources
+C:\Users\s3keka03\source\repos\pokemon\obj\Debug\pokemon.Battle.resources

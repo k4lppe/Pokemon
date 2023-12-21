@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 using System.Linq;
+using System.Drawing;
 
 namespace pokemon
 {
@@ -20,6 +21,8 @@ namespace pokemon
 
         int pokemonSelected = 0;
         int pokemonIndex = 0;
+
+        
         private void ImportPokemonStats(string path)
         {
             try
@@ -74,7 +77,7 @@ namespace pokemon
 
         }
 
-        private void btnGyarados_Click(object sender, EventArgs e)
+        private void BtnGyarados_Click(object sender, EventArgs e)
         {
             if (pokemonSelected < 3)
             {
@@ -107,7 +110,7 @@ namespace pokemon
             }
 
         }
-        private void btnMachamp_Click(object sender, EventArgs e)
+        private void BtnMachamp_Click(object sender, EventArgs e)
         {
             if (pokemonSelected < 3)
             {
@@ -169,7 +172,7 @@ namespace pokemon
             }
 
         }
-        private void btnZapdos_Click(object sender, EventArgs e)
+        private void BtnZapdos_Click(object sender, EventArgs e)
         {
             if (pokemonSelected < 3)
             {
@@ -200,7 +203,7 @@ namespace pokemon
                 MessageBox.Show("You can choose up to three Pokémon.");
             }
         }
-        private void btnSnorlax_Click(object sender, EventArgs e)
+        private void BtnSnorlax_Click(object sender, EventArgs e)
         {
             if (pokemonSelected < 3)
             {
@@ -230,7 +233,7 @@ namespace pokemon
                 MessageBox.Show("You can choose up to three Pokémon.");
             }
         }
-        private void btnGengar_Click(object sender, EventArgs e)
+        private void BtnGengar_Click(object sender, EventArgs e)
         {
             if (pokemonSelected < 3)
             {
@@ -270,7 +273,7 @@ namespace pokemon
             return null;
         }
 
-        private void btnStartGame_Click(object sender, EventArgs e)
+        private void BtnStartGame_Click(object sender, EventArgs e)
         {         
             if (pokemonSelected == 3)
             {
@@ -304,7 +307,7 @@ namespace pokemon
 
         }
 
-        private void btnGyarados_MouseHover(object sender, EventArgs e)
+        private void BtnGyarados_MouseHover(object sender, EventArgs e)
         {
             lblHover.Text = "Current Pokémon: Gyarados";
             lblStats.Text = $"Type: Water, Flying, HP: 95, ATK: 125, DEF: 79, SPD: 81";
@@ -316,25 +319,25 @@ namespace pokemon
             lblStats.Text = "Type: Fire, Flying, HP: 78, ATK: 84, DEF: 78, SPD: 100";
         }
 
-        private void btnZapdos_MouseHover(object sender, EventArgs e)
+        private void BtnZapdos_MouseHover(object sender, EventArgs e)
         {
             lblHover.Text = "Current Pokémon: Zapdos";
             lblStats.Text = "Type: Electric, Flying, HP: 90, ATK: 90, DEF: 85, SPD: 100";
         }
 
-        private void btnSnorlax_MouseHover(object sender, EventArgs e)
+        private void BtnSnorlax_MouseHover(object sender, EventArgs e)
         {
             lblHover.Text = "Current Pokémon: Snorlax";
             lblStats.Text = "Type: Normal, HP: 160, ATK 110, DEF: 65, SPD: 30";
         }
 
-        private void btnGengar_MouseHover(object sender, EventArgs e)
+        private void BtnGengar_MouseHover(object sender, EventArgs e)
         {
             lblHover.Text = "Current Pokémon: Gengar";
             lblStats.Text = "Type: Ghost, Poison, HP: 60, ATK: 65, DEF: 60, SPD: 110";
         }
 
-        private void btnMachamp_MouseHover(object sender, EventArgs e)
+        private void BtnMachamp_MouseHover(object sender, EventArgs e)
         {
             lblHover.Text = "Current Pokémon: Machamp";
             lblStats.Text = "Type: Fighting, HP: 90, ATK: 130, DEF: 80, \nSPD: 55";
@@ -346,25 +349,25 @@ namespace pokemon
             lblStats.Text = "";
         }
 
-        private void btnStartGame_MouseHover(object sender, EventArgs e)
+        private void BtnStartGame_MouseHover(object sender, EventArgs e)
         {
             lblHover.Text = "Start the Game!";
             lblStats.Text = "";
         }
 
-        private void lblStats_MouseHover(object sender, EventArgs e)
+        private void LblStats_MouseHover(object sender, EventArgs e)
         {
             lblHover.Text = "";
             lblStats.Text = "";
         }
 
-        private void lblHover_MouseHover(object sender, EventArgs e)
+        private void LblHover_MouseHover(object sender, EventArgs e)
         {
             lblHover.Text = "";
             lblStats.Text = "";
         }
 
-        private void label1_MouseHover(object sender, EventArgs e)
+        private void Label1_MouseHover(object sender, EventArgs e)
         {
             lblHover.Text = "";
             lblStats.Text = "";

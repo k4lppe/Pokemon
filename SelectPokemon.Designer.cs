@@ -44,13 +44,13 @@ namespace pokemon
             // 
             // label1
             // 
-            this.label1.Font = new System.Drawing.Font("Unispace", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Comic Sans MS", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(220, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(404, 63);
             this.label1.TabIndex = 6;
             this.label1.Text = "Choose 3 Pokémon";
-            this.label1.MouseHover += new System.EventHandler(this.label1_MouseHover);
+            this.label1.MouseHover += new System.EventHandler(this.Label1_MouseHover);
             // 
             // btnStartGame
             // 
@@ -61,15 +61,15 @@ namespace pokemon
             this.btnStartGame.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.btnStartGame.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.btnStartGame.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnStartGame.Font = new System.Drawing.Font("Unispace", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnStartGame.Font = new System.Drawing.Font("Comic Sans MS", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStartGame.Location = new System.Drawing.Point(679, 593);
             this.btnStartGame.Name = "btnStartGame";
             this.btnStartGame.Size = new System.Drawing.Size(142, 55);
             this.btnStartGame.TabIndex = 7;
             this.btnStartGame.Text = "Start";
             this.btnStartGame.UseVisualStyleBackColor = false;
-            this.btnStartGame.Click += new System.EventHandler(this.btnStartGame_Click);
-            this.btnStartGame.MouseHover += new System.EventHandler(this.btnStartGame_MouseHover);
+            this.btnStartGame.Click += new System.EventHandler(this.BtnStartGame_Click);
+            this.btnStartGame.MouseHover += new System.EventHandler(this.BtnStartGame_MouseHover);
             // 
             // btnMachamp
             // 
@@ -83,8 +83,8 @@ namespace pokemon
             this.btnMachamp.Size = new System.Drawing.Size(258, 240);
             this.btnMachamp.TabIndex = 5;
             this.btnMachamp.UseVisualStyleBackColor = true;
-            this.btnMachamp.Click += new System.EventHandler(this.btnMachamp_Click);
-            this.btnMachamp.MouseHover += new System.EventHandler(this.btnMachamp_MouseHover);
+            this.btnMachamp.Click += new System.EventHandler(this.BtnMachamp_Click);
+            this.btnMachamp.MouseHover += new System.EventHandler(this.BtnMachamp_MouseHover);
             // 
             // btnGengar
             // 
@@ -98,8 +98,8 @@ namespace pokemon
             this.btnGengar.Size = new System.Drawing.Size(258, 240);
             this.btnGengar.TabIndex = 4;
             this.btnGengar.UseVisualStyleBackColor = true;
-            this.btnGengar.Click += new System.EventHandler(this.btnGengar_Click);
-            this.btnGengar.MouseHover += new System.EventHandler(this.btnGengar_MouseHover);
+            this.btnGengar.Click += new System.EventHandler(this.BtnGengar_Click);
+            this.btnGengar.MouseHover += new System.EventHandler(this.BtnGengar_MouseHover);
             // 
             // btnSnorlax
             // 
@@ -113,8 +113,8 @@ namespace pokemon
             this.btnSnorlax.Size = new System.Drawing.Size(258, 240);
             this.btnSnorlax.TabIndex = 3;
             this.btnSnorlax.UseVisualStyleBackColor = true;
-            this.btnSnorlax.Click += new System.EventHandler(this.btnSnorlax_Click);
-            this.btnSnorlax.MouseHover += new System.EventHandler(this.btnSnorlax_MouseHover);
+            this.btnSnorlax.Click += new System.EventHandler(this.BtnSnorlax_Click);
+            this.btnSnorlax.MouseHover += new System.EventHandler(this.BtnSnorlax_MouseHover);
             // 
             // btnZapdos
             // 
@@ -128,8 +128,8 @@ namespace pokemon
             this.btnZapdos.Size = new System.Drawing.Size(258, 240);
             this.btnZapdos.TabIndex = 2;
             this.btnZapdos.UseVisualStyleBackColor = true;
-            this.btnZapdos.Click += new System.EventHandler(this.btnZapdos_Click);
-            this.btnZapdos.MouseHover += new System.EventHandler(this.btnZapdos_MouseHover);
+            this.btnZapdos.Click += new System.EventHandler(this.BtnZapdos_Click);
+            this.btnZapdos.MouseHover += new System.EventHandler(this.BtnZapdos_MouseHover);
             // 
             // btnCharizard
             // 
@@ -161,33 +161,33 @@ namespace pokemon
             this.btnGyarados.Size = new System.Drawing.Size(258, 240);
             this.btnGyarados.TabIndex = 0;
             this.btnGyarados.UseVisualStyleBackColor = false;
-            this.btnGyarados.Click += new System.EventHandler(this.btnGyarados_Click);
-            this.btnGyarados.MouseHover += new System.EventHandler(this.btnGyarados_MouseHover);
+            this.btnGyarados.Click += new System.EventHandler(this.BtnGyarados_Click);
+            this.btnGyarados.MouseHover += new System.EventHandler(this.BtnGyarados_MouseHover);
             // 
             // lblHover
             // 
-            this.lblHover.Font = new System.Drawing.Font("Unispace", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHover.Font = new System.Drawing.Font("Comic Sans MS", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblHover.Location = new System.Drawing.Point(12, 579);
             this.lblHover.Name = "lblHover";
             this.lblHover.Size = new System.Drawing.Size(466, 37);
             this.lblHover.TabIndex = 8;
-            this.lblHover.MouseHover += new System.EventHandler(this.lblHover_MouseHover);
+            this.lblHover.MouseHover += new System.EventHandler(this.LblHover_MouseHover);
             // 
             // lblStats
             // 
-            this.lblStats.Font = new System.Drawing.Font("Unispace", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStats.Location = new System.Drawing.Point(12, 607);
+            this.lblStats.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStats.Location = new System.Drawing.Point(12, 616);
             this.lblStats.Name = "lblStats";
-            this.lblStats.Size = new System.Drawing.Size(661, 55);
+            this.lblStats.Size = new System.Drawing.Size(661, 54);
             this.lblStats.TabIndex = 9;
-            this.lblStats.MouseHover += new System.EventHandler(this.lblStats_MouseHover);
+            this.lblStats.MouseHover += new System.EventHandler(this.LblStats_MouseHover);
             // 
             // SelectPokemon
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(837, 660);
+            this.ClientSize = new System.Drawing.Size(837, 679);
             this.Controls.Add(this.lblStats);
             this.Controls.Add(this.lblHover);
             this.Controls.Add(this.btnStartGame);

@@ -96,7 +96,7 @@ namespace pokemon
             this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(169)))), ((int)(((byte)(212)))));
             this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(169)))), ((int)(((byte)(212)))));
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Unispace", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Font = new System.Drawing.Font("Comic Sans MS", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.Location = new System.Drawing.Point(797, 575);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(155, 72);
@@ -113,7 +113,7 @@ namespace pokemon
             this.btnPokemon.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.btnPokemon.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.btnPokemon.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPokemon.Font = new System.Drawing.Font("Unispace", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPokemon.Font = new System.Drawing.Font("Comic Sans MS", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPokemon.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btnPokemon.Location = new System.Drawing.Point(636, 575);
             this.btnPokemon.Name = "btnPokemon";
@@ -131,7 +131,7 @@ namespace pokemon
             this.btnBag.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.btnBag.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.btnBag.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBag.Font = new System.Drawing.Font("Unispace", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBag.Font = new System.Drawing.Font("Comic Sans MS", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBag.Location = new System.Drawing.Point(797, 497);
             this.btnBag.Name = "btnBag";
             this.btnBag.Size = new System.Drawing.Size(155, 72);
@@ -149,14 +149,14 @@ namespace pokemon
             this.btnFight.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.btnFight.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.btnFight.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFight.Font = new System.Drawing.Font("Unispace", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFight.Font = new System.Drawing.Font("Comic Sans MS", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFight.Location = new System.Drawing.Point(636, 497);
             this.btnFight.Name = "btnFight";
             this.btnFight.Size = new System.Drawing.Size(155, 72);
             this.btnFight.TabIndex = 4;
             this.btnFight.Text = "Fight";
             this.btnFight.UseVisualStyleBackColor = false;
-            this.btnFight.Click += new System.EventHandler(this.btnFight_Click);
+            this.btnFight.Click += new System.EventHandler(this.BtnFight_Click);
             // 
             // listView2
             // 
@@ -181,7 +181,7 @@ namespace pokemon
             // lblText
             // 
             this.lblText.BackColor = System.Drawing.Color.White;
-            this.lblText.Font = new System.Drawing.Font("Unispace", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblText.Font = new System.Drawing.Font("Comic Sans MS", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblText.Location = new System.Drawing.Point(12, 507);
             this.lblText.Name = "lblText";
             this.lblText.Size = new System.Drawing.Size(606, 128);
@@ -209,7 +209,7 @@ namespace pokemon
             // lblBackground2
             // 
             this.lblBackground2.BackColor = System.Drawing.Color.White;
-            this.lblBackground2.Font = new System.Drawing.Font("Unispace", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBackground2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBackground2.Location = new System.Drawing.Point(26, 24);
             this.lblBackground2.Name = "lblBackground2";
             this.lblBackground2.Size = new System.Drawing.Size(364, 84);
@@ -226,18 +226,18 @@ namespace pokemon
             // lblHP
             // 
             this.lblHP.BackColor = System.Drawing.Color.White;
-            this.lblHP.Font = new System.Drawing.Font("Unispace", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHP.Location = new System.Drawing.Point(644, 423);
+            this.lblHP.Font = new System.Drawing.Font("Comic Sans MS", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHP.Location = new System.Drawing.Point(630, 423);
             this.lblHP.Name = "lblHP";
-            this.lblHP.Size = new System.Drawing.Size(53, 42);
+            this.lblHP.Size = new System.Drawing.Size(65, 42);
             this.lblHP.TabIndex = 14;
             this.lblHP.Text = "HP";
             // 
             // lblPlayerPokemonHealth
             // 
             this.lblPlayerPokemonHealth.BackColor = System.Drawing.Color.White;
-            this.lblPlayerPokemonHealth.Font = new System.Drawing.Font("Unispace", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPlayerPokemonHealth.Location = new System.Drawing.Point(687, 444);
+            this.lblPlayerPokemonHealth.Font = new System.Drawing.Font("Comic Sans MS", 13.25F);
+            this.lblPlayerPokemonHealth.Location = new System.Drawing.Point(682, 444);
             this.lblPlayerPokemonHealth.Name = "lblPlayerPokemonHealth";
             this.lblPlayerPokemonHealth.Size = new System.Drawing.Size(131, 21);
             this.lblPlayerPokemonHealth.TabIndex = 15;
@@ -270,13 +270,13 @@ namespace pokemon
             this.btnHeal.TabIndex = 18;
             this.btnHeal.Text = "heal";
             this.btnHeal.UseVisualStyleBackColor = true;
-            this.btnHeal.Click += new System.EventHandler(this.btnHeal_Click);
+            this.btnHeal.Click += new System.EventHandler(this.BtnHeal_Click);
             // 
             // lblHP2
             // 
             this.lblHP2.BackColor = System.Drawing.Color.White;
-            this.lblHP2.Font = new System.Drawing.Font("Unispace", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHP2.Location = new System.Drawing.Point(91, 66);
+            this.lblHP2.Font = new System.Drawing.Font("Comic Sans MS", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHP2.Location = new System.Drawing.Point(79, 66);
             this.lblHP2.Name = "lblHP2";
             this.lblHP2.Size = new System.Drawing.Size(58, 42);
             this.lblHP2.TabIndex = 19;
@@ -294,8 +294,8 @@ namespace pokemon
             // lblEnemyPokemonHealth
             // 
             this.lblEnemyPokemonHealth.BackColor = System.Drawing.Color.White;
-            this.lblEnemyPokemonHealth.Font = new System.Drawing.Font("Unispace", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEnemyPokemonHealth.Location = new System.Drawing.Point(129, 87);
+            this.lblEnemyPokemonHealth.Font = new System.Drawing.Font("Comic Sans MS", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEnemyPokemonHealth.Location = new System.Drawing.Point(128, 87);
             this.lblEnemyPokemonHealth.Name = "lblEnemyPokemonHealth";
             this.lblEnemyPokemonHealth.Size = new System.Drawing.Size(145, 21);
             this.lblEnemyPokemonHealth.TabIndex = 21;
@@ -304,10 +304,10 @@ namespace pokemon
             // lblPlayerPokemonName
             // 
             this.lblPlayerPokemonName.BackColor = System.Drawing.Color.White;
-            this.lblPlayerPokemonName.Font = new System.Drawing.Font("Unispace", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPlayerPokemonName.Location = new System.Drawing.Point(574, 388);
+            this.lblPlayerPokemonName.Font = new System.Drawing.Font("Comic Sans MS", 18.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPlayerPokemonName.Location = new System.Drawing.Point(576, 388);
             this.lblPlayerPokemonName.Name = "lblPlayerPokemonName";
-            this.lblPlayerPokemonName.Size = new System.Drawing.Size(326, 44);
+            this.lblPlayerPokemonName.Size = new System.Drawing.Size(319, 35);
             this.lblPlayerPokemonName.TabIndex = 13;
             this.lblPlayerPokemonName.Text = "pokemonName";
             // 
@@ -337,10 +337,10 @@ namespace pokemon
             // 
             this.lblEnemyPokemonName.AutoSize = true;
             this.lblEnemyPokemonName.BackColor = System.Drawing.Color.White;
-            this.lblEnemyPokemonName.Font = new System.Drawing.Font("Unispace", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEnemyPokemonName.Font = new System.Drawing.Font("Comic Sans MS", 18.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEnemyPokemonName.Location = new System.Drawing.Point(29, 24);
             this.lblEnemyPokemonName.Name = "lblEnemyPokemonName";
-            this.lblEnemyPokemonName.Size = new System.Drawing.Size(191, 33);
+            this.lblEnemyPokemonName.Size = new System.Drawing.Size(181, 35);
             this.lblEnemyPokemonName.TabIndex = 24;
             this.lblEnemyPokemonName.Text = "pokemonName";
             // 
@@ -352,7 +352,7 @@ namespace pokemon
             this.btnHeal2.TabIndex = 25;
             this.btnHeal2.Text = "heal enemy";
             this.btnHeal2.UseVisualStyleBackColor = true;
-            this.btnHeal2.Click += new System.EventHandler(this.btnHeal2_Click);
+            this.btnHeal2.Click += new System.EventHandler(this.BtnHeal2_Click);
             // 
             // btnDamage2
             // 
@@ -370,7 +370,7 @@ namespace pokemon
             this.btnMove1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnMove1.FlatAppearance.BorderSize = 0;
             this.btnMove1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMove1.Font = new System.Drawing.Font("Unispace", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMove1.Font = new System.Drawing.Font("Comic Sans MS", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMove1.Location = new System.Drawing.Point(12, 507);
             this.btnMove1.Name = "btnMove1";
             this.btnMove1.Size = new System.Drawing.Size(303, 62);
@@ -378,9 +378,9 @@ namespace pokemon
             this.btnMove1.Text = "Move1";
             this.btnMove1.UseVisualStyleBackColor = false;
             this.btnMove1.Visible = false;
-            this.btnMove1.Click += new System.EventHandler(this.btnMove1_Click);
-            this.btnMove1.MouseLeave += new System.EventHandler(this.btnMove1_MouseLeave);
-            this.btnMove1.MouseHover += new System.EventHandler(this.btnMove1_MouseHover);
+            this.btnMove1.Click += new System.EventHandler(this.BtnMove1_Click);
+            this.btnMove1.MouseLeave += new System.EventHandler(this.BtnMove1_MouseLeave);
+            this.btnMove1.MouseHover += new System.EventHandler(this.BtnMove1_MouseHover);
             // 
             // btnMove2
             // 
@@ -388,7 +388,7 @@ namespace pokemon
             this.btnMove2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnMove2.FlatAppearance.BorderSize = 0;
             this.btnMove2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMove2.Font = new System.Drawing.Font("Unispace", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMove2.Font = new System.Drawing.Font("Comic Sans MS", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMove2.Location = new System.Drawing.Point(312, 507);
             this.btnMove2.Name = "btnMove2";
             this.btnMove2.Size = new System.Drawing.Size(306, 62);
@@ -396,9 +396,9 @@ namespace pokemon
             this.btnMove2.Text = "Move2";
             this.btnMove2.UseVisualStyleBackColor = false;
             this.btnMove2.Visible = false;
-            this.btnMove2.Click += new System.EventHandler(this.btnMove2_Click);
-            this.btnMove2.MouseLeave += new System.EventHandler(this.btnMove2_MouseLeave);
-            this.btnMove2.MouseHover += new System.EventHandler(this.btnMove2_MouseHover);
+            this.btnMove2.Click += new System.EventHandler(this.BtnMove2_Click);
+            this.btnMove2.MouseLeave += new System.EventHandler(this.BtnMove2_MouseLeave);
+            this.btnMove2.MouseHover += new System.EventHandler(this.BtnMove2_MouseHover);
             // 
             // btnMove3
             // 
@@ -406,7 +406,7 @@ namespace pokemon
             this.btnMove3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnMove3.FlatAppearance.BorderSize = 0;
             this.btnMove3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMove3.Font = new System.Drawing.Font("Unispace", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMove3.Font = new System.Drawing.Font("Comic Sans MS", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMove3.Location = new System.Drawing.Point(12, 564);
             this.btnMove3.Name = "btnMove3";
             this.btnMove3.Size = new System.Drawing.Size(303, 71);
@@ -414,9 +414,9 @@ namespace pokemon
             this.btnMove3.Text = "Move3";
             this.btnMove3.UseVisualStyleBackColor = false;
             this.btnMove3.Visible = false;
-            this.btnMove3.Click += new System.EventHandler(this.btnMove3_Click);
-            this.btnMove3.MouseLeave += new System.EventHandler(this.btnMove3_MouseLeave);
-            this.btnMove3.MouseHover += new System.EventHandler(this.btnMove3_MouseHover);
+            this.btnMove3.Click += new System.EventHandler(this.BtnMove3_Click);
+            this.btnMove3.MouseLeave += new System.EventHandler(this.BtnMove3_MouseLeave);
+            this.btnMove3.MouseHover += new System.EventHandler(this.BtnMove3_MouseHover);
             // 
             // btnMove4
             // 
@@ -424,7 +424,7 @@ namespace pokemon
             this.btnMove4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnMove4.FlatAppearance.BorderSize = 0;
             this.btnMove4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMove4.Font = new System.Drawing.Font("Unispace", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMove4.Font = new System.Drawing.Font("Comic Sans MS", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMove4.Location = new System.Drawing.Point(312, 564);
             this.btnMove4.Name = "btnMove4";
             this.btnMove4.Size = new System.Drawing.Size(306, 71);
@@ -432,9 +432,9 @@ namespace pokemon
             this.btnMove4.Text = "Move4";
             this.btnMove4.UseVisualStyleBackColor = false;
             this.btnMove4.Visible = false;
-            this.btnMove4.Click += new System.EventHandler(this.btnMove4_Click);
-            this.btnMove4.MouseLeave += new System.EventHandler(this.btnMove4_MouseLeave);
-            this.btnMove4.MouseHover += new System.EventHandler(this.btnMove4_MouseHover);
+            this.btnMove4.Click += new System.EventHandler(this.BtnMove4_Click);
+            this.btnMove4.MouseLeave += new System.EventHandler(this.BtnMove4_MouseLeave);
+            this.btnMove4.MouseHover += new System.EventHandler(this.BtnMove4_MouseHover);
             // 
             // btnPotion
             // 
@@ -442,10 +442,10 @@ namespace pokemon
             this.btnPotion.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnPotion.FlatAppearance.BorderSize = 0;
             this.btnPotion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPotion.Font = new System.Drawing.Font("Unispace", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPotion.Font = new System.Drawing.Font("Comic Sans MS", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPotion.Image = global::pokemon.Properties.Resources.potion;
             this.btnPotion.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnPotion.Location = new System.Drawing.Point(12, 508);
+            this.btnPotion.Location = new System.Drawing.Point(12, 505);
             this.btnPotion.Name = "btnPotion";
             this.btnPotion.Size = new System.Drawing.Size(303, 62);
             this.btnPotion.TabIndex = 31;
@@ -453,9 +453,9 @@ namespace pokemon
             this.btnPotion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnPotion.UseVisualStyleBackColor = false;
             this.btnPotion.Visible = false;
-            this.btnPotion.Click += new System.EventHandler(this.btnPotion_Click);
-            this.btnPotion.MouseLeave += new System.EventHandler(this.btnPotion_MouseLeave);
-            this.btnPotion.MouseHover += new System.EventHandler(this.btnPotion_MouseHover);
+            this.btnPotion.Click += new System.EventHandler(this.BtnPotion_Click);
+            this.btnPotion.MouseLeave += new System.EventHandler(this.BtnPotion_MouseLeave);
+            this.btnPotion.MouseHover += new System.EventHandler(this.BtnPotion_MouseHover);
             // 
             // btnSPotion
             // 
@@ -463,10 +463,10 @@ namespace pokemon
             this.btnSPotion.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSPotion.FlatAppearance.BorderSize = 0;
             this.btnSPotion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSPotion.Font = new System.Drawing.Font("Unispace", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSPotion.Font = new System.Drawing.Font("Comic Sans MS", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSPotion.Image = global::pokemon.Properties.Resources.superpotion;
             this.btnSPotion.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSPotion.Location = new System.Drawing.Point(315, 508);
+            this.btnSPotion.Location = new System.Drawing.Point(315, 505);
             this.btnSPotion.Name = "btnSPotion";
             this.btnSPotion.Size = new System.Drawing.Size(303, 62);
             this.btnSPotion.TabIndex = 32;
@@ -474,8 +474,8 @@ namespace pokemon
             this.btnSPotion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSPotion.UseVisualStyleBackColor = false;
             this.btnSPotion.Visible = false;
-            this.btnSPotion.Click += new System.EventHandler(this.btnSPotion_Click);
-            this.btnSPotion.MouseLeave += new System.EventHandler(this.btnSPotion_MouseLeave);
+            this.btnSPotion.Click += new System.EventHandler(this.BtnSPotion_Click);
+            this.btnSPotion.MouseLeave += new System.EventHandler(this.BtnSPotion_MouseLeave);
             this.btnSPotion.MouseHover += new System.EventHandler(this.btnSPotion_MouseHover);
             // 
             // btnHPotion
@@ -484,10 +484,10 @@ namespace pokemon
             this.btnHPotion.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnHPotion.FlatAppearance.BorderSize = 0;
             this.btnHPotion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnHPotion.Font = new System.Drawing.Font("Unispace", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHPotion.Font = new System.Drawing.Font("Comic Sans MS", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnHPotion.Image = global::pokemon.Properties.Resources.hyperpotion1;
             this.btnHPotion.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnHPotion.Location = new System.Drawing.Point(13, 565);
+            this.btnHPotion.Location = new System.Drawing.Point(12, 564);
             this.btnHPotion.Name = "btnHPotion";
             this.btnHPotion.Size = new System.Drawing.Size(303, 71);
             this.btnHPotion.TabIndex = 33;
@@ -495,14 +495,14 @@ namespace pokemon
             this.btnHPotion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnHPotion.UseVisualStyleBackColor = false;
             this.btnHPotion.Visible = false;
-            this.btnHPotion.Click += new System.EventHandler(this.btnHPotion_Click);
-            this.btnHPotion.MouseLeave += new System.EventHandler(this.btnHPotion_MouseLeave);
-            this.btnHPotion.MouseHover += new System.EventHandler(this.btnHPotion_MouseHover);
+            this.btnHPotion.Click += new System.EventHandler(this.BtnHPotion_Click);
+            this.btnHPotion.MouseLeave += new System.EventHandler(this.BtnHPotion_MouseLeave);
+            this.btnHPotion.MouseHover += new System.EventHandler(this.BtnHPotion_MouseHover);
             // 
             // lblInfo
             // 
             this.lblInfo.BackColor = System.Drawing.Color.White;
-            this.lblInfo.Font = new System.Drawing.Font("Unispace", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInfo.Font = new System.Drawing.Font("Comic Sans MS", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblInfo.Location = new System.Drawing.Point(9, 373);
             this.lblInfo.Name = "lblInfo";
             this.lblInfo.Size = new System.Drawing.Size(504, 108);
@@ -513,7 +513,7 @@ namespace pokemon
             // lblParalyzed
             // 
             this.lblParalyzed.BackColor = System.Drawing.Color.Yellow;
-            this.lblParalyzed.Font = new System.Drawing.Font("Unispace", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblParalyzed.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblParalyzed.ForeColor = System.Drawing.Color.Black;
             this.lblParalyzed.Location = new System.Drawing.Point(829, 397);
             this.lblParalyzed.Name = "lblParalyzed";
@@ -525,9 +525,9 @@ namespace pokemon
             // lblSleeping
             // 
             this.lblSleeping.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.lblSleeping.Font = new System.Drawing.Font("Unispace", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSleeping.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSleeping.ForeColor = System.Drawing.Color.Black;
-            this.lblSleeping.Location = new System.Drawing.Point(829, 397);
+            this.lblSleeping.Location = new System.Drawing.Point(829, 396);
             this.lblSleeping.Name = "lblSleeping";
             this.lblSleeping.Size = new System.Drawing.Size(100, 23);
             this.lblSleeping.TabIndex = 36;
@@ -537,9 +537,9 @@ namespace pokemon
             // lblConfused
             // 
             this.lblConfused.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.lblConfused.Font = new System.Drawing.Font("Unispace", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblConfused.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblConfused.ForeColor = System.Drawing.Color.Black;
-            this.lblConfused.Location = new System.Drawing.Point(829, 397);
+            this.lblConfused.Location = new System.Drawing.Point(829, 396);
             this.lblConfused.Name = "lblConfused";
             this.lblConfused.Size = new System.Drawing.Size(100, 23);
             this.lblConfused.TabIndex = 37;
@@ -549,9 +549,9 @@ namespace pokemon
             // lblBurning
             // 
             this.lblBurning.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblBurning.Font = new System.Drawing.Font("Unispace", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBurning.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBurning.ForeColor = System.Drawing.Color.Black;
-            this.lblBurning.Location = new System.Drawing.Point(829, 397);
+            this.lblBurning.Location = new System.Drawing.Point(829, 396);
             this.lblBurning.Name = "lblBurning";
             this.lblBurning.Size = new System.Drawing.Size(100, 23);
             this.lblBurning.TabIndex = 38;
@@ -561,7 +561,7 @@ namespace pokemon
             // lblParalyzed2
             // 
             this.lblParalyzed2.BackColor = System.Drawing.Color.Yellow;
-            this.lblParalyzed2.Font = new System.Drawing.Font("Unispace", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblParalyzed2.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblParalyzed2.ForeColor = System.Drawing.Color.Black;
             this.lblParalyzed2.Location = new System.Drawing.Point(272, 34);
             this.lblParalyzed2.Name = "lblParalyzed2";
@@ -573,9 +573,9 @@ namespace pokemon
             // lblSleeping2
             // 
             this.lblSleeping2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.lblSleeping2.Font = new System.Drawing.Font("Unispace", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSleeping2.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSleeping2.ForeColor = System.Drawing.Color.Black;
-            this.lblSleeping2.Location = new System.Drawing.Point(272, 35);
+            this.lblSleeping2.Location = new System.Drawing.Point(272, 33);
             this.lblSleeping2.Name = "lblSleeping2";
             this.lblSleeping2.Size = new System.Drawing.Size(100, 23);
             this.lblSleeping2.TabIndex = 40;
@@ -585,9 +585,9 @@ namespace pokemon
             // lblConfused2
             // 
             this.lblConfused2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.lblConfused2.Font = new System.Drawing.Font("Unispace", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblConfused2.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblConfused2.ForeColor = System.Drawing.Color.Black;
-            this.lblConfused2.Location = new System.Drawing.Point(272, 35);
+            this.lblConfused2.Location = new System.Drawing.Point(272, 34);
             this.lblConfused2.Name = "lblConfused2";
             this.lblConfused2.Size = new System.Drawing.Size(100, 23);
             this.lblConfused2.TabIndex = 41;
@@ -597,9 +597,9 @@ namespace pokemon
             // lblBurning2
             // 
             this.lblBurning2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblBurning2.Font = new System.Drawing.Font("Unispace", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBurning2.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBurning2.ForeColor = System.Drawing.Color.Black;
-            this.lblBurning2.Location = new System.Drawing.Point(272, 34);
+            this.lblBurning2.Location = new System.Drawing.Point(272, 33);
             this.lblBurning2.Name = "lblBurning2";
             this.lblBurning2.Size = new System.Drawing.Size(100, 23);
             this.lblBurning2.TabIndex = 42;
@@ -612,7 +612,7 @@ namespace pokemon
             this.btnLumberry.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLumberry.FlatAppearance.BorderSize = 0;
             this.btnLumberry.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLumberry.Font = new System.Drawing.Font("Unispace", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLumberry.Font = new System.Drawing.Font("Comic Sans MS", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLumberry.Image = ((System.Drawing.Image)(resources.GetObject("btnLumberry.Image")));
             this.btnLumberry.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnLumberry.Location = new System.Drawing.Point(315, 573);
@@ -623,9 +623,9 @@ namespace pokemon
             this.btnLumberry.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnLumberry.UseVisualStyleBackColor = false;
             this.btnLumberry.Visible = false;
-            this.btnLumberry.Click += new System.EventHandler(this.btnLumberry_Click);
-            this.btnLumberry.MouseLeave += new System.EventHandler(this.btnLumberry_MouseLeave);
-            this.btnLumberry.MouseHover += new System.EventHandler(this.btnLumberry_MouseHover);
+            this.btnLumberry.Click += new System.EventHandler(this.BtnLumberry_Click);
+            this.btnLumberry.MouseLeave += new System.EventHandler(this.BtnLumberry_MouseLeave);
+            this.btnLumberry.MouseHover += new System.EventHandler(this.BtnLumberry_MouseHover);
             // 
             // Battle
             // 
