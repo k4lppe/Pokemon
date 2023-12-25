@@ -191,18 +191,18 @@ namespace pokemon
             // pictureBox2
             // 
             this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox2.Location = new System.Drawing.Point(619, 87);
+            this.pictureBox2.Location = new System.Drawing.Point(582, 66);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(310, 280);
+            this.pictureBox2.Size = new System.Drawing.Size(347, 295);
             this.pictureBox2.TabIndex = 6;
             this.pictureBox2.TabStop = false;
             // 
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.Location = new System.Drawing.Point(85, 191);
+            this.pictureBox1.Location = new System.Drawing.Point(53, 159);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(321, 290);
+            this.pictureBox1.Size = new System.Drawing.Size(353, 306);
             this.pictureBox1.TabIndex = 5;
             this.pictureBox1.TabStop = false;
             // 
@@ -445,9 +445,9 @@ namespace pokemon
             this.btnPotion.Font = new System.Drawing.Font("Comic Sans MS", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPotion.Image = global::pokemon.Properties.Resources.potion;
             this.btnPotion.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnPotion.Location = new System.Drawing.Point(12, 505);
+            this.btnPotion.Location = new System.Drawing.Point(12, 507);
             this.btnPotion.Name = "btnPotion";
-            this.btnPotion.Size = new System.Drawing.Size(303, 62);
+            this.btnPotion.Size = new System.Drawing.Size(303, 60);
             this.btnPotion.TabIndex = 31;
             this.btnPotion.Text = "potion";
             this.btnPotion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -466,9 +466,9 @@ namespace pokemon
             this.btnSPotion.Font = new System.Drawing.Font("Comic Sans MS", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSPotion.Image = global::pokemon.Properties.Resources.superpotion;
             this.btnSPotion.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSPotion.Location = new System.Drawing.Point(315, 505);
+            this.btnSPotion.Location = new System.Drawing.Point(315, 507);
             this.btnSPotion.Name = "btnSPotion";
-            this.btnSPotion.Size = new System.Drawing.Size(303, 62);
+            this.btnSPotion.Size = new System.Drawing.Size(303, 60);
             this.btnSPotion.TabIndex = 32;
             this.btnSPotion.Text = "super potion";
             this.btnSPotion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
