@@ -33,7 +33,7 @@ namespace pokemon
                     while ((line = reader.ReadLine()) != null)
                     {
                         string[] stats = line.Split(',');
-                        if (stats.Length == 24)
+                        if (stats.Length == 30)
                         {
                             Pokemon pokemon = new Pokemon(
                                 stats[0].Trim(), // name
@@ -59,7 +59,13 @@ namespace pokemon
                                 bool.Parse(stats[20].Trim()), //pokemonCriticalHit
                                 bool.Parse(stats[21].Trim()), //pokemonFlinch
                                 bool.Parse(stats[22].Trim()), //pokemonBurning
-                                bool.Parse(stats[23].Trim()) //pokemonSleeping
+                                bool.Parse(stats[23].Trim()), //pokemonSleeping
+                                int.Parse(stats[24].Trim()), //startMove1Damage
+                                int.Parse(stats[25].Trim()), //startMove2Damage
+                                int.Parse(stats[26].Trim()), //startMove3Damage
+                                int.Parse(stats[27].Trim()), //startMove4Damage
+                                int.Parse(stats[28].Trim()), //specialAttack
+                                int.Parse(stats[29].Trim())  //specialDefence
                             );
                             pokemons.Add(pokemon);
                         }
@@ -274,7 +280,7 @@ namespace pokemon
         }
 
         private void BtnStartGame_Click(object sender, EventArgs e)
-        {         
+        {
             if (pokemonSelected == 3)
             {
                 enemyPokemons = pokemons.Except(selectedPokemons).ToList();
@@ -283,11 +289,11 @@ namespace pokemon
                 {
                     string selectedPokemonImageFileName = GetSelectedPokemonImageFileName();
                     Battle BattleScreen = new Battle(selectedPokemons, selectedPokemonImageFileName, enemyPokemons);
-
-
-                    BattleScreen.ShowDialog();
+                    
+                    BattleScreen.ShowDialog();                 
                     this.Close();
                     BattleScreen.Close();
+                    
                 }
               
             }
@@ -403,8 +409,14 @@ namespace pokemon
         public bool pokemonFlinch;
         public bool pokemonBurning;
         public bool pokemonSleeping;
+        public int startMove1Damage;
+        public int startMove2Damage;
+        public int startMove3Damage;
+        public int startMove4Damage;
+        public int specialAttack;
+        public int specialDefence;
 
-        public Pokemon(string pokemonName, string pokemonType, string pokemonType2, int pokemonHealth, int attack, int defense, int speed, int index, string imageFile, int pokemonStartHealth, string move1, string move2, string move3, string move4, int move1Damage, int move2Damage, int move3Damage, int move4Damage, bool pokemonParalyzed, bool pokemonConfused, bool pokemonCriticalHit, bool pokemonFlinch, bool pokemonBurning, bool pokemonSleeping)
+        public Pokemon(string pokemonName, string pokemonType, string pokemonType2, int pokemonHealth, int attack, int defense, int speed, int index, string imageFile, int pokemonStartHealth, string move1, string move2, string move3, string move4, int move1Damage, int move2Damage, int move3Damage, int move4Damage, bool pokemonParalyzed, bool pokemonConfused, bool pokemonCriticalHit, bool pokemonFlinch, bool pokemonBurning, bool pokemonSleeping, int startMove1Damage, int startMove2Damage, int startMove3Damage, int startMove4Damage, int specialAttack, int specialDefence)
         {
             this.pokemonName = pokemonName;
             this.pokemonHealth = pokemonHealth;
@@ -430,6 +442,12 @@ namespace pokemon
             this.pokemonFlinch = pokemonFlinch;
             this.pokemonBurning = pokemonBurning;
             this.pokemonSleeping = pokemonSleeping;
+            this.startMove1Damage = startMove1Damage;
+            this.startMove2Damage = startMove2Damage;
+            this.startMove3Damage = startMove3Damage;
+            this.startMove4Damage = startMove4Damage;
+            this.specialAttack = specialAttack;
+            this.specialDefence = specialDefence;
         }
 
     }

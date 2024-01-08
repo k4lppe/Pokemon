@@ -20,3 +20,4 @@ C:\pokemon\Pokemon-master\obj\Debug\pokemon.exe
 C:\pokemon\Pokemon-master\obj\Debug\pokemon.pdb
 C:\pokemon\Pokemon-master\obj\Debug\pokemon.Battle.resources
 C:\Users\s3keka03\source\repos\pokemon\obj\Debug\pokemon.Battle.resources
+C:\pokemon\Pokemon-master\obj\Debug\pokemon.FinalSummary.resources

@@ -31,7 +31,7 @@ namespace pokemon
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Battle));
             this.listView1 = new System.Windows.Forms.ListView();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnSpecial = new System.Windows.Forms.Button();
             this.btnPokemon = new System.Windows.Forms.Button();
             this.btnBag = new System.Windows.Forms.Button();
             this.btnFight = new System.Windows.Forms.Button();
@@ -73,6 +73,8 @@ namespace pokemon
             this.lblConfused2 = new System.Windows.Forms.Label();
             this.lblBurning2 = new System.Windows.Forms.Label();
             this.btnLumberry = new System.Windows.Forms.Button();
+            this.lblTime = new System.Windows.Forms.Label();
+            this.lblDamageText = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -87,22 +89,22 @@ namespace pokemon
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             // 
-            // button1
+            // btnSpecial
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(124)))), ((int)(((byte)(212)))));
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(72)))), ((int)(((byte)(212)))));
-            this.button1.FlatAppearance.BorderSize = 6;
-            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(169)))), ((int)(((byte)(212)))));
-            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(169)))), ((int)(((byte)(212)))));
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Comic Sans MS", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(797, 575);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(155, 72);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = false;
+            this.btnSpecial.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(124)))), ((int)(((byte)(212)))));
+            this.btnSpecial.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSpecial.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(72)))), ((int)(((byte)(212)))));
+            this.btnSpecial.FlatAppearance.BorderSize = 6;
+            this.btnSpecial.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(169)))), ((int)(((byte)(212)))));
+            this.btnSpecial.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(169)))), ((int)(((byte)(212)))));
+            this.btnSpecial.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSpecial.Font = new System.Drawing.Font("Comic Sans MS", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSpecial.Location = new System.Drawing.Point(797, 575);
+            this.btnSpecial.Name = "btnSpecial";
+            this.btnSpecial.Size = new System.Drawing.Size(155, 72);
+            this.btnSpecial.TabIndex = 1;
+            this.btnSpecial.Text = "button1";
+            this.btnSpecial.UseVisualStyleBackColor = false;
             // 
             // btnPokemon
             // 
@@ -627,14 +629,35 @@ namespace pokemon
             this.btnLumberry.MouseLeave += new System.EventHandler(this.BtnLumberry_MouseLeave);
             this.btnLumberry.MouseHover += new System.EventHandler(this.BtnLumberry_MouseHover);
             // 
+            // lblTime
+            // 
+            this.lblTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTime.Location = new System.Drawing.Point(594, 0);
+            this.lblTime.Name = "lblTime";
+            this.lblTime.Size = new System.Drawing.Size(180, 31);
+            this.lblTime.TabIndex = 44;
+            this.lblTime.Text = "time";
+            // 
+            // lblDamageText
+            // 
+            this.lblDamageText.Font = new System.Drawing.Font("Comic Sans MS", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDamageText.Location = new System.Drawing.Point(743, 0);
+            this.lblDamageText.Name = "lblDamageText";
+            this.lblDamageText.Size = new System.Drawing.Size(186, 56);
+            this.lblDamageText.TabIndex = 45;
+            this.lblDamageText.Text = "damage";
+            // 
             // Battle
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackgroundImage = global::pokemon.Properties.Resources.background;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(964, 649);
+            this.Controls.Add(this.lblDamageText);
+            this.Controls.Add(this.lblTime);
             this.Controls.Add(this.btnLumberry);
             this.Controls.Add(this.lblBurning2);
             this.Controls.Add(this.lblConfused2);
@@ -676,7 +699,7 @@ namespace pokemon
             this.Controls.Add(this.btnFight);
             this.Controls.Add(this.btnBag);
             this.Controls.Add(this.btnPokemon);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnSpecial);
             this.Controls.Add(this.listView1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Battle";
@@ -693,7 +716,7 @@ namespace pokemon
         #endregion
 
         private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnSpecial;
         private System.Windows.Forms.Button btnPokemon;
         private System.Windows.Forms.Button btnBag;
         private System.Windows.Forms.Button btnFight;
@@ -735,5 +758,7 @@ namespace pokemon
         private System.Windows.Forms.Label lblConfused2;
         private System.Windows.Forms.Label lblBurning2;
         private System.Windows.Forms.Button btnLumberry;
+        private System.Windows.Forms.Label lblTime;
+        private System.Windows.Forms.Label lblDamageText;
     }
 }

@@ -38,6 +38,9 @@ namespace pokemon
         readonly Random enemy = new Random();
         int enemyMove;
 
+        readonly Random damageCalculation = new Random();
+        double randomPercentage;
+
         private Timer turnTimer = new Timer();
         private int turnDelay = 5000;
         private bool playerTurn = true;
@@ -60,14 +63,30 @@ namespace pokemon
         bool ePokemon1Alive = false;
         bool ePokemon2Alive = false;
 
-        bool eventActive = false;
+        bool usedMove1 = false;
+        bool usedMove2 = false;
+        bool usedMove3 = false;
+        bool usedMove4 = false;
 
+        bool defenceUp = false;
+        bool criticalIncreased = false;
+        int critical;
+        bool attackFell = false;
+        bool usedLeer = false;
+        bool speedFell = false;
+        private bool enemyHasAttacked = false;
+
+
+        private Timer gameTimer = new Timer();
+        private int seconds;
+
+        bool playerWon = false;
+        bool statusEffectOn = false;
         private int aliveEnemyPokemons;
 
         public Battle(List<Pokemon> selectedPokemons, string selectedPokemonImageName, List<Pokemon> enemyPokemons)
         {
             InitializeComponent();
-
 
             this.selectedPokemons = selectedPokemons;
             this.selectedPokemonImageFileName = selectedPokemonImageName;
@@ -75,6 +94,10 @@ namespace pokemon
 
             enemyRandomIndex = enemyRandom.Next(0, 3);
             enemyIndex = enemyRandomIndex;
+
+            gameTimer.Interval = 1000;
+            gameTimer.Tick += GameTimer_Tick;
+            lblTime.Text = "Time: " + seconds;
 
             turnTimer.Interval = turnDelay;
             turnTimer.Tick += TurnTimer_Tick;
@@ -133,7 +156,11 @@ namespace pokemon
         {
             return aliveEnemyPokemons > 0;
         }
-
+        private void GameTimer_Tick(object sender, EventArgs e)
+        {
+            seconds++;
+            lblTime.Text = "Time: " + seconds;
+        }
         private void UpdateProgressBar()
         {
             if (selectedPokemons[0].pokemonHealth >= 0)
@@ -155,12 +182,12 @@ namespace pokemon
             {
                 enemyPokemonHealthBar.Maximum = enemyPokemons[enemyIndex].pokemonStartHealth;
                 enemyPokemonHealthBar.Value = Math.Min(enemyPokemons[enemyIndex].pokemonHealth, enemyPokemonHealthBar.Maximum);
-                lblEnemyPokemonHealth.Text = $"{enemyPokemons[enemyIndex].pokemonHealth}/{enemyPokemons[enemyIndex].pokemonStartHealth}";              
+                lblEnemyPokemonHealth.Text = $"{enemyPokemons[enemyIndex].pokemonHealth}/{enemyPokemons[enemyIndex].pokemonStartHealth}";
             }
             else
             {
                 enemyPokemonHealthBar.Value = 0;
-                lblEnemyPokemonHealth.Text = $"0/{enemyPokemons[enemyIndex].pokemonStartHealth}";               
+                lblEnemyPokemonHealth.Text = $"0/{enemyPokemons[enemyIndex].pokemonStartHealth}";
             }
         }
         private void HideBag()
@@ -180,8 +207,8 @@ namespace pokemon
 
         private void Form2_Load(object sender, EventArgs e)
         {
+            gameTimer.Start();
             HideBag();
-
             lblPlayerPokemonName.Text = $"{selectedPokemons[0].pokemonName}";
             lblPlayerPokemonHealth.Text = $"{selectedPokemons[0].pokemonHealth}/{selectedPokemons[0].pokemonStartHealth}";
             lblEnemyPokemonName.Text = $"{enemyPokemons[enemyRandomIndex].pokemonName}";
@@ -212,7 +239,7 @@ namespace pokemon
 
                 HideBag();
                 MoveButtonsHidden();
-                SwitchToNextPokemon();
+                SwitchToNextPokemon(seconds);
 
             }
         }
@@ -267,22 +294,16 @@ namespace pokemon
 
         }
 
-        bool defenceUp = false;
-        bool criticalIncreased = false;
-        bool attackFell = false;
-        bool usedLeer = false;
-        bool speedFell = false;
-        private bool enemyHasAttacked = false;
-        private void BtnMove1_Click(object sender, EventArgs e)
+        private async void BtnMove1_Click(object sender, EventArgs e)
         {
 
             MoveButtonsHidden();
-            lblText.Text = $"{selectedPokemons[0].pokemonName} used {selectedPokemons[0].move1}!";
+            lblText.Text = $"{selectedPokemons[0].pokemonName} used {selectedPokemons[0].move1}!";          
             if (playerTurn)
             {
+                usedMove1 = true;
                 switch (selectedPokemons[0].move1)
                 {
-
 
                     case "Dragon Rage":
                         enemyPokemons[enemyIndex].pokemonHealth = Math.Max(enemyPokemons[enemyIndex].pokemonHealth - selectedPokemons[0].move1Damage, 0);
@@ -294,9 +315,7 @@ namespace pokemon
                         break;
 
                     case "Dragon Claw":
-                        enemyPokemons[enemyIndex].pokemonHealth = Math.Max(enemyPokemons[enemyIndex].pokemonHealth - selectedPokemons[0].move1Damage, 0);
-                        lblEnemyPokemonHealth.Text = $"{enemyPokemons[enemyRandomIndex].pokemonHealth}/{enemyPokemons[enemyRandomIndex].pokemonStartHealth}";
-                        UpdateEnemyProgressBar();
+                        PhysicalDamageCalculation();
                         EnemyPokemonFaints();
                         turnTimer.Start();
                         MoveDelayStart();
@@ -312,9 +331,13 @@ namespace pokemon
                         break;
 
                     case "Body Slam":
-                        enemyPokemons[enemyIndex].pokemonHealth = Math.Max(enemyPokemons[enemyIndex].pokemonHealth - selectedPokemons[0].move1Damage, 0);
-                        lblEnemyPokemonHealth.Text = $"{enemyPokemons[enemyRandomIndex].pokemonHealth}/{enemyPokemons[enemyRandomIndex].pokemonStartHealth}";
-                        UpdateEnemyProgressBar();
+                        PhysicalDamageCalculation();
+                        if (enemyPokemons[enemyIndex].pokemonType == "Ghost")
+                        {
+                            FunctionButtonsHidden();
+                            await Task.Delay(2000);
+                            lblText.Text = $"It had no effect on {enemyPokemons[enemyIndex].pokemonName}!";
+                        }
                         paralysisChance = paralysis.Next(0, 3);
                         if (paralysisChance == 0)
                         {
@@ -344,7 +367,6 @@ namespace pokemon
                             enemyPokemons[enemyIndex].pokemonHealth = Math.Max(enemyPokemons[enemyIndex].pokemonHealth - selectedPokemons[0].move1Damage * 2, 0);
                             lblEnemyPokemonHealth.Text = $"{enemyPokemons[enemyRandomIndex].pokemonHealth}/{enemyPokemons[enemyRandomIndex].pokemonStartHealth}";
                             enemyPokemons[enemyIndex].pokemonCriticalHit = true;
-                            eventActive = true;
                             UpdateEnemyProgressBar();
                             EnemyPokemonFaints();
                             CriticalHit();
@@ -365,7 +387,7 @@ namespace pokemon
 
         }
 
-        private void BtnMove2_Click(object sender, EventArgs e)
+        private async void BtnMove2_Click(object sender, EventArgs e)
         {
             MoveButtonsHidden();
             lblText.Text = $"{selectedPokemons[0].pokemonName} used {selectedPokemons[0].move2}!";
@@ -374,6 +396,7 @@ namespace pokemon
                 switch (selectedPokemons[0].move2)
                 {
                     case "Bite":
+                        usedMove1 = true;
                         enemyPokemons[enemyIndex].pokemonHealth = Math.Max(enemyPokemons[enemyIndex].pokemonHealth - selectedPokemons[0].move2Damage, 0);
                         lblEnemyPokemonHealth.Text = $"{enemyPokemons[enemyRandomIndex].pokemonHealth}/{enemyPokemons[enemyRandomIndex].pokemonStartHealth}";
                         UpdateEnemyProgressBar();
@@ -383,8 +406,8 @@ namespace pokemon
                             enemyPokemons[enemyIndex].pokemonFlinch = true;
                             UpdateEnemyProgressBar();
                             EnemyPokemonFaints();
-                            turnTimer.Start();                          
-                            PokemonFlinch();                          
+                            turnTimer.Start();
+                            PokemonFlinch();
                         }
                         else
                         {
@@ -426,15 +449,29 @@ namespace pokemon
                         break;
 
                     case "Belly Drum":
-                        selectedPokemons[0].move1Damage = Math.Max(selectedPokemons[0].move1Damage * 2, 0); //MUOKKAA!
-                        selectedPokemons[0].pokemonHealth = Math.Max(selectedPokemons[0].pokemonHealth - selectedPokemons[0].pokemonStartHealth / 2, 0);
-                        lblPlayerPokemonHealth.Text = $"{selectedPokemons[0].pokemonHealth}/{selectedPokemons[0].pokemonStartHealth}";
-                        playerPokemonHealthBar.Value = Math.Min(selectedPokemons[0].pokemonHealth / 2, playerPokemonHealthBar.Maximum);
-                        UpdateProgressBar();
-                        UpdateEnemyProgressBar();
-                        EnemyPokemonFaints();
-                        PlayerPokemonFaints();
-                        turnTimer.Start();
+                        if (selectedPokemons[0].pokemonHealth > selectedPokemons[0].pokemonStartHealth / 2)
+                        {
+                            selectedPokemons[0].move1Damage = Math.Max(selectedPokemons[0].move1Damage * 2, 0);
+                            selectedPokemons[0].move2Damage = Math.Max(selectedPokemons[0].move2Damage * 2, 0);
+                            selectedPokemons[0].move3Damage = Math.Max(selectedPokemons[0].move3Damage * 2, 0);
+                            selectedPokemons[0].move4Damage = Math.Max(selectedPokemons[0].move4Damage * 2, 0);
+                            selectedPokemons[0].pokemonHealth = Math.Max(selectedPokemons[0].pokemonHealth - selectedPokemons[0].pokemonStartHealth / 2, 0);
+                            lblPlayerPokemonHealth.Text = $"{selectedPokemons[0].pokemonHealth}/{selectedPokemons[0].pokemonStartHealth}";
+                            playerPokemonHealthBar.Value = Math.Min(selectedPokemons[0].pokemonHealth / 2, playerPokemonHealthBar.Maximum);
+                            UpdateProgressBar();
+                            UpdateEnemyProgressBar();
+                            EnemyPokemonFaints();
+                            PlayerPokemonFaints();
+                            turnTimer.Start();
+                        }
+                        else
+                        {
+                            FunctionButtonsHidden();
+                            await Task.Delay(3000);
+                            lblText.Text = $"{selectedPokemons[0].move2} failed!";
+                            await Task.Delay(2000);
+                            turnTimer.Start();
+                        }
                         MoveDelayStart();
                         break;
 
@@ -454,15 +491,10 @@ namespace pokemon
                         break;
 
                     case "Leer":
-                        usedLeer = true;
                         enemyPokemons[enemyIndex].defense = Math.Max(enemyPokemons[enemyIndex].defense - enemyPokemons[enemyIndex].defense - 10, 0);
-                        if (usedLeer)
-                        {
-
-                        }
                         EnemyPokemonFaints();
                         turnTimer.Start();
-                        MoveDelayStart();
+                        EnemyDefenceFell();
                         break;
                 }
             }
@@ -510,7 +542,7 @@ namespace pokemon
                         break;
 
                     case "Thunder Wave":
-                        enemyPokemons[enemyIndex].pokemonParalyzed = true;;
+                        enemyPokemons[enemyIndex].pokemonParalyzed = true; ;
                         EnemyPokemonFaints();
                         turnTimer.Start();
                         MoveDelayStart();
@@ -595,8 +627,7 @@ namespace pokemon
                         MoveDelayStart();
                         break;
 
-                    case "Rest":
-                        //btnFight.Enabled = false;
+                    case "Surf":
                         EnemyPokemonFaints();
                         turnTimer.Start();
                         MoveDelayStart();
@@ -650,21 +681,21 @@ namespace pokemon
         }
 
         private async void EnemyPokemonFaints()
-        {          
+        {
             if (enemyPokemons[enemyIndex].pokemonHealth <= 0)
             {
                 enemyTurnInProgress = true;
                 await Task.Delay(3000);
                 ePokemon1Alive = true;
                 lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} fainted!";
-
+                FunctionButtonsHidden();
                 HideBag();
                 MoveButtonsHidden();
                 criticalIncreased = false;
-                enemyPokemons[enemyIndex].move1Damage = enemyPokemons[enemyIndex].move1Damage;
-                enemyPokemons[enemyIndex].move2Damage = enemyPokemons[enemyIndex].move2Damage;
-                enemyPokemons[enemyIndex].move3Damage = enemyPokemons[enemyIndex].move3Damage;
-                enemyPokemons[enemyIndex].move4Damage = enemyPokemons[enemyIndex].move4Damage;
+                enemyPokemons[enemyIndex].move1Damage = enemyPokemons[enemyIndex].startMove1Damage;
+                enemyPokemons[enemyIndex].move2Damage = enemyPokemons[enemyIndex].startMove2Damage;
+                enemyPokemons[enemyIndex].move3Damage = enemyPokemons[enemyIndex].startMove3Damage;
+                enemyPokemons[enemyIndex].move4Damage = enemyPokemons[enemyIndex].startMove4Damage;
                 enemyPokemons[enemyIndex].pokemonConfused = false;
                 lblConfused2.Visible = false;
                 enemyPokemons[enemyIndex].pokemonSleeping = false;
@@ -676,17 +707,17 @@ namespace pokemon
                 selectedPokemons[0].defense = selectedPokemons[0].defense;
                 if (enemyPokemons.Count > 0)
                 {
-                    EnemySwitchToNextPokemon();
+                    EnemySwitchToNextPokemon(seconds);
                     await Task.Delay(2000);
                     lblText.Text = $"Enemy sent out {enemyPokemons[enemyIndex].pokemonName}!";
                 }
                 enemyTurnInProgress = false;
                 PlayersTurn();
-            }        
+            }
         }
         private async void PlayerPokemonFaints()
         {
-            
+
             if (selectedPokemons[0].pokemonHealth <= 0)
             {
                 enemyTurnInProgress = true;
@@ -697,22 +728,15 @@ namespace pokemon
                 HideBag();
                 MoveButtonsHidden();
                 criticalIncreased = false;
-                selectedPokemons[0].move1Damage = selectedPokemons[0].move1Damage;
-                selectedPokemons[0].move2Damage = selectedPokemons[0].move2Damage;
-                selectedPokemons[0].move3Damage = selectedPokemons[0].move3Damage;
-                selectedPokemons[0].move4Damage = selectedPokemons[0].move4Damage;
-                selectedPokemons[0].pokemonConfused = false;
-                lblConfused.Visible = false;
-                selectedPokemons[0].pokemonSleeping = false;
-                lblSleeping.Visible = false;
-                selectedPokemons[0].pokemonBurning = false;
-                lblBurning.Visible = false;
-                selectedPokemons[0].pokemonParalyzed = false;
-                lblParalyzed.Visible = false;
+                selectedPokemons[0].move1Damage = selectedPokemons[0].startMove1Damage;
+                selectedPokemons[0].move2Damage = selectedPokemons[0].startMove2Damage;
+                selectedPokemons[0].move3Damage = selectedPokemons[0].startMove3Damage;
+                selectedPokemons[0].move4Damage = selectedPokemons[0].startMove4Damage;
+                RestorePokemonsCondition();
                 selectedPokemons[0].defense = selectedPokemons[0].defense;
                 if (selectedPokemons.Count > 0)
                 {
-                    SwitchToNextPokemon();
+                    SwitchToNextPokemon(seconds);
                     await Task.Delay(2000);
                     lblText.Text = $"Player sent out {selectedPokemons[0].pokemonName}!";
                 }
@@ -751,6 +775,8 @@ namespace pokemon
                     lblPlayerPokemonHealth.Text = $"{selectedPokemons[0].pokemonHealth}/{selectedPokemons[0].pokemonStartHealth}";
                     potions--;
                     btnPotion.Text = $"Potions x{potions}";
+                    MoveDelayStart();
+                    turnTimer.Start();
                 }
             }
             else
@@ -778,6 +804,8 @@ namespace pokemon
                     lblPlayerPokemonHealth.Text = $"{selectedPokemons[0].pokemonHealth}/{selectedPokemons[0].pokemonStartHealth}";
                     superPotions--;
                     btnSPotion.Text = $"Super Potions x{superPotions}";
+                    MoveDelayStart();
+                    turnTimer.Start();
                 }
             }
             else
@@ -800,12 +828,14 @@ namespace pokemon
                 else
                 {
                     HideBag();
-                    lblText.Text = $"Used Hyper Super Potion on {selectedPokemons[0].pokemonName}!";
+                    lblText.Text = $"Used Hyper Potion on {selectedPokemons[0].pokemonName}!";
                     selectedPokemons[0].pokemonHealth = Math.Min(selectedPokemons[0].pokemonHealth + 200, selectedPokemons[0].pokemonStartHealth);
                     UpdateProgressBar();
                     lblPlayerPokemonHealth.Text = $"{selectedPokemons[0].pokemonHealth}/{selectedPokemons[0].pokemonStartHealth}";
                     hyperPotions--;
                     btnHPotion.Text = $"Hyper Potions x{hyperPotions}";
+                    MoveDelayStart();
+                    turnTimer.Start();
                 }
             }
             else
@@ -814,7 +844,7 @@ namespace pokemon
                 lblText.Text = $"You're all out of Super Potions!";
             }
         }
-        private void SwitchToNextPokemon()
+        private void SwitchToNextPokemon(int time)
         {
             if (selectedPokemons[0].pokemonHealth <= 0)
             {
@@ -843,14 +873,14 @@ namespace pokemon
             }
             else
             {
-                lblText.Text = $"Enemy defeated! You win!";
-                lblText.Text = $"Gained - amout of xp!";
-
+                gameTimer.Stop();
+                lblText.Text = $"u lose lil brp";
+                OpenFinalSummary(time);
             }
 
         }
 
-        private void EnemySwitchToNextPokemon()
+        private void EnemySwitchToNextPokemon(int time)
         {
             ePokemon1Alive = false;
             aliveEnemyPokemons--;
@@ -867,8 +897,16 @@ namespace pokemon
             }
             else
             {
+                playerWon = true;
+                gameTimer.Stop();
                 lblText.Text = "u win lil bro";
+                OpenFinalSummary(time);
             }
+        }
+        private void OpenFinalSummary(int time)
+        {
+            FinalSummary finalSummary = new FinalSummary(time);
+            finalSummary.Show();
         }
         private void LoadEnemyPokemonData()
         {
@@ -892,6 +930,8 @@ namespace pokemon
                     break;
 
                 case "Dragon Claw":
+                    lblInfo.Size = new Size(504, 108);
+                    lblInfo.Location = new System.Drawing.Point(9, 373);
                     lblInfo.Text = "Dragon Claw deals damage with no additional effect.";
                     break;
 
@@ -948,7 +988,7 @@ namespace pokemon
                 case "Belly Drum":
                     lblInfo.Size = new Size(504, 108);
                     lblInfo.Location = new System.Drawing.Point(9, 373);
-                    lblInfo.Text = "User loses 50% of its max HP, but Attack doubles.";
+                    lblInfo.Text = "User loses 50% of its max HP, but Attack doubles. It fails if the user's current HP is less than half its maxium.";
                     break;
 
                 case "Lick":
@@ -1034,10 +1074,10 @@ namespace pokemon
                     lblInfo.Text = "Charge raises the user's Defense by 10, and if this Pokémon's next move is a damage-dealing Electric-type attack, it will deal double damage.";
                     break;
 
-                case "Rest":
+                case "Surf":
                     lblInfo.Size = new Size(504, 108);
                     lblInfo.Location = new System.Drawing.Point(9, 373);
-                    lblInfo.Text = "User sleeps for 2 turns, but user is fully healed.";
+                    lblInfo.Text = "Surf deals damage with no additional effect.";
                     break;
 
                 case "Hex":
@@ -1101,7 +1141,8 @@ namespace pokemon
                     RestorePokemonsCondition();
                     lumBerries--;
                     btnPotion.Text = $"Lum berries x{lumBerries}";
-
+                    MoveDelayStart();
+                    turnTimer.Start();
                 }
                 else
                 {
@@ -1118,9 +1159,14 @@ namespace pokemon
         private void RestorePokemonsCondition()
         {
             selectedPokemons[0].pokemonSleeping = false;
+            lblSleeping.Visible = false;
             selectedPokemons[0].pokemonParalyzed = false;
+            lblParalyzed.Visible = false;
             selectedPokemons[0].pokemonBurning = false;
+            lblBurning.Visible = false;
             selectedPokemons[0].pokemonConfused = false;
+            lblConfused.Visible = false;
+
         }
 
         private void BtnLumberry_MouseHover(object sender, EventArgs e)
@@ -1138,18 +1184,17 @@ namespace pokemon
             btnFight.Visible = false;
             btnBag.Visible = false;
             btnPokemon.Visible = false;
-            button1.Visible = false;
+            btnSpecial.Visible = false;
         }
         private void FunctionButtonsVisible()
         {
             btnFight.Visible = true;
             btnBag.Visible = true;
             btnPokemon.Visible = true;
-            button1.Visible = true;
+            btnSpecial.Visible = true;
         }
         private async void PokemonFlinch()
         {
-            eventActive = false;
             FunctionButtonsHidden();
             await Task.Delay(2 * 1000);
             lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} flinched!";
@@ -1162,7 +1207,7 @@ namespace pokemon
         }
         private async void PokemonParalyzed()
         {
-            eventActive = false;
+            statusEffectOn = true;
             FunctionButtonsHidden();
             await Task.Delay(2 * 1000);
             if (enemyPokemons[enemyIndex].pokemonType == "Electric")
@@ -1184,7 +1229,7 @@ namespace pokemon
         }
         private async void PokemonParalyzedEnemy()
         {
-            eventActive = false;
+            statusEffectOn = true;
             FunctionButtonsHidden();
             await Task.Delay(2 * 1000);
             if (selectedPokemons[0].pokemonType == "Electric")
@@ -1196,11 +1241,12 @@ namespace pokemon
                 lblText.Text = $"{selectedPokemons[0].pokemonName} is paralyzed!";
                 lblParalyzed.Visible = true;
             }
+            await Task.Delay(2 * 1000);
             PlayersTurn();
         }
         private async void PokemonConfused()
         {
-            eventActive = false;
+            statusEffectOn = true;
             FunctionButtonsHidden();
             await Task.Delay(2 * 1000);
             lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} is confused!";
@@ -1223,11 +1269,22 @@ namespace pokemon
         }
         private async void CriticalHit()
         {
-            eventActive = false;
             FunctionButtonsHidden();
             await Task.Delay(2 * 1000);
             lblText.Text = $"A critical hit!";
             await Task.Delay(2 * 1000);
+            enemyHasAttacked = false;
+            if (!enemyHasAttacked)
+            {
+                await EnemysTurn();
+            }
+        }
+        private async void EnemyDefenceFell()
+        {
+            FunctionButtonsHidden();
+            await Task.Delay(2000);
+            lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} defence fell!";
+            await Task.Delay(2000);
             enemyHasAttacked = false;
             if (!enemyHasAttacked)
             {
@@ -1246,7 +1303,6 @@ namespace pokemon
             }
 
         }
-
         private async void PlayersTurn()
         {
             await Task.Delay(turnDelaySec * 1000);
@@ -1255,6 +1311,113 @@ namespace pokemon
             lblText.Text = $"What will {selectedPokemons[0].pokemonName} do?";
             turnTimer.Start();
 
+        }
+        double type1;
+        double type2 = 1.0;
+        private void PhysicalDamageCalculation()
+        {
+            switch (enemyPokemons[enemyIndex].pokemonType)
+            {
+                case "Water":
+                    if (selectedPokemons[0].pokemonType == "Fire")
+                    {
+                        type1 = 0.5;
+                    }
+                    else if (selectedPokemons[0].pokemonType == "Electric")
+                    {
+                        type1 = 2.0;
+                    }
+                    else if (selectedPokemons[0].pokemonType == "Normal" || selectedPokemons[0].pokemonType == "Ghost" || selectedPokemons[0].pokemonType == "Fighting")
+                    {
+                        type1 = 1.0;
+                    }
+                    break;
+
+                case "Fire":
+                    if (selectedPokemons[0].pokemonType == "Water")
+                    {
+                        type1 = 2.0;
+                    }
+                    else if (selectedPokemons[0].pokemonType == "Electric" || selectedPokemons[0].pokemonType == "Normal" || selectedPokemons[0].pokemonType == "Ghost" || selectedPokemons[0].pokemonType == "Fighting")
+                    {
+                        type1 = 1.0;
+                    }
+                    break;
+
+                case "Electric":
+                    type1 = 1.0;
+                    break;
+
+                case "Normal":
+                    if (selectedPokemons[0].pokemonType == "Water" || selectedPokemons[0].pokemonType == "Fire" || selectedPokemons[0].pokemonType == "Electric")
+                    {
+                        type1 = 1.0;
+                    }
+                    else if (selectedPokemons[0].pokemonType == "Ghost")
+                    {
+                        type1 = 0;
+                    }
+                    else if (selectedPokemons[0].pokemonType == "Fighting")
+                    {
+                        type1 = 2.0;
+                    }
+                    break;
+
+                case "Ghost":
+                    if (selectedPokemons[0].pokemonType == "Water" || selectedPokemons[0].pokemonType == "Fire" || selectedPokemons[0].pokemonType == "Electric")
+                    {
+                        type1 = 1.0;
+                    }
+                    else if (selectedPokemons[0].pokemonType == "Normal" || selectedPokemons[0].pokemonType == "Fighting")
+                    {
+                        type1 = 0;
+                    }
+                    break;
+
+                case "Fighting":
+                    type1 = 1;
+                    break;
+
+            }
+
+            increasedCriticalChance = increasedCritical.Next(1, 17);
+            if (increasedCriticalChance == 16)
+            {
+                critical = 2;
+            }
+            else
+            { 
+                critical = 1;
+            }
+
+            if (usedMove1)
+            {
+
+                randomPercentage = damageCalculation.Next(85, 101) / 100.0;
+
+                double pokemonMove1Damage = (int)(((((2 * 50 * critical) / 5 + 2) * selectedPokemons[0].move1Damage * (selectedPokemons[0].attack / enemyPokemons[enemyIndex].defense) / 50) + 2) * type1 * type2 * randomPercentage);
+                selectedPokemons[0].move1Damage = Convert.ToInt32(pokemonMove1Damage);
+
+                enemyPokemons[enemyIndex].pokemonHealth = Math.Max(enemyPokemons[enemyIndex].pokemonHealth - selectedPokemons[0].move1Damage, 0);
+                lblEnemyPokemonHealth.Text = $"{enemyPokemons[enemyRandomIndex].pokemonHealth}/{enemyPokemons[enemyRandomIndex].pokemonStartHealth}";
+                UpdateEnemyProgressBar();
+                lblDamageText.Text = $"Damage: {selectedPokemons[0].move1Damage}";
+                selectedPokemons[0].move1Damage = selectedPokemons[0].startMove1Damage;
+
+                usedMove1 = false;
+            }
+            else if (usedMove2)
+            {
+
+            }
+            else if (usedMove3)
+            {
+
+            }
+            else if (usedMove4)
+            {
+
+            }
         }
 
         private async Task EnemysTurn()
@@ -1283,7 +1446,7 @@ namespace pokemon
                             case 0:
                                 selectedPokemons[0].pokemonHealth = Math.Max(selectedPokemons[0].pokemonHealth - enemyPokemons[enemyIndex].move1Damage, 0);
                                 lblPlayerPokemonHealth.Text = $"{selectedPokemons[0].pokemonHealth}/{selectedPokemons[0].pokemonStartHealth}";
-                                lblText.Text = $"{enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move1}!";
+                                lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move1}!";
                                 UpdateProgressBar();
                                 PlayerPokemonFaints();
                                 break;
@@ -1292,7 +1455,7 @@ namespace pokemon
                                 selectedPokemons[0].pokemonHealth = Math.Max(selectedPokemons[0].pokemonHealth - enemyPokemons[enemyIndex].move2Damage, 0);
                                 lblPlayerPokemonHealth.Text = $"{selectedPokemons[0].pokemonHealth}/{selectedPokemons[0].pokemonStartHealth}";
                                 UpdateProgressBar();
-                                lblText.Text = $"{enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move2}!";
+                                lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move2}!";
                                 flinchChance = flinch.Next(0, 3);
                                 if (flinchChance == 0)
                                 {
@@ -1306,7 +1469,7 @@ namespace pokemon
                                 selectedPokemons[0].pokemonHealth = Math.Max(selectedPokemons[0].pokemonHealth - enemyPokemons[enemyIndex].move3Damage, 0);
                                 lblPlayerPokemonHealth.Text = $"{selectedPokemons[0].pokemonHealth}/{selectedPokemons[0].pokemonStartHealth}";
                                 UpdateProgressBar();
-                                lblText.Text = $"{enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move3}!";
+                                lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move3}!";
                                 paralysisChance = paralysis.Next(0, 3);
                                 if (paralysisChance == 0)
                                 {
@@ -1321,7 +1484,7 @@ namespace pokemon
                                 selectedPokemons[0].pokemonHealth = Math.Max(selectedPokemons[0].pokemonHealth - enemyPokemons[enemyIndex].move4Damage, 0);
                                 lblPlayerPokemonHealth.Text = $"{selectedPokemons[0].pokemonHealth}/{selectedPokemons[0].pokemonStartHealth}";
                                 UpdateProgressBar();
-                                lblText.Text = $"{enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move4}!";
+                                lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move4}!";
                                 PlayerPokemonFaints();
                                 break;
                         }
@@ -1353,7 +1516,7 @@ namespace pokemon
                                 selectedPokemons[0].pokemonHealth = Math.Max(selectedPokemons[0].pokemonHealth - enemyPokemons[enemyIndex].move1Damage, 0);
                                 lblPlayerPokemonHealth.Text = $"{selectedPokemons[0].pokemonHealth}/{selectedPokemons[0].pokemonStartHealth}";
                                 UpdateProgressBar();
-                                lblText.Text = $"{enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move1}!";
+                                lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move1}!";
                                 PlayerPokemonFaints();
                                 break;
 
@@ -1361,7 +1524,7 @@ namespace pokemon
                                 selectedPokemons[0].pokemonHealth = Math.Max(selectedPokemons[0].pokemonHealth - enemyPokemons[enemyIndex].move2Damage, 0);
                                 lblPlayerPokemonHealth.Text = $"{selectedPokemons[0].pokemonHealth}/{selectedPokemons[0].pokemonStartHealth}";
                                 UpdateProgressBar();
-                                lblText.Text = $"{enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move2}!";
+                                lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move2}!";
                                 burningChance = burn.Next(0, 11);
                                 if (burningChance == 5)
                                 {
@@ -1375,7 +1538,7 @@ namespace pokemon
                                 selectedPokemons[0].pokemonHealth = Math.Max(selectedPokemons[0].pokemonHealth - enemyPokemons[enemyIndex].move3Damage, 0);
                                 lblPlayerPokemonHealth.Text = $"{selectedPokemons[0].pokemonHealth}/{selectedPokemons[0].pokemonStartHealth}";
                                 UpdateProgressBar();
-                                lblText.Text = $"{enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move3}!";
+                                lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move3}!";
                                 paralysisChance = paralysis.Next(0, 3);
                                 if (paralysisChance == 0)
                                 {
@@ -1391,7 +1554,7 @@ namespace pokemon
                                 selectedPokemons[0].move2Damage = selectedPokemons[0].move2Damage - 10;
                                 selectedPokemons[0].move3Damage = selectedPokemons[0].move3Damage - 10;
                                 selectedPokemons[0].move4Damage = selectedPokemons[0].move4Damage - 10;
-                                lblText.Text = $"{enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move4}!";
+                                lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move4}!";
                                 attackFell = true;
                                 PlayerPokemonFaints();
                                 break;
@@ -1420,7 +1583,7 @@ namespace pokemon
                         switch (enemyMove)
                         {
                             case 0:
-                                lblText.Text = $"{enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move1}!";
+                                lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move1}!";
                                 selectedPokemons[0].pokemonHealth = Math.Max(selectedPokemons[0].pokemonHealth - enemyPokemons[enemyIndex].move1Damage, 0);
                                 lblPlayerPokemonHealth.Text = $"{selectedPokemons[0].pokemonHealth}/{selectedPokemons[0].pokemonStartHealth}";
                                 UpdateProgressBar();
@@ -1428,7 +1591,7 @@ namespace pokemon
                                 break;
 
                             case 1:
-                                lblText.Text = $"{enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move2}!";
+                                lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move2}!";
                                 selectedPokemons[0].pokemonHealth = Math.Max(selectedPokemons[0].pokemonHealth - enemyPokemons[enemyIndex].move2Damage, 0);
                                 lblPlayerPokemonHealth.Text = $"{selectedPokemons[0].pokemonHealth}/{selectedPokemons[0].pokemonStartHealth}";
                                 UpdateProgressBar();
@@ -1443,7 +1606,7 @@ namespace pokemon
                                 break;
 
                             case 2:
-                                lblText.Text = $"{enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move3}!";
+                                lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move3}!";
                                 selectedPokemons[0].pokemonParalyzed = true;
                                 lblParalyzed.Visible = true;
                                 PokemonParalyzedEnemy();
@@ -1451,13 +1614,13 @@ namespace pokemon
                                 break;
 
                             case 3:
-                                lblText.Text = $"{enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move4}!";
+                                lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move4}!";
                                 enemyPokemons[enemyIndex].defense = enemyPokemons[enemyIndex].defense + 10;
                                 PlayerPokemonFaints();
                                 break;
                         }
                     }
-                   
+
                     enemyHasAttacked = true;
                     await Task.Delay(turnDelaySec * 1000);
                     enemyTurnInProgress = false;
@@ -1484,7 +1647,7 @@ namespace pokemon
                                 selectedPokemons[0].pokemonHealth = Math.Max(selectedPokemons[0].pokemonHealth - enemyPokemons[enemyIndex].move1Damage, 0);
                                 lblPlayerPokemonHealth.Text = $"{selectedPokemons[0].pokemonHealth}/{selectedPokemons[0].pokemonStartHealth}";
                                 UpdateProgressBar();
-                                lblText.Text = $"{enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move1}!";
+                                lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move1}!";
                                 paralysisChance = paralysis.Next(0, 3);
                                 if (paralysisChance == 0)
                                 {
@@ -1497,11 +1660,11 @@ namespace pokemon
                             case 1:
                                 enemyPokemons[enemyIndex].move1Damage = Math.Max(enemyPokemons[enemyIndex].move1Damage * 2, 0);//MUOKKAA!
                                 enemyPokemons[enemyIndex].pokemonHealth = Math.Max(enemyPokemons[enemyIndex].pokemonHealth - enemyPokemons[enemyIndex].pokemonStartHealth / 2, 0);
-                                lblEnemyPokemonHealth.Text = $"{ enemyPokemons[enemyIndex].pokemonHealth}/{enemyPokemons[enemyIndex].pokemonStartHealth}";
+                                lblEnemyPokemonHealth.Text = $"{enemyPokemons[enemyIndex].pokemonHealth}/{enemyPokemons[enemyIndex].pokemonStartHealth}";
                                 enemyPokemonHealthBar.Value = Math.Min(enemyPokemons[enemyIndex].pokemonHealth / 2, enemyPokemonHealthBar.Maximum);
                                 UpdateEnemyProgressBar();
                                 UpdateProgressBar();
-                                lblText.Text = $"{enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move2}!";
+                                lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move2}!";
                                 EnemyPokemonFaints();
                                 PlayerPokemonFaints();
                                 break;
@@ -1510,7 +1673,7 @@ namespace pokemon
                                 selectedPokemons[0].pokemonHealth = Math.Max(selectedPokemons[0].pokemonHealth - enemyPokemons[enemyIndex].move3Damage, 0);
                                 lblPlayerPokemonHealth.Text = $"{selectedPokemons[0].pokemonHealth}/{selectedPokemons[0].pokemonStartHealth}";
                                 UpdateProgressBar();
-                                lblText.Text = $"{enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move3}!";
+                                lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move3}!";
                                 enemyPokemons[enemyIndex].pokemonHealth = Math.Max(enemyPokemons[enemyIndex].pokemonHealth - enemyPokemons[enemyIndex].move3Damage / 4, 0);
                                 lblEnemyPokemonHealth.Text = $"{enemyPokemons[enemyIndex].pokemonHealth}/{enemyPokemons[enemyIndex].pokemonStartHealth}";
                                 UpdateEnemyProgressBar();
@@ -1519,11 +1682,11 @@ namespace pokemon
                                 break;
 
                             case 3:
-                                lblText.Text = $"{enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move4}!";
+                                lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move4}!";
                                 PlayerPokemonFaints();
                                 break;
                         }
-                    }                 
+                    }
                     enemyHasAttacked = true;
                     await Task.Delay(turnDelaySec * 1000);
                     enemyTurnInProgress = false;
@@ -1550,7 +1713,7 @@ namespace pokemon
                         switch (enemyMove)
                         {
                             case 0:
-                                lblText.Text = $"{enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move1}!";
+                                lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move1}!";
                                 selectedPokemons[0].pokemonConfused = true;
                                 break;
 
@@ -1559,7 +1722,7 @@ namespace pokemon
                                 selectedPokemons[0].pokemonHealth = Math.Max(selectedPokemons[0].pokemonHealth - enemyPokemons[enemyIndex].move2Damage, 0);
                                 lblPlayerPokemonHealth.Text = $"{selectedPokemons[0].pokemonHealth}/{selectedPokemons[0].pokemonStartHealth}";
                                 UpdateProgressBar();
-                                lblText.Text = $"{enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move2}!";
+                                lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move2}!";
                                 paralysisChance = paralysis.Next(0, 3);
                                 if (paralysisChance == 0)
                                 {
@@ -1573,14 +1736,14 @@ namespace pokemon
                                 sleepingChance = sleep.Next(0, 3);
                                 if (sleepingChance == 0)
                                 {
-                                    lblText.Text = $"{enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move3}!";
+                                    lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move3}!";
                                     selectedPokemons[0].pokemonSleeping = true;
                                     lblSleeping.Visible = true;
                                     PlayerPokemonFaints();
                                 }
                                 else
                                 {
-                                    lblText.Text = $"{enemyPokemons[enemyIndex].pokemonName} missed!";
+                                    lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} missed!";
                                     PlayerPokemonFaints();
                                 }
                                 break;
@@ -1591,7 +1754,7 @@ namespace pokemon
                                     selectedPokemons[0].pokemonHealth = Math.Max(selectedPokemons[0].pokemonHealth - enemyPokemons[enemyIndex].move4Damage * 2, 0);
                                     lblPlayerPokemonHealth.Text = $"{selectedPokemons[0].pokemonHealth}/{selectedPokemons[0].pokemonStartHealth}";
                                     UpdateProgressBar();
-                                    lblText.Text = $"{enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move4}, it does double damage!";
+                                    lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move4}, it does double damage!";
                                     PlayerPokemonFaints();
                                 }
                                 else
@@ -1599,12 +1762,12 @@ namespace pokemon
                                     selectedPokemons[0].pokemonHealth = Math.Max(selectedPokemons[0].pokemonHealth - enemyPokemons[enemyIndex].move4Damage, 0);
                                     lblPlayerPokemonHealth.Text = $"{selectedPokemons[0].pokemonHealth}/{selectedPokemons[0].pokemonStartHealth}";
                                     UpdateProgressBar();
-                                    lblText.Text = $"{enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move4}!";
+                                    lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move4}!";
                                     PlayerPokemonFaints();
                                 }
                                 break;
                         }
-                    }                  
+                    }
                     enemyHasAttacked = true;
                     await Task.Delay(turnDelaySec * 1000);
                     enemyTurnInProgress = false;
@@ -1635,7 +1798,7 @@ namespace pokemon
                                     lblPlayerPokemonHealth.Text = $"{selectedPokemons[0].pokemonHealth}/{selectedPokemons[0].pokemonStartHealth}";
                                     selectedPokemons[0].pokemonCriticalHit = true;
                                     UpdateProgressBar();
-                                    lblText.Text = $"{enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move1}!";
+                                    lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move1}!";
                                     PlayerPokemonFaints();
                                     CriticalHitEnemy();
                                 }
@@ -1644,7 +1807,7 @@ namespace pokemon
                                     selectedPokemons[0].pokemonHealth = Math.Max(selectedPokemons[0].pokemonHealth - enemyPokemons[enemyIndex].move1Damage, 0);
                                     lblPlayerPokemonHealth.Text = $"{selectedPokemons[0].pokemonHealth}/{selectedPokemons[0].pokemonStartHealth}";
                                     UpdateProgressBar();
-                                    lblText.Text = $"{enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move1}!";
+                                    lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move1}!";
                                     PlayerPokemonFaints();
                                 }
                                 break;
@@ -1657,7 +1820,7 @@ namespace pokemon
 
                                 }
                                 PlayerPokemonFaints();
-                                lblText.Text = $"{enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move2}!";
+                                lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move2}!";
                                 break;
 
                             case 2:
@@ -1666,14 +1829,14 @@ namespace pokemon
                                 selectedPokemons[0].pokemonSleeping = true;
 
                                 PlayerPokemonFaints();
-                                lblText.Text = $"{enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move3}!";
+                                lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move3}!";
                                 break;
 
                             case 3:
                                 selectedPokemons[0].pokemonHealth = Math.Max(selectedPokemons[0].pokemonHealth - enemyPokemons[enemyIndex].move4Damage, 0);
                                 lblPlayerPokemonHealth.Text = $"{selectedPokemons[0].pokemonHealth}/{selectedPokemons[0].pokemonStartHealth}";
                                 UpdateProgressBar();
-                                lblText.Text = $"{enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move4}!";
+                                lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move4}!";
                                 enemyPokemons[enemyIndex].pokemonHealth = Math.Max(enemyPokemons[enemyIndex].pokemonHealth - selectedPokemons[0].move3Damage / 4, 0);
                                 lblEnemyPokemonHealth.Text = $"{enemyPokemons[enemyIndex].pokemonHealth}/{enemyPokemons[enemyIndex].pokemonStartHealth}";
                                 UpdateEnemyProgressBar();
@@ -1681,7 +1844,7 @@ namespace pokemon
                                 PlayerPokemonFaints();
                                 break;
                         }
-                    }                  
+                    }
                     enemyHasAttacked = true;
                     await Task.Delay(turnDelaySec * 1000);
                     enemyTurnInProgress = false;
