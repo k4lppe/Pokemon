@@ -346,7 +346,7 @@ namespace pokemon
         private void BtnMachamp_MouseHover(object sender, EventArgs e)
         {
             lblHover.Text = "Current Pokémon: Machamp";
-            lblStats.Text = "Type: Fighting, HP: 90, ATK: 130, DEF: 80, \nSPD: 55";
+            lblStats.Text = "Type: Fighting, HP: 90, ATK: 130, DEF: 80, SPD: 55";
         }
 
         private void SelectPokemon_MouseHover(object sender, EventArgs e)

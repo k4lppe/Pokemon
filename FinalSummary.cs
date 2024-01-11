@@ -13,11 +13,20 @@ namespace pokemon
     public partial class FinalSummary : Form
     {
         private int receivedTime;
-        public FinalSummary(int time)
+        public FinalSummary(int time, int totalDamage, bool playerWon)
         {
             InitializeComponent();
             receivedTime = time;
             lblTime.Text = "Time: " + FormantTime(receivedTime);
+            lblTotalDamage.Text = $"Total Damage: {totalDamage}";
+            if(playerWon)
+			{
+                lblWinLose.Text = "You Won!";
+			}
+            else
+			{
+                lblWinLose.Text = "You Lost!";
+			}
         }
         private string FormantTime(int timeInSeconds)
         {
@@ -25,5 +34,5 @@ namespace pokemon
             int seconds = timeInSeconds % 60;
             return $"{minutes} min {seconds} sec";
         }
-    }
+	}
 }
