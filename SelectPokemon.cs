@@ -33,7 +33,7 @@ namespace pokemon
                     while ((line = reader.ReadLine()) != null)
                     {
                         string[] stats = line.Split(',');
-                        if (stats.Length == 30)
+                        if (stats.Length == 33)
                         {
                             Pokemon pokemon = new Pokemon(
                                 stats[0].Trim(), // name
@@ -65,7 +65,10 @@ namespace pokemon
                                 int.Parse(stats[26].Trim()), //startMove3Damage
                                 int.Parse(stats[27].Trim()), //startMove4Damage
                                 int.Parse(stats[28].Trim()), //specialAttack
-                                int.Parse(stats[29].Trim())  //specialDefence
+                                int.Parse(stats[29].Trim()),  //specialDefence
+                                int.Parse(stats[30].Trim()),  //starting defence
+                                int.Parse(stats[31].Trim()), //starting specialAttack
+                                int.Parse(stats[32].Trim()) // starting specialDefence
                             );
                             pokemons.Add(pokemon);
                         }
@@ -307,7 +310,7 @@ namespace pokemon
 
         private void SelectPokemon_Load_1(object sender, EventArgs e)
         {
-            const string path = @"C:\pokemon\Pokemon-master\pokemonStats.txt";
+            const string path = @"C:\pokemon\pokemonStats.txt";
             ImportPokemonStats(path);
 
 
@@ -415,8 +418,11 @@ namespace pokemon
         public int startMove4Damage;
         public int specialAttack;
         public int specialDefence;
+        public int startDefence;
+        public int startSpecialAttack;
+        public int startSpecialDefence;
 
-        public Pokemon(string pokemonName, string pokemonType, string pokemonType2, int pokemonHealth, int attack, int defense, int speed, int index, string imageFile, int pokemonStartHealth, string move1, string move2, string move3, string move4, int move1Damage, int move2Damage, int move3Damage, int move4Damage, bool pokemonParalyzed, bool pokemonConfused, bool pokemonCriticalHit, bool pokemonFlinch, bool pokemonBurning, bool pokemonSleeping, int startMove1Damage, int startMove2Damage, int startMove3Damage, int startMove4Damage, int specialAttack, int specialDefence)
+        public Pokemon(string pokemonName, string pokemonType, string pokemonType2, int pokemonHealth, int attack, int defense, int speed, int index, string imageFile, int pokemonStartHealth, string move1, string move2, string move3, string move4, int move1Damage, int move2Damage, int move3Damage, int move4Damage, bool pokemonParalyzed, bool pokemonConfused, bool pokemonCriticalHit, bool pokemonFlinch, bool pokemonBurning, bool pokemonSleeping, int startMove1Damage, int startMove2Damage, int startMove3Damage, int startMove4Damage, int specialAttack, int specialDefence, int startDefence, int startSpecialAttack, int startSpecialDefence)
         {
             this.pokemonName = pokemonName;
             this.pokemonHealth = pokemonHealth;
@@ -448,6 +454,10 @@ namespace pokemon
             this.startMove4Damage = startMove4Damage;
             this.specialAttack = specialAttack;
             this.specialDefence = specialDefence;
+            this.startDefence = startDefence;
+            this.startSpecialAttack = startSpecialAttack;
+            this.startSpecialDefence = startSpecialDefence;
+       
         }
 
     }

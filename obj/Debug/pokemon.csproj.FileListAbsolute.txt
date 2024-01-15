@@ -21,3 +21,15 @@ C:\pokemon\Pokemon-master\obj\Debug\pokemon.pdb
 C:\pokemon\Pokemon-master\obj\Debug\pokemon.Battle.resources
 C:\Users\s3keka03\source\repos\pokemon\obj\Debug\pokemon.Battle.resources
 C:\pokemon\Pokemon-master\obj\Debug\pokemon.FinalSummary.resources
+C:\pokemon\bin\Debug\pokemon.exe.config
+C:\pokemon\bin\Debug\pokemon.exe
+C:\pokemon\bin\Debug\pokemon.pdb
+C:\pokemon\obj\Debug\pokemon.csproj.AssemblyReference.cache
+C:\pokemon\obj\Debug\pokemon.FinalSummary.resources
+C:\pokemon\obj\Debug\pokemon.Battle.resources
+C:\pokemon\obj\Debug\pokemon.SelectPokemon.resources
+C:\pokemon\obj\Debug\pokemon.Properties.Resources.resources
+C:\pokemon\obj\Debug\pokemon.csproj.GenerateResource.cache
+C:\pokemon\obj\Debug\pokemon.csproj.CoreCompileInputs.cache
+C:\pokemon\obj\Debug\pokemon.exe
+C:\pokemon\obj\Debug\pokemon.pdb
