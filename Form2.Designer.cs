@@ -31,7 +31,6 @@ namespace pokemon
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Battle));
             this.listView1 = new System.Windows.Forms.ListView();
-            this.btnPokemon = new System.Windows.Forms.Button();
             this.btnBag = new System.Windows.Forms.Button();
             this.btnFight = new System.Windows.Forms.Button();
             this.listView2 = new System.Windows.Forms.ListView();
@@ -74,8 +73,6 @@ namespace pokemon
             this.btnLumberry = new System.Windows.Forms.Button();
             this.lblTime = new System.Windows.Forms.Label();
             this.lblDamageText = new System.Windows.Forms.Label();
-            this.lblTotalDamage = new System.Windows.Forms.Label();
-            this.btnSpecial = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -90,24 +87,6 @@ namespace pokemon
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             // 
-            // btnPokemon
-            // 
-            this.btnPokemon.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.btnPokemon.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnPokemon.FlatAppearance.BorderColor = System.Drawing.Color.Green;
-            this.btnPokemon.FlatAppearance.BorderSize = 6;
-            this.btnPokemon.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.btnPokemon.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.btnPokemon.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPokemon.Font = new System.Drawing.Font("Comic Sans MS", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPokemon.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnPokemon.Location = new System.Drawing.Point(636, 575);
-            this.btnPokemon.Name = "btnPokemon";
-            this.btnPokemon.Size = new System.Drawing.Size(155, 72);
-            this.btnPokemon.TabIndex = 2;
-            this.btnPokemon.Text = "Pokémon";
-            this.btnPokemon.UseVisualStyleBackColor = false;
-            // 
             // btnBag
             // 
             this.btnBag.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
@@ -118,9 +97,9 @@ namespace pokemon
             this.btnBag.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.btnBag.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBag.Font = new System.Drawing.Font("Comic Sans MS", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBag.Location = new System.Drawing.Point(797, 497);
+            this.btnBag.Location = new System.Drawing.Point(637, 575);
             this.btnBag.Name = "btnBag";
-            this.btnBag.Size = new System.Drawing.Size(155, 72);
+            this.btnBag.Size = new System.Drawing.Size(315, 72);
             this.btnBag.TabIndex = 3;
             this.btnBag.Text = "Bag";
             this.btnBag.UseVisualStyleBackColor = false;
@@ -138,7 +117,7 @@ namespace pokemon
             this.btnFight.Font = new System.Drawing.Font("Comic Sans MS", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFight.Location = new System.Drawing.Point(636, 497);
             this.btnFight.Name = "btnFight";
-            this.btnFight.Size = new System.Drawing.Size(155, 72);
+            this.btnFight.Size = new System.Drawing.Size(316, 72);
             this.btnFight.TabIndex = 4;
             this.btnFight.Text = "Fight";
             this.btnFight.UseVisualStyleBackColor = false;
@@ -633,33 +612,6 @@ namespace pokemon
             this.lblDamageText.TabIndex = 45;
             this.lblDamageText.Text = "damage";
             // 
-            // lblTotalDamage
-            // 
-            this.lblTotalDamage.BackColor = System.Drawing.Color.Transparent;
-            this.lblTotalDamage.Font = new System.Drawing.Font("Comic Sans MS", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalDamage.Location = new System.Drawing.Point(594, 33);
-            this.lblTotalDamage.Name = "lblTotalDamage";
-            this.lblTotalDamage.Size = new System.Drawing.Size(192, 49);
-            this.lblTotalDamage.TabIndex = 46;
-            this.lblTotalDamage.Text = "label1";
-            // 
-            // btnSpecial
-            // 
-            this.btnSpecial.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(124)))), ((int)(((byte)(212)))));
-            this.btnSpecial.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSpecial.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(72)))), ((int)(((byte)(212)))));
-            this.btnSpecial.FlatAppearance.BorderSize = 6;
-            this.btnSpecial.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(169)))), ((int)(((byte)(212)))));
-            this.btnSpecial.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(169)))), ((int)(((byte)(212)))));
-            this.btnSpecial.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSpecial.Font = new System.Drawing.Font("Comic Sans MS", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSpecial.Location = new System.Drawing.Point(797, 575);
-            this.btnSpecial.Name = "btnSpecial";
-            this.btnSpecial.Size = new System.Drawing.Size(155, 72);
-            this.btnSpecial.TabIndex = 1;
-            this.btnSpecial.Text = "button1";
-            this.btnSpecial.UseVisualStyleBackColor = false;
-            // 
             // Battle
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -669,7 +621,6 @@ namespace pokemon
             this.BackgroundImage = global::pokemon.Properties.Resources.background;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(964, 649);
-            this.Controls.Add(this.lblTotalDamage);
             this.Controls.Add(this.lblDamageText);
             this.Controls.Add(this.lblTime);
             this.Controls.Add(this.btnLumberry);
@@ -712,8 +663,6 @@ namespace pokemon
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btnFight);
             this.Controls.Add(this.btnBag);
-            this.Controls.Add(this.btnPokemon);
-            this.Controls.Add(this.btnSpecial);
             this.Controls.Add(this.listView1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Battle";
@@ -730,7 +679,6 @@ namespace pokemon
         #endregion
 
         private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.Button btnPokemon;
         private System.Windows.Forms.Button btnBag;
         private System.Windows.Forms.Button btnFight;
         private System.Windows.Forms.PictureBox pictureBox1;
@@ -773,7 +721,5 @@ namespace pokemon
         private System.Windows.Forms.Button btnLumberry;
         private System.Windows.Forms.Label lblTime;
         private System.Windows.Forms.Label lblDamageText;
-		private System.Windows.Forms.Label lblTotalDamage;
-		private System.Windows.Forms.Button btnSpecial;
-	}
+    }
 }
