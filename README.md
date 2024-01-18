@@ -26,3 +26,5 @@ Peli perustuu perinteiseen Pokémon taisteluun, missä kaksi eri Pokémonia tais
 ![Battle kuva 6](https://github.com/k4lppe/Pokemon/assets/151001970/8ab2c7d5-225c-4400-a6da-7825822c4435)
 
 ![Battle kuva 7](https://github.com/k4lppe/Pokemon/assets/151001970/62e01254-52fe-415c-84de-7bd1daec468f)
+
+![FinalSummary](https://github.com/k4lppe/Pokemon/assets/151001970/692a5d14-2806-4525-a397-e5e89adbd9c0)
