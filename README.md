@@ -1,5 +1,9 @@
 # Pokemonpeli
 
+## Tärkeä tiedote!
+
+Ennen kun asennat peliä luo C asemallesi "pokemon" kansio kaikki pienillä kirjaimilla. Asenna peli siihen kansioon, muuten peli ei toimi.
+
 ## Toiminta ja käyttötarkoitus
 
 Tämä projekti on C#-ohjelmointi näyttötehtävä
