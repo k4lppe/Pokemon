@@ -40,5 +40,12 @@ Koodi lukee ulkoisesta tiedostosta pokemonien tilastot ja luo niille objektin po
 ![Koodi1](https://github.com/k4lppe/Pokemon/assets/151001970/801f5fee-70a5-47d6-8589-d63e48c4850f)
 Pokemon luokka, joka määrittelee mitä muuttujia pokemon objektille pitää antaa.
 ![koodi2](https://github.com/k4lppe/Pokemon/assets/151001970/28fdf405-2951-4c2e-9a21-bab400e0b7d2)
+Pokemonin fyysisten iskujen vahingonlaskukaava
+![koodi3](https://github.com/k4lppe/Pokemon/assets/151001970/63c81927-1207-4927-b926-a0d5ec5fc47a)
+Pokemonin erikois iskujen vahingonlaskukaava
+![koodi4](https://github.com/k4lppe/Pokemon/assets/151001970/ec750982-83ef-4c50-a639-4ff365514cc9)
 
+Koodi kun valitaan pokemonin ensimmäinen hyökkäysliike, ensin varmistetaan että on pelaajan vuoro, sitten tarkistetaan flinch, eli säpsähdys, jotkut liikkeet voivat aiheuttaa sitä, jos säpsähdys on totta niin pokemon ei voi sillä vuorolla hyökätä. Sitten tarkistetaan tilavaikutukset. paralysis eli halvaannuksessa on yksi neljästä mahdollisuus, että pokemon ei voi liikkua, tarkistetaan myös palaako pokemon, jos se palaa sen elämäpisteistä vähennetään kahdeksasosa. Nukkumisessa sama juttu kuin säpsähdyksessä että ei voi hyökätä jos nukkuu. lopuksi tarkastetaan hämmennys. Ylempänä arvottiin yksi kolmesta mahdollisuus, että pokemon satuttaa itseään. Koodissa kutsutaan myös paljon funktioita, MoveDelayStart käynnistää viiveen vihollisen vuoron alkamiselle. PlayerPokemonFaints tarkistaa onko pokemonin elämäpisteet 0, jos on niin se vaihtaa pokemonin uuteen. UpdateProgressBar päivittää pokemonin elämäpalkin. await Task.Delay() luo pienen viiveen koodin välille niin pelaaja ehtii lukea tekstin mikä lukee ruudulla.
+![koodi5](https://github.com/k4lppe/Pokemon/assets/151001970/a957cca4-ddd9-4cf8-88c3-86603d4e8351)
+![koodi6](https://github.com/k4lppe/Pokemon/assets/151001970/66bbf79e-e18a-4521-87a1-2e8120d58603)
 
