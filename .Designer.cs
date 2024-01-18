@@ -35,6 +35,8 @@ namespace pokemon
 			this.lblTotalDamage = new System.Windows.Forms.Label();
 			this.lblTime = new System.Windows.Forms.Label();
 			this.listView1 = new System.Windows.Forms.ListView();
+			this.BtnSave = new System.Windows.Forms.Button();
+			this.BtnQuit = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// lblWinLose
@@ -87,6 +89,38 @@ namespace pokemon
 			this.listView1.TabIndex = 1;
 			this.listView1.UseCompatibleStateImageBehavior = false;
 			// 
+			// BtnSave
+			// 
+			this.BtnSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(148)))), ((int)(((byte)(128)))));
+			this.BtnSave.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.BtnSave.FlatAppearance.BorderColor = System.Drawing.Color.Red;
+			this.BtnSave.FlatAppearance.BorderSize = 7;
+			this.BtnSave.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Red;
+			this.BtnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.BtnSave.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.BtnSave.Location = new System.Drawing.Point(229, 425);
+			this.BtnSave.Name = "BtnSave";
+			this.BtnSave.Size = new System.Drawing.Size(176, 85);
+			this.BtnSave.TabIndex = 5;
+			this.BtnSave.Text = "Save results and quit";
+			this.BtnSave.UseVisualStyleBackColor = false;
+			// 
+			// BtnQuit
+			// 
+			this.BtnQuit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(168)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+			this.BtnQuit.Cursor = System.Windows.Forms.Cursors.Hand;
+			this.BtnQuit.FlatAppearance.BorderColor = System.Drawing.Color.Aqua;
+			this.BtnQuit.FlatAppearance.BorderSize = 7;
+			this.BtnQuit.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Cyan;
+			this.BtnQuit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.BtnQuit.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.BtnQuit.Location = new System.Drawing.Point(508, 425);
+			this.BtnQuit.Name = "BtnQuit";
+			this.BtnQuit.Size = new System.Drawing.Size(176, 85);
+			this.BtnQuit.TabIndex = 6;
+			this.BtnQuit.Text = "Quit without saving";
+			this.BtnQuit.UseVisualStyleBackColor = false;
+			// 
 			// FinalSummary
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -94,6 +128,8 @@ namespace pokemon
 			this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
 			this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
 			this.ClientSize = new System.Drawing.Size(933, 579);
+			this.Controls.Add(this.BtnQuit);
+			this.Controls.Add(this.BtnSave);
 			this.Controls.Add(this.lblTime);
 			this.Controls.Add(this.lblTotalDamage);
 			this.Controls.Add(this.listView2);
@@ -115,5 +151,7 @@ namespace pokemon
 		private System.Windows.Forms.Label lblTotalDamage;
 		private System.Windows.Forms.Label lblTime;
 		private System.Windows.Forms.ListView listView1;
+		private System.Windows.Forms.Button BtnSave;
+		private System.Windows.Forms.Button BtnQuit;
 	}
 }
