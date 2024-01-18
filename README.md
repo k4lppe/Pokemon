@@ -12,6 +12,8 @@ Peli perustuu perinteiseen Pokémon taisteluun, missä kaksi eri Pokémonia tais
 
 # Vuokaavio pelistä
 
+![pokemonvuokaavio](https://github.com/k4lppe/Pokemon/assets/151001970/9098b151-f4fd-4a84-a5bf-6b83d9081bd3)
+
 
 # Kuvakaappauksia pelistä
 
