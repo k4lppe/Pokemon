@@ -1,6 +1,6 @@
-Gyarados,Water,Flying, 95, 125, 79, 81, 1, gyarados,95,Dragon Rage, Bite, Bubblebeam, Hydro Pump, 40, 60, 65, 120, false, false, false, false, false, false, 40, 60, 65, 120, 60, 100, 79, 60, 100
+Gyarados,Water,Flying, 95, 125, 79, 81, 1, gyarados,95,Dragon Rage, Bite, Bubblebeam, Hydro Pump, 40, 60, 65, 80, false, false, false, false, false, false, 40, 60, 65, 120, 60, 100, 79, 60, 100
 Charizard,Fire,Flying, 78, 84, 78, 100, 2, charizard,78, Dragon Claw, Ember, Dragon Breath, Growl, 80, 40, 60, 0, false, false, false, false, false, false, 80, 40, 60, 0, 109, 85, 78, 109, 85
-Zapdos,Electric,Flying,90,90,85,100, 3, zapdos,90, Drill Peck, Thunder Shock, Thunder Wave, Charge, 80, 40, 0, 0, false, false, false, false, false, false, 80, 40, 0, 0, 125, 90, 85, 125, 90
+Zapdos,Electric,Flying,90,90,85,100, 3, zapdos,90, Drill Peck, Thunder Shock, Thunder Wave, Charge, 60, 40, 0, 0, false, false, false, false, false, false, 80, 40, 0, 0, 125, 90, 85, 125, 90
 Snorlax,Normal,,160,110,65,30, 4, snorlax,160, Body Slam, Belly Drum, Double-Edge, Surf, 85, 0, 120, 0, false, false, false, false, false, false, 85, 0, 120, 0, 65, 110, 65, 65, 110
 Gengar,Ghost,Poison,60,65,60,110, 5, gengar,60, Confuse Ray, Lick, Hypnosis, Hex, 0, 30, 0, 65, false, false, false, false, false, false, 0, 30, 0, 65, 130, 75, 60, 130, 75
 Machamp,Fighting,,90,130,80,55, 6, machamp,90, Karate Chop, Leer, Focus Energy, Submission, 50, 0, 0, 80, false, false, false, false, false, false, 50, 0, 0, 80, 65, 85, 80, 65, 85

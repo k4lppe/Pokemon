@@ -148,7 +148,7 @@ namespace pokemon
 			this.btnCharizard.Size = new System.Drawing.Size(258, 240);
 			this.btnCharizard.TabIndex = 1;
 			this.btnCharizard.UseVisualStyleBackColor = false;
-			this.btnCharizard.Click += new System.EventHandler(this.btnCharizard_Click);
+			this.btnCharizard.Click += new System.EventHandler(this.BtnCharizard_Click);
 			this.btnCharizard.MouseHover += new System.EventHandler(this.btnCharizard_MouseHover);
 			// 
 			// btnGyarados

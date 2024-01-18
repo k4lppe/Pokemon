@@ -95,7 +95,7 @@ namespace pokemon
                     Pokemon pokemonGyarados = pokemons.Find(p => p.pokemonName == "Gyarados");
                     if (pokemonGyarados != null)
                     {
-                        //MessageBox.Show($"Valittu Pokemon: {pokemonGyarados.pokemonName}");
+
                         btnGyarados.Enabled = false;
                         pokemonSelected++;
                         pokemonIndex++;
@@ -128,7 +128,6 @@ namespace pokemon
                     Pokemon pokemonMachamp = pokemons.Find(p => p.pokemonName == "Machamp");
                     if (pokemonMachamp != null)
                     {
-                        //MessageBox.Show($"Valittu Pokemon: {pokemonMachamp.pokemonName}");
                         btnMachamp.Enabled = false;
                         pokemonSelected++;
                         pokemonIndex++;
@@ -150,7 +149,7 @@ namespace pokemon
             }
 
         }
-        private void btnCharizard_Click(object sender, EventArgs e)
+        private void BtnCharizard_Click(object sender, EventArgs e)
         {
             if (pokemonSelected < 3)
             {
