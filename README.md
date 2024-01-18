@@ -38,6 +38,8 @@ Peli perustuu perinteiseen Pokémon taisteluun, missä kaksi eri Pokémonia tais
 ## Koodin esittely
 Koodi lukee ulkoisesta tiedostosta pokemonien tilastot ja luo niille objektin pokemon luokkaan.
 ![Koodi1](https://github.com/k4lppe/Pokemon/assets/151001970/801f5fee-70a5-47d6-8589-d63e48c4850f)
+![stats](https://github.com/k4lppe/Pokemon/assets/151001970/a8e3dd1c-5075-485b-89f0-b8f9bb0597e4)
+
 Pokemon luokka, joka määrittelee mitä muuttujia pokemon objektille pitää antaa.
 ![koodi2](https://github.com/k4lppe/Pokemon/assets/151001970/28fdf405-2951-4c2e-9a21-bab400e0b7d2)
 Pokemonin fyysisten iskujen vahingonlaskukaava
