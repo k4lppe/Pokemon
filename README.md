@@ -2,7 +2,7 @@
 
 ## Tärkeä tiedote!
 
-Ennen kun asennat peliä luo C asemallesi "pokemon" kansio kaikki pienillä kirjaimilla. Asenna peli siihen kansioon, muuten peli ei toimi.
+Ennen kun asennat peliä luo C asemallesi "pokemon" kansio kaikki pienillä kirjaimilla. Eli C:/pokemon/   Asenna peli siihen kansioon, muuten peli ei toimi.
 
 ## Toiminta ja käyttötarkoitus
 
