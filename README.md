@@ -34,3 +34,11 @@ Peli perustuu perinteiseen Pokémon taisteluun, missä kaksi eri Pokémonia tais
 ![Battle kuva 7](https://github.com/k4lppe/Pokemon/assets/151001970/62e01254-52fe-415c-84de-7bd1daec468f)
 
 ![FinalSummary](https://github.com/k4lppe/Pokemon/assets/151001970/692a5d14-2806-4525-a397-e5e89adbd9c0)
+
+# Koodin esittely
+Koodi lukee ulkoisesta tiedostosta pokemonien tilastot ja luo niille objektin pokemon luokkaan.
+![Koodi1](https://github.com/k4lppe/Pokemon/assets/151001970/801f5fee-70a5-47d6-8589-d63e48c4850f)
+Pokemon luokka, joka määrittelee mitä muuttujia pokemon objektille pitää antaa.
+![koodi2](https://github.com/k4lppe/Pokemon/assets/151001970/28fdf405-2951-4c2e-9a21-bab400e0b7d2)
+
+
