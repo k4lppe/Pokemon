@@ -1,5 +1,5 @@
-#Pokemonpeli
+# Pokemonpeli
 
-##Toiminta ja käyttötarkoitus
+## Toiminta ja käyttötarkoitus
 
 Tämä projekti on C#-ohjelmointi näyttötehtävä
