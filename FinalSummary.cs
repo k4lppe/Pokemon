@@ -41,11 +41,13 @@ namespace pokemon
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
-            string fileName = "GameResults.txt";
-            string filePath = Path.Combine(Application.StartupPath, "results", fileName);
+            const string fileName = "GameResults.txt";
+            string filePath = Path.Combine(Application.StartupPath, "stats", fileName);
+           
 
             try
             {
+
                 using (StreamWriter writer = new StreamWriter(filePath))
                 {
                     writer.WriteLine("The results of the last game: ");

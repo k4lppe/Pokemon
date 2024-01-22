@@ -130,9 +130,9 @@ namespace pokemon
             // 
             this.lblTextSaved.BackColor = System.Drawing.Color.White;
             this.lblTextSaved.Font = new System.Drawing.Font("Comic Sans MS", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTextSaved.Location = new System.Drawing.Point(278, 357);
+            this.lblTextSaved.Location = new System.Drawing.Point(279, 299);
             this.lblTextSaved.Name = "lblTextSaved";
-            this.lblTextSaved.Size = new System.Drawing.Size(358, 50);
+            this.lblTextSaved.Size = new System.Drawing.Size(358, 41);
             this.lblTextSaved.TabIndex = 7;
             this.lblTextSaved.Text = "Results saved successfully!";
             this.lblTextSaved.Visible = false;
@@ -141,9 +141,9 @@ namespace pokemon
             // 
             this.lblTextNotSaved.BackColor = System.Drawing.Color.White;
             this.lblTextNotSaved.Font = new System.Drawing.Font("Comic Sans MS", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTextNotSaved.Location = new System.Drawing.Point(313, 319);
+            this.lblTextNotSaved.Location = new System.Drawing.Point(325, 299);
             this.lblTextNotSaved.Name = "lblTextNotSaved";
-            this.lblTextNotSaved.Size = new System.Drawing.Size(277, 50);
+            this.lblTextNotSaved.Size = new System.Drawing.Size(277, 41);
             this.lblTextNotSaved.TabIndex = 8;
             this.lblTextNotSaved.Text = "Error saving results.";
             this.lblTextNotSaved.Visible = false;
@@ -151,10 +151,10 @@ namespace pokemon
             // lblErrorText
             // 
             this.lblErrorText.BackColor = System.Drawing.Color.White;
-            this.lblErrorText.Font = new System.Drawing.Font("Comic Sans MS", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblErrorText.Location = new System.Drawing.Point(278, 357);
+            this.lblErrorText.Font = new System.Drawing.Font("Comic Sans MS", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblErrorText.Location = new System.Drawing.Point(229, 340);
             this.lblErrorText.Name = "lblErrorText";
-            this.lblErrorText.Size = new System.Drawing.Size(378, 65);
+            this.lblErrorText.Size = new System.Drawing.Size(455, 82);
             this.lblErrorText.TabIndex = 9;
             this.lblErrorText.Visible = false;
             // 

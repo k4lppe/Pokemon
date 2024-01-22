@@ -337,6 +337,7 @@ namespace pokemon
                 {
                     lblText.Text = $"{selectedPokemons[0].pokemonName} is unable to attack!";
                     enemyPokemons[0].pokemonFlinch = false;
+                    await MoveDelayStart();
                 }
                 else
                 {
@@ -488,6 +489,7 @@ namespace pokemon
                 {
                     lblText.Text = $"{selectedPokemons[0].pokemonName} is unable to attack!";
                     enemyPokemons[0].pokemonFlinch = false;
+                    await MoveDelayStart();
                 }
                 else
                 {
@@ -653,6 +655,7 @@ namespace pokemon
                 {
                     lblText.Text = $"{selectedPokemons[0].pokemonName} is unable to attack!";
                     enemyPokemons[0].pokemonFlinch = false;
+                    await MoveDelayStart();
                 }
                 else
                 {
@@ -792,6 +795,7 @@ namespace pokemon
                 {
                     lblText.Text = $"{selectedPokemons[0].pokemonName} is unable to attack!";
                     enemyPokemons[0].pokemonFlinch = false;
+                    await MoveDelayStart();
                 }
                 else
                 {
