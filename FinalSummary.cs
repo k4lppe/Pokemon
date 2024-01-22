@@ -42,7 +42,7 @@ namespace pokemon
         private void BtnSave_Click(object sender, EventArgs e)
         {
             string fileName = "GameResults.txt";
-            string filePath = Path.Combine("C:/pokemon/", fileName);
+            string filePath = Path.Combine("pokemon", fileName);
 
             try
             {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -135,11 +136,14 @@ namespace pokemon
 
             if (enemyRandomIndex < enemyPokemons.Count)
             {
-                string enemyImageFileName = @"C:\pokemon\pictures\" + enemyPokemons[enemyRandomIndex].ImageFileName + "2" + ".gif";
+                //string enemyImageFileName = @"C:\pokemon\pictures\" + enemyPokemons[enemyRandomIndex].ImageFileName + "2" + ".gif";
+                string enemyImageFileName = Path.Combine(Application.StartupPath, "pictures", enemyPokemons[enemyIndex].ImageFileName + "2" + ".gif");
                 LoadImageForEnemyPokemon(enemyImageFileName);
             }
 
-            string imageFileName = @"C:\pokemon\pictures\" + selectedPokemons[0].ImageFileName + ".gif";
+            //string imageFileName = @"C:\pokemon\pictures\" + selectedPokemons[0].ImageFileName + ".gif";
+            string imageFileName = Path.Combine(Application.StartupPath, "pictures", selectedPokemons[0].ImageFileName + ".gif");
+            Image image = Image.FromFile(imageFileName);
             LoadImageForSelectedPokemon(imageFileName);
 
             aliveEnemyPokemons = enemyPokemons.Count;
@@ -1137,7 +1141,8 @@ namespace pokemon
             }
             if (selectedPokemons[0] != null)
             {
-                string imageFileName = @"C:\pokemon\pictures\" + selectedPokemons[0].ImageFileName + ".gif";
+                //string imageFileName = @"C:\pokemon\pictures\" + selectedPokemons[0].ImageFileName + ".gif";
+                string imageFileName = Path.Combine(Application.StartupPath, "pictures", selectedPokemons[0].ImageFileName + ".gif");
                 LoadImageForSelectedPokemon(imageFileName);
                 lblPlayerPokemonName.Text = $"{selectedPokemons[0].pokemonName}";
                 lblPlayerPokemonHealth.Text = $"{selectedPokemons[0].pokemonHealth}/{selectedPokemons[0].pokemonStartHealth}";
@@ -1186,7 +1191,8 @@ namespace pokemon
         {
             enemyPokemonHealthBar.Maximum = enemyPokemons[enemyIndex].pokemonStartHealth;
             enemyPokemonHealthBar.Value = Math.Min(enemyPokemons[enemyIndex].pokemonHealth, enemyPokemonHealthBar.Maximum);
-            string enemyImageFileName = @"C:\pokemon\pictures\" + enemyPokemons[enemyIndex].ImageFileName + "2" + ".gif";
+            //string enemyImageFileName = @"C:\pokemon\pictures\" + enemyPokemons[enemyIndex].ImageFileName + "2" + ".gif";
+            string enemyImageFileName = Path.Combine(Application.StartupPath, "pictures", enemyPokemons[enemyIndex].ImageFileName + "2" + ".gif");
             LoadImageForEnemyPokemon(enemyImageFileName);
             lblEnemyPokemonName.Text = $"{enemyPokemons[enemyIndex].pokemonName}";
             lblEnemyPokemonHealth.Text = $"{enemyPokemons[enemyIndex].pokemonHealth}/{enemyPokemons[enemyIndex].pokemonStartHealth}";
@@ -1707,10 +1713,10 @@ namespace pokemon
             lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} defence fell!";
             await Task.Delay(2000);
             enemyHasAttacked = false;
-            if (!enemyHasAttacked)
-            {
+            //if (!enemyHasAttacked)
+            
                 await EnemysTurn();
-            }
+            
         }
         private async void EnemyAttackFell()
         {
@@ -2028,6 +2034,10 @@ namespace pokemon
             {
                 randomPercentage = damageCalculation.Next(85, 101) / 100.0;
 
+                if (enemyPokemons[enemyIndex].defense == 0)
+                {
+                    enemyPokemons[enemyIndex].defense += 10;
+                }
                 double pokemonMove2Damage = (int)(((((2 * 50 * critical) / 5 + 2) * selectedPokemons[0].move2Damage * (selectedPokemons[0].attack / enemyPokemons[enemyIndex].defense) / 50) + 2) * type1 * type2 * randomPercentage);
                 selectedPokemons[0].move2Damage = Convert.ToInt32(pokemonMove2Damage);
 
@@ -2387,6 +2397,10 @@ namespace pokemon
             {
                 randomPercentage = damageCalculation.Next(85, 101) / 100.0;
 
+                if (selectedPokemons[0].defense == 0)
+                {
+                    selectedPokemons[0].defense += 10;
+                }
                 double enemyPokemonMove2Damage = (int)(((((2 * 50 * critical) / 5 + 2) * enemyPokemons[enemyIndex].move2Damage * (enemyPokemons[enemyIndex].attack / selectedPokemons[0].defense) / 50) + 2) * type1 * type2 * randomPercentage);
                 enemyPokemons[enemyIndex].move2Damage = Convert.ToInt32(enemyPokemonMove2Damage);
 

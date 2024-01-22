@@ -33,3 +33,15 @@ C:\pokemon\obj\Debug\pokemon.csproj.GenerateResource.cache
 C:\pokemon\obj\Debug\pokemon.csproj.CoreCompileInputs.cache
 C:\pokemon\obj\Debug\pokemon.exe
 C:\pokemon\obj\Debug\pokemon.pdb
+C:\Users\kalle\source\repos\pokemon\obj\Debug\pokemon.csproj.AssemblyReference.cache
+C:\Users\kalle\source\repos\pokemon\obj\Debug\pokemon.FinalSummary.resources
+C:\Users\kalle\source\repos\pokemon\obj\Debug\pokemon.Battle.resources
+C:\Users\kalle\source\repos\pokemon\obj\Debug\pokemon.SelectPokemon.resources
+C:\Users\kalle\source\repos\pokemon\obj\Debug\pokemon.csproj.GenerateResource.cache
+C:\Users\kalle\source\repos\pokemon\obj\Debug\pokemon.exe
+C:\Users\kalle\source\repos\pokemon\obj\Debug\pokemon.pdb
+C:\Users\kalle\source\repos\pokemon\bin\Debug\pokemon.exe.config
+C:\Users\kalle\source\repos\pokemon\bin\Debug\pokemon.exe
+C:\Users\kalle\source\repos\pokemon\bin\Debug\pokemon.pdb
+C:\Users\kalle\source\repos\pokemon\obj\Debug\pokemon.Properties.Resources.resources
+C:\Users\kalle\source\repos\pokemon\obj\Debug\pokemon.csproj.CoreCompileInputs.cache

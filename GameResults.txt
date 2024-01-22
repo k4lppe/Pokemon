@@ -1,0 +1,5 @@
+The results of the last game: 
+
+Outcome: Victory!
+Time: 2 min 19 sec
+Total Damage: 337

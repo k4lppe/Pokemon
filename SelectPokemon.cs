@@ -309,9 +309,10 @@ namespace pokemon
 
         private void SelectPokemon_Load_1(object sender, EventArgs e)
         {
-            const string path = @"C:\pokemon\pokemonStats.txt";
-            ImportPokemonStats(path);
-
+            const string path = "pokemonStats.txt";
+            string fullPath = Path.Combine(Application.StartupPath, "stats", path);
+            ImportPokemonStats(fullPath);
+          
 
         }
 
