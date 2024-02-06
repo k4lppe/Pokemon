@@ -5,8 +5,6 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-
-
 namespace pokemon
 {
     public partial class Battle : Form
@@ -106,6 +104,7 @@ namespace pokemon
         bool speedFell = false;
         private bool enemyHasAttacked = false;
         bool usedSurf;
+        bool enemyTurn;
 
 
         private Timer gameTimer = new Timer();
@@ -2623,919 +2622,931 @@ namespace pokemon
         }
         private async Task EnemysTurn()
         {
-            playerTurn = false;
-            MoveButtonsHidden();
-            HideBag();
-            enemyMove = enemy.Next(0, 4); // 4
-            if (enemyPokemons[enemyIndex].pokemonParalyzed)
+            enemyTurn = true;
+            while(enemyTurn)
             {
-                lblParalyzed2.Visible = true;
-                enemyPokemons[enemyIndex].pokemonConfused = false;
-                lblConfused2.Visible = false;
-                enemyPokemons[enemyIndex].pokemonBurning = false;
-                lblBurning2.Visible = false;
-                enemyPokemons[enemyIndex].pokemonSleeping = false;
-                lblSleeping2.Visible = false;
-
-                enemyParalysisIndex++;
-                if (enemyParalysisIndex >= 5)
+                playerTurn = false;
+                MoveButtonsHidden();
+                HideBag();
+                enemyMove = enemy.Next(0, 4); // 4
+                if (enemyPokemons[enemyIndex].pokemonParalyzed)
                 {
-                    enemyParalysisIndex = 0;
-                    enemyPokemons[enemyIndex].pokemonParalyzed = false;
-                    await Task.Delay(2000);
-                    lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} is no longer paralyzed!";
-                    lblParalyzed2.Visible = false;
-                    await Task.Delay(3000);
-                }
-            }
-            else if (enemyPokemons[enemyIndex].pokemonConfused)
-            {
-                lblConfused2.Visible = true;
-                enemyPokemons[enemyIndex].pokemonParalyzed = false;
-                lblParalyzed2.Visible = false;
-                enemyPokemons[enemyIndex].pokemonBurning = false;
-                lblBurning2.Visible = false;
-                enemyPokemons[enemyIndex].pokemonSleeping = false;
-                lblSleeping2.Visible = false;
-
-                enemyConfuseIndex++;
-                if (enemyConfuseIndex >= 6)
-                {
-                    enemyConfuseIndex = 0;
+                    lblParalyzed2.Visible = true;
                     enemyPokemons[enemyIndex].pokemonConfused = false;
-                    await Task.Delay(2000);
-                    lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} is no longer confused!";
                     lblConfused2.Visible = false;
-                    await Task.Delay(3000);
-                }
-            }
-            else if (enemyPokemons[enemyIndex].pokemonSleeping)
-            {
-                lblSleeping2.Visible = true;
-                enemyPokemons[enemyIndex].pokemonParalyzed = false;
-                lblParalyzed2.Visible = false;
-                enemyPokemons[enemyIndex].pokemonBurning = false;
-                lblBurning2.Visible = false;
-                enemyPokemons[enemyIndex].pokemonConfused = false;
-                lblConfused2.Visible = false;
-
-                enemySleepIndex++;
-                if (enemySleepIndex >= 8)
-                {
-                    enemySleepIndex = 0;
+                    enemyPokemons[enemyIndex].pokemonBurning = false;
+                    lblBurning2.Visible = false;
                     enemyPokemons[enemyIndex].pokemonSleeping = false;
-                    await Task.Delay(2000);
-                    lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} woke up!";
                     lblSleeping2.Visible = false;
-                    await Task.Delay(3000);
-                }
-            }
-            else if (enemyPokemons[enemyIndex].pokemonBurning)
-            {
-                lblBurning2.Visible = true;
-                enemyPokemons[enemyIndex].pokemonParalyzed = false;
-                lblParalyzed2.Visible = false;
-                enemyPokemons[enemyIndex].pokemonSleeping = false;
-                lblSleeping2.Visible = false;
-                enemyPokemons[enemyIndex].pokemonConfused = false;
-                lblConfused2.Visible = false;
-            }
 
-
-            if (enemyPokemons[enemyIndex].pokemonName == "Gyarados")
-            {
-                if (!enemyTurnInProgress)
-                {
-                    enemyTurnInProgress = true;
-
-                    if (enemyPokemons[enemyIndex].pokemonFlinch)
+                    enemyParalysisIndex++;
+                    if (enemyParalysisIndex >= 5)
                     {
-                        lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} is unable to attack!";
-                        enemyPokemons[enemyIndex].pokemonFlinch = false;
+                        enemyParalysisIndex = 0;
+                        enemyPokemons[enemyIndex].pokemonParalyzed = false;
+                        await Task.Delay(2000);
+                        lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} is no longer paralyzed!";
+                        lblParalyzed2.Visible = false;
+                        await Task.Delay(3000);
                     }
-                    else
-                    {
-                        confuseChance = confuse.Next(0, 3); //3
-                        paralysisChance = paralysis.Next(0, 4);
-                        if (enemyPokemons[enemyIndex].pokemonParalyzed && paralysisChance == 1)
-                        {
-                            lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} is fully paralyzed and unable to move!";
-                        }
-                        else if (enemyPokemons[enemyIndex].pokemonSleeping)
-                        {
-                            lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} is fast asleep!";
-                            await EnemyHealing();
-                        }
-                        else if (enemyPokemons[enemyIndex].pokemonConfused)
-                        {
-                            if (confuseChance == 0)
-                            {
-                                lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} is confused, and hurt itself in confusion!";
-                                randomChance = Random.Next(10, 21);
-                                enemyPokemons[enemyIndex].pokemonHealth = Math.Max(enemyPokemons[enemyIndex].pokemonHealth - randomChance, 0);
-                                UpdateEnemyProgressBar();
-                                await EnemyPokemonFaints();
-                            }
+                }
+                else if (enemyPokemons[enemyIndex].pokemonConfused)
+                {
+                    lblConfused2.Visible = true;
+                    enemyPokemons[enemyIndex].pokemonParalyzed = false;
+                    lblParalyzed2.Visible = false;
+                    enemyPokemons[enemyIndex].pokemonBurning = false;
+                    lblBurning2.Visible = false;
+                    enemyPokemons[enemyIndex].pokemonSleeping = false;
+                    lblSleeping2.Visible = false;
 
+                    enemyConfuseIndex++;
+                    if (enemyConfuseIndex >= 6)
+                    {
+                        enemyConfuseIndex = 0;
+                        enemyPokemons[enemyIndex].pokemonConfused = false;
+                        await Task.Delay(2000);
+                        lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} is no longer confused!";
+                        lblConfused2.Visible = false;
+                        await Task.Delay(3000);
+                    }
+                }
+                else if (enemyPokemons[enemyIndex].pokemonSleeping)
+                {
+                    lblSleeping2.Visible = true;
+                    enemyPokemons[enemyIndex].pokemonParalyzed = false;
+                    lblParalyzed2.Visible = false;
+                    enemyPokemons[enemyIndex].pokemonBurning = false;
+                    lblBurning2.Visible = false;
+                    enemyPokemons[enemyIndex].pokemonConfused = false;
+                    lblConfused2.Visible = false;
+
+                    enemySleepIndex++;
+                    if (enemySleepIndex >= 8)
+                    {
+                        enemySleepIndex = 0;
+                        enemyPokemons[enemyIndex].pokemonSleeping = false;
+                        await Task.Delay(2000);
+                        lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} woke up!";
+                        lblSleeping2.Visible = false;
+                        await Task.Delay(3000);
+                    }
+                }
+                else if (enemyPokemons[enemyIndex].pokemonBurning)
+                {
+                    lblBurning2.Visible = true;
+                    enemyPokemons[enemyIndex].pokemonParalyzed = false;
+                    lblParalyzed2.Visible = false;
+                    enemyPokemons[enemyIndex].pokemonSleeping = false;
+                    lblSleeping2.Visible = false;
+                    enemyPokemons[enemyIndex].pokemonConfused = false;
+                    lblConfused2.Visible = false;
+                }
+
+
+                if (enemyPokemons[enemyIndex].pokemonName == "Gyarados")
+                {
+                    if (!enemyTurnInProgress)
+                    {
+                        enemyTurnInProgress = true;
+
+                        if (enemyPokemons[enemyIndex].pokemonFlinch)
+                        {
+                            lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} is unable to attack!";
+                            enemyPokemons[enemyIndex].pokemonFlinch = false;
                         }
                         else
                         {
-                            switch (enemyMove)
+                            confuseChance = confuse.Next(0, 3); //3
+                            paralysisChance = paralysis.Next(0, 4);
+                            if (enemyPokemons[enemyIndex].pokemonParalyzed && paralysisChance == 1)
                             {
+                                lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} is fully paralyzed and unable to move!";
+                            }
+                            else if (enemyPokemons[enemyIndex].pokemonSleeping)
+                            {
+                                lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} is fast asleep!";
+                                await EnemyHealing();
+                            }
+                            else if (enemyPokemons[enemyIndex].pokemonConfused)
+                            {
+                                if (confuseChance == 0)
+                                {
+                                    lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} is confused, and hurt itself in confusion!";
+                                    randomChance = Random.Next(10, 21);
+                                    enemyPokemons[enemyIndex].pokemonHealth = Math.Max(enemyPokemons[enemyIndex].pokemonHealth - randomChance, 0);
+                                    UpdateEnemyProgressBar();
+                                    await EnemyPokemonFaints();
+                                }
 
-                                case 0: //Dragon Rage
-                                    enemyUsedMove1 = true;
-                                    await EnemyHealing();
-                                    if (healing == 0)
-                                    {
+                            }
+                            else
+                            {
+                                switch (enemyMove)
+                                {
 
-                                    }
-                                    else
-                                    {
-                                        selectedPokemons[0].pokemonHealth = Math.Max(selectedPokemons[0].pokemonHealth - enemyPokemons[enemyIndex].move1Damage, 0);
-                                        lblPlayerPokemonHealth.Text = $"{selectedPokemons[0].pokemonHealth}/{selectedPokemons[0].pokemonStartHealth}";
-                                        lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move1}!";
-                                        UpdateProgressBar();
-                                        await MoveEffectivenes();
-                                        await PlayerPokemonFaints();
-                                    }
-                                    break;
-
-                                case 1: //Bite
-                                    enemyUsedMove2 = true;
-                                    await EnemyHealing();
-                                    if (healing == 0)
-                                    {
-
-                                    }
-                                    else
-                                    {
-                                        lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move2}!";
-                                        EnemyPhysicalDamageCalculation();
-                                        await MoveEffectivenes();
-
-                                        flinchChance = flinch.Next(0, 3);
-                                        if (flinchChance == 0)
+                                    case 0: //Dragon Rage
+                                        enemyUsedMove1 = true;
+                                        await EnemyHealing();
+                                        if (healing == 0)
                                         {
-                                            selectedPokemons[0].pokemonFlinch = true;
+
+                                        }
+                                        else
+                                        {
+                                            selectedPokemons[0].pokemonHealth = Math.Max(selectedPokemons[0].pokemonHealth - enemyPokemons[enemyIndex].move1Damage, 0);
+                                            lblPlayerPokemonHealth.Text = $"{selectedPokemons[0].pokemonHealth}/{selectedPokemons[0].pokemonStartHealth}";
+                                            lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move1}!";
                                             UpdateProgressBar();
-                                        }
-                                        await PlayerPokemonFaints();
-                                    }
-                                    break;
-
-                                case 2: //Bubblebeam
-                                    enemyUsedMove3 = true;
-                                    await EnemyHealing();
-                                    if (healing == 0)
-                                    {
-
-                                    }
-                                    else
-                                    {
-                                        lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move3}!";
-                                        EnemySpecialDamageCalculation();
-                                        await MoveEffectivenes();
-                                        await PlayerPokemonFaints();
-                                    }
-                                    break;
-
-                                case 3: //Hydro Pump
-                                    enemyUsedMove4 = true;
-                                    await EnemyHealing();
-                                    if (healing == 0)
-                                    {
-
-                                    }
-                                    else
-                                    {
-                                        lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move4}!";
-                                        EnemySpecialDamageCalculation();
-                                        await MoveEffectivenes();
-                                        await PlayerPokemonFaints();
-                                    }
-                                    break;
-                            }
-                        }
-                    }
-                    await EnemyPokemonStatusCondition();
-                    enemyHasAttacked = true;
-                    await Task.Delay(turnDelaySec * 1000);
-                    enemyTurnInProgress = false;
-                    await PlayersTurn();
-                }
-
-            }
-            if (enemyPokemons[enemyIndex].pokemonName == "Charizard")
-            {
-                if (!enemyTurnInProgress)
-                {
-                    enemyTurnInProgress = true;
-
-                    if (enemyPokemons[enemyIndex].pokemonFlinch)
-                    {
-                        lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} is unable to attack!";
-                        enemyPokemons[enemyIndex].pokemonFlinch = false;
-                    }
-                    else
-                    {
-                        paralysisChance = paralysis.Next(0, 2); //2
-                        confuseChance = confuse.Next(0, 3); //3
-                        if (enemyPokemons[enemyIndex].pokemonConfused)
-                        {
-                            if (confuseChance == 0)
-                            {
-                                lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} is confused, and hurt itself in confusion!";
-                                randomChance = Random.Next(10, 21);
-                                enemyPokemons[enemyIndex].pokemonHealth = Math.Max(enemyPokemons[enemyIndex].pokemonHealth - randomChance, 0);
-                                UpdateEnemyProgressBar();
-                                await EnemyPokemonFaints();
-                            }
-
-                        }
-                        else if (enemyPokemons[enemyIndex].pokemonParalyzed && paralysisChance == 0)
-                        {
-                            lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} is fully paralyzed and unable to move!";
-                        }
-                        else if (enemyPokemons[enemyIndex].pokemonSleeping)
-                        {
-                            lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} is fast asleep!";
-                            await EnemyHealing();
-                        }
-                        else
-                        {
-                            switch (enemyMove)
-                            {
-                                case 0: //Dragon Claw
-                                    enemyUsedMove1 = true;
-                                    await EnemyHealing();
-                                    if (healing == 0)
-                                    {
-
-                                    }
-                                    else
-                                    {
-                                        lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move1}!";
-                                        EnemyPhysicalDamageCalculation();
-                                        await MoveEffectivenes();
-                                        await PlayerPokemonFaints();
-                                    }
-                                    break;
-
-                                case 1: //Ember
-                                    enemyUsedMove2 = true;
-                                    await EnemyHealing();
-                                    if (healing == 0)
-                                    {
-
-                                    }
-                                    else
-                                    {
-                                        lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move2}!";
-                                        EnemySpecialDamageCalculation();
-                                        await MoveEffectivenes();
-
-                                        burningChance = burn.Next(0, 10);
-                                        if (burningChance == 0)
-                                        {
-                                            selectedPokemons[0].pokemonBurning = true;
-                                            lblBurning.Visible = true;
-                                        }
-                                        await PlayerPokemonFaints();
-                                    }
-
-                                    break;
-
-                                case 2: //Dragon Breath
-                                    enemyUsedMove3 = true;
-                                    await EnemyHealing();
-                                    if (healing == 0)
-                                    {
-
-                                    }
-                                    else
-                                    {
-                                        lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move3}!";
-                                        EnemySpecialDamageCalculation();
-                                        await MoveEffectivenes();
-
-                                        paralysisChance = paralysis.Next(0, 3);
-                                        if (paralysisChance == 0)
-                                        {
-                                            selectedPokemons[0].pokemonParalyzed = true;
-                                            lblParalyzed.Visible = true;
-                                            await PokemonParalyzedEnemy();
-                                        }
-                                        await PlayerPokemonFaints();
-                                    }
-                                    break;
-
-                                case 3: //Growl
-                                    enemyUsedMove4 = true;
-                                    await EnemyHealing();
-                                    if (healing == 0)
-                                    {
-
-                                    }
-                                    else
-                                    {
-                                        lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move4}!";
-                                        if (enemyAttackFellIndex >= 3)
-                                        {
-                                            await Task.Delay(2000);
-                                            lblText.Text = $"{enemyPokemons[enemyIndex].move4} failed!";
-                                        }
-                                        else
-                                        {
-                                            selectedPokemons[0].move1Damage = selectedPokemons[0].move1Damage - 20;
-                                            selectedPokemons[0].move2Damage = selectedPokemons[0].move2Damage - 20;
-                                            selectedPokemons[0].move3Damage = selectedPokemons[0].move3Damage - 20;
-                                            selectedPokemons[0].move4Damage = selectedPokemons[0].move4Damage - 20;
-                                            enemyAttackFellIndex++;
-                                            attackFell = true;
-                                            PlayerAttackFell();
-                                        }
-                                        await PlayerPokemonFaints();
-                                    }
-                                    break;
-                            }
-                        }
-                    }
-                    await EnemyPokemonStatusCondition();
-                    enemyHasAttacked = true;
-                    await Task.Delay(turnDelaySec * 1000);
-                    enemyTurnInProgress = false;
-                    await PlayersTurn();
-                }
-
-            }
-            if (enemyPokemons[enemyIndex].pokemonName == "Zapdos")
-            {
-                if (!enemyTurnInProgress)
-                {
-                    enemyTurnInProgress = true;
-
-                    if (enemyPokemons[enemyIndex].pokemonFlinch)
-                    {
-                        lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} is unable to attack!";
-                        enemyPokemons[enemyIndex].pokemonFlinch = false;
-                    }
-                    else
-                    {
-
-                        paralysisChance = paralysis.Next(0, 2); //2
-                        confuseChance = confuse.Next(0, 3); //3
-                        if (enemyPokemons[enemyIndex].pokemonConfused)
-                        {
-                            if (confuseChance == 0)
-                            {
-                                lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} is confused, and hurt itself in confusion!";
-                                randomChance = Random.Next(10, 21);
-                                enemyPokemons[enemyIndex].pokemonHealth = Math.Max(enemyPokemons[enemyIndex].pokemonHealth - randomChance, 0);
-                                UpdateEnemyProgressBar();
-                                await EnemyPokemonFaints();
-                            }
-
-                        }
-                        else if (enemyPokemons[enemyIndex].pokemonParalyzed && paralysisChance == 0)
-                        {
-                            lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} is fully paralyzed and unable to move!";
-                        }
-                        else if (enemyPokemons[enemyIndex].pokemonSleeping)
-                        {
-                            lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} is fast asleep!";
-                            await EnemyHealing();
-                        }
-                        else
-                        {
-                            switch (enemyMove)
-                            {
-                                case 0: //Drill Peck
-                                    enemyUsedMove1 = true;
-                                    await EnemyHealing();
-                                    if (healing == 0)
-                                    {
-
-                                    }
-                                    else
-                                    {
-                                        lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move1}!";
-                                        EnemySpecialDamageCalculation();
-                                        await MoveEffectivenes();
-                                        await PlayerPokemonFaints();
-                                    }
-
-                                    break;
-
-                                case 1: // Thunder Shock
-                                    enemyUsedMove2 = true;
-                                    await EnemyHealing();
-                                    if (healing == 0)
-                                    {
-
-                                    }
-                                    else
-                                    {
-                                        lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move2}!";
-                                        EnemySpecialDamageCalculation();
-                                        await MoveEffectivenes();
-                                        paralysisChance = paralysis.Next(0, 10);
-                                        if (paralysisChance == 2)
-                                        {
-                                            selectedPokemons[0].pokemonParalyzed = true;
-                                            lblParalyzed.Visible = true;
-                                            await PokemonParalyzedEnemy();
-                                        }
-                                        await PlayerPokemonFaints();
-                                    }
-                                    break;
-
-                                case 2: //Thunder Wave
-                                    enemyUsedMove3 = true;
-                                    await EnemyHealing();
-                                    if (healing == 0)
-                                    {
-
-                                    }
-                                    else
-                                    {
-                                        lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move3}!";
-                                        selectedPokemons[0].pokemonParalyzed = true;
-                                        lblParalyzed.Visible = true;
-                                        await PokemonParalyzedEnemy();
-                                        await PlayerPokemonFaints();
-
-                                    }
-
-                                    break;
-
-                                case 3: //Charge
-                                    enemyUsedMove4 = true;
-                                    await EnemyHealing();
-                                    if (healing == 0)
-                                    {
-
-                                    }
-                                    else
-                                    {
-                                        lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move4}!";
-                                        if (enemyDefenceUpIndex >= 3)
-                                        {
-                                            await Task.Delay(3000);
-                                            lblText.Text = $"{enemyPokemons[enemyIndex].move4} failed!";
-                                        }
-                                        else
-                                        {
-                                            await Task.Delay(3000);
-                                            lblText.Text = $"It rose it's Special Defence!";
-                                            enemyPokemons[enemyIndex].specialDefence += 10;
-                                            enemyDefenceUpIndex++;
-                                        }
-                                        await PlayerPokemonFaints();
-                                    }
-                                    break;
-                            }
-                        }
-
-                    }
-                    await EnemyPokemonStatusCondition();
-                    enemyHasAttacked = true;
-                    await Task.Delay(turnDelaySec * 1000);
-                    enemyTurnInProgress = false;
-                    await PlayersTurn();
-                }
-
-            }
-            if (enemyPokemons[enemyIndex].pokemonName == "Snorlax")
-            {
-                if (!enemyTurnInProgress)
-                {
-                    enemyTurnInProgress = true;
-
-                    if (enemyPokemons[enemyIndex].pokemonFlinch)
-                    {
-                        lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} is unable to attack!";
-                        enemyPokemons[enemyIndex].pokemonFlinch = false;
-                    }
-                    else
-                    {
-                        paralysisChance = paralysis.Next(0, 2); //2
-                        confuseChance = confuse.Next(0, 3); //3
-                        if (enemyPokemons[enemyIndex].pokemonConfused)
-                        {
-                            if (confuseChance == 0)
-                            {
-                                lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} is confused, and hurt itself in confusion!";
-                                randomChance = Random.Next(10, 21);
-                                enemyPokemons[enemyIndex].pokemonHealth = Math.Max(enemyPokemons[enemyIndex].pokemonHealth - randomChance, 0);
-                                UpdateEnemyProgressBar();
-                                await EnemyPokemonFaints();
-                            }
-
-                        }
-                        else if (enemyPokemons[enemyIndex].pokemonParalyzed && paralysisChance == 0)
-                        {
-                            lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} is fully paralyzed and unable to move!";
-                        }
-                        else if (enemyPokemons[enemyIndex].pokemonSleeping)
-                        {
-                            lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} is fast asleep!";
-                            await EnemyHealing();
-                        }
-                        else
-                        {
-                            switch (enemyMove)
-                            {
-                                case 0: //Body Slam
-                                    enemyUsedMove1 = true;
-                                    await EnemyHealing();
-                                    if (healing == 0)
-                                    {
-
-                                    }
-                                    else
-                                    {
-                                        lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move1}!";
-                                        EnemyPhysicalDamageCalculation();
-                                        await MoveEffectivenes();
-
-                                        paralysisChance = paralysis.Next(0, 3);
-                                        if (paralysisChance == 0)
-                                        {
-                                            selectedPokemons[0].pokemonParalyzed = true;
-                                            lblParalyzed.Visible = true;
-                                            await PokemonParalyzedEnemy();
-                                        }
-                                        await PlayerPokemonFaints();
-                                    }
-                                    break;
-
-                                case 1: //Belly Drum
-                                    enemyUsedMove2 = true;
-                                    await EnemyHealing();
-                                    if (healing == 0)
-                                    {
-
-                                    }
-                                    else
-                                    {
-                                        lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move2}!";
-                                        if (enemyPokemons[enemyIndex].pokemonHealth < enemyPokemons[enemyIndex].pokemonStartHealth / 2)
-                                        {
-                                            await Task.Delay(3000);
-                                            lblText.Text = $"Belly Drum failed!";
-                                        }
-                                        else
-                                        {
-                                            enemyPokemons[enemyIndex].attack += 30;
-                                            enemyPokemons[enemyIndex].pokemonHealth = Math.Max(enemyPokemons[enemyIndex].pokemonHealth / 2, 0);
-                                            enemyPokemonHealthBar.Value = Math.Min(enemyPokemons[enemyIndex].pokemonHealth / 2, enemyPokemonHealthBar.Maximum);
-                                        }
-                                        UpdateEnemyProgressBar();
-                                        UpdateProgressBar();
-                                        await EnemyPokemonFaints();
-                                        await PlayerPokemonFaints();
-                                    }
-                                    break;
-
-                                case 2: // Double-Edge
-                                    enemyUsedMove3 = true;
-                                    await EnemyHealing();
-                                    if (healing == 0)
-                                    {
-
-                                    }
-                                    else
-                                    {
-                                        lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move3}!";
-                                        EnemyPhysicalDamageCalculation();
-                                        await MoveEffectivenes();
-                                        enemyPokemons[enemyIndex].pokemonHealth = Math.Max(enemyPokemons[enemyIndex].pokemonHealth - calculatedDamage / 4, 0);
-                                        lblEnemyPokemonHealth.Text = $"{enemyPokemons[enemyIndex].pokemonHealth}/{enemyPokemons[enemyIndex].pokemonStartHealth}";
-                                        UpdateEnemyProgressBar();
-                                        UpdateProgressBar();
-                                        await EnemyPokemonFaints();
-                                        await PlayerPokemonFaints();
-                                    }
-                                    break;
-
-                                case 3: // Surf
-                                    enemyUsedMove4 = true;
-                                    await EnemyHealing();
-                                    if (healing == 0)
-                                    {
-
-                                    }
-                                    else
-                                    {
-                                        lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move4}!";
-                                        EnemySpecialDamageCalculation();
-                                        await MoveEffectivenes();
-                                        await PlayerPokemonFaints();
-                                    }
-                                    break;
-                            }
-                        }
-
-
-                    }
-                    await EnemyPokemonStatusCondition();
-                    enemyHasAttacked = true;
-                    await Task.Delay(turnDelaySec * 1000);
-                    enemyTurnInProgress = false;
-                    await PlayersTurn();
-                }
-
-            }
-            if (enemyPokemons[enemyIndex].pokemonName == "Gengar")
-            {
-                if (!enemyTurnInProgress)
-                {
-                    enemyTurnInProgress = true;
-
-                    if (enemyPokemons[enemyIndex].pokemonFlinch)
-                    {
-                        lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} is unable to attack!";
-                        enemyPokemons[enemyIndex].pokemonFlinch = false;
-                    }
-                    else
-                    {
-                        paralysisChance = paralysis.Next(0, 2); //2
-                        confuseChance = confuse.Next(0, 3); //3
-                        if (enemyPokemons[enemyIndex].pokemonConfused)
-                        {
-                            if (confuseChance == 0)
-                            {
-                                lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} is confused, and hurt itself in confusion!";
-                                randomChance = Random.Next(10, 21);
-                                enemyPokemons[enemyIndex].pokemonHealth = Math.Max(enemyPokemons[enemyIndex].pokemonHealth - randomChance, 0);
-                                UpdateEnemyProgressBar();
-                                await EnemyPokemonFaints();
-                            }
-
-                        }
-                        else if (enemyPokemons[enemyIndex].pokemonParalyzed && paralysisChance == 0)
-                        {
-                            lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} is fully paralyzed and unable to move!";
-                        }
-                        else if (enemyPokemons[enemyIndex].pokemonSleeping)
-                        {
-                            lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} is fast asleep!";
-                            await EnemyHealing();
-                        }
-                        else
-                        {
-                            switch (enemyMove)
-                            {
-                                case 0: // Confuse Ray
-                                    enemyUsedMove1 = true;
-                                    await EnemyHealing();
-                                    if (healing == 0)
-                                    {
-
-                                    }
-                                    else
-                                    {
-                                        lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move1}!";
-                                        selectedPokemons[0].pokemonConfused = true;
-                                        lblConfused.Visible = true;
-                                        selectedPokemons[0].pokemonParalyzed = false;
-                                        selectedPokemons[0].pokemonSleeping = false;
-                                        selectedPokemons[0].pokemonBurning = false;
-                                        lblParalyzed.Visible = false;
-                                        lblSleeping.Visible = false;
-                                        lblBurning.Visible = false;
-                                    }
-                                    break;
-
-                                case 1: // Lick
-                                    enemyUsedMove2 = true;
-                                    await EnemyHealing();
-                                    if (healing == 0)
-                                    {
-
-                                    }
-                                    else
-                                    {
-                                        lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move2}!";
-                                        EnemyPhysicalDamageCalculation();
-                                        await MoveEffectivenes();
-                                        paralysisChance = paralysis.Next(0, 3);
-                                        if (paralysisChance == 0)
-                                        {
-                                            selectedPokemons[0].pokemonParalyzed = true;
-                                            lblParalyzed.Visible = true;
-                                            await PokemonParalyzedEnemy();
-                                        }
-                                        await PlayerPokemonFaints();
-                                    }
-                                    break;
-
-                                case 2: // Hypnosis
-                                    enemyUsedMove3 = true;
-                                    await EnemyHealing();
-                                    if (healing == 0)
-                                    {
-
-                                    }
-                                    else
-                                    {
-                                        sleepingChance = sleep.Next(0, 3); // 3
-                                        if (sleepingChance == 0)
-                                        {
-                                            lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move3}!";
-                                            selectedPokemons[0].pokemonSleeping = true;
-                                            await PokemonSleeping();
+                                            await MoveEffectivenes();
                                             await PlayerPokemonFaints();
                                         }
+                                        break;
+
+                                    case 1: //Bite
+                                        enemyUsedMove2 = true;
+                                        await EnemyHealing();
+                                        if (healing == 0)
+                                        {
+
+                                        }
                                         else
                                         {
-                                            lblText.Text = $"Hypnosis missed!";
-                                            await PlayerPokemonFaints();
-                                        }
-                                    }
-                                    break;
-
-                                case 3: // Hex
-                                    enemyUsedMove4 = true;
-                                    await EnemyHealing();
-                                    if (healing == 0)
-                                    {
-
-                                    }
-                                    else
-                                    {
-                                        if (selectedPokemons[0].pokemonParalyzed || selectedPokemons[0].pokemonBurning || selectedPokemons[0].pokemonSleeping || selectedPokemons[0].pokemonConfused)
-                                        {
-                                            lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move4}, it does double damage!";
-                                            usedHex = true;
-                                            EnemySpecialDamageCalculation();
+                                            lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move2}!";
+                                            EnemyPhysicalDamageCalculation();
                                             await MoveEffectivenes();
 
+                                            flinchChance = flinch.Next(0, 3);
+                                            if (flinchChance == 0)
+                                            {
+                                                selectedPokemons[0].pokemonFlinch = true;
+                                                UpdateProgressBar();
+                                            }
                                             await PlayerPokemonFaints();
+                                        }
+                                        break;
+
+                                    case 2: //Bubblebeam
+                                        enemyUsedMove3 = true;
+                                        await EnemyHealing();
+                                        if (healing == 0)
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move3}!";
+                                            EnemySpecialDamageCalculation();
+                                            await MoveEffectivenes();
+                                            await PlayerPokemonFaints();
+                                        }
+                                        break;
+
+                                    case 3: //Hydro Pump
+                                        enemyUsedMove4 = true;
+                                        await EnemyHealing();
+                                        if (healing == 0)
+                                        {
+
                                         }
                                         else
                                         {
                                             lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move4}!";
                                             EnemySpecialDamageCalculation();
                                             await MoveEffectivenes();
-
                                             await PlayerPokemonFaints();
                                         }
-                                    }
-                                    break;
+                                        break;
+                                }
                             }
                         }
-
+                        await EnemyPokemonStatusCondition();
+                        enemyHasAttacked = true;
+                        enemyTurn = false;
+                        await Task.Delay(turnDelaySec * 1000);
+                        enemyTurnInProgress = false;
+                        await PlayersTurn();
+                        
                     }
-                    await EnemyPokemonStatusCondition();
-                    enemyHasAttacked = true;
-                    await Task.Delay(turnDelaySec * 1000);
-                    enemyTurnInProgress = false;
-                    await PlayersTurn();
+
                 }
-
-            }
-            if (enemyPokemons[enemyIndex].pokemonName == "Machamp")
-            {
-                if (!enemyTurnInProgress)
+                if (enemyPokemons[enemyIndex].pokemonName == "Charizard")
                 {
-                    enemyTurnInProgress = true;
-
-                    if (enemyPokemons[enemyIndex].pokemonFlinch)
+                    if (!enemyTurnInProgress)
                     {
-                        lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} is unable to attack!";
-                        enemyPokemons[enemyIndex].pokemonFlinch = false;
-                    }
-                    else
-                    {
-                        paralysisChance = paralysis.Next(0, 2); //2
-                        confuseChance = confuse.Next(0, 3); //3
-                        if (enemyPokemons[enemyIndex].pokemonConfused)
-                        {
-                            if (confuseChance == 0)
-                            {
-                                lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} is confused, and hurt itself in confusion!";
-                                randomChance = Random.Next(10, 21);
-                                enemyPokemons[enemyIndex].pokemonHealth = Math.Max(enemyPokemons[enemyIndex].pokemonHealth - randomChance, 0);
-                                UpdateEnemyProgressBar();
-                                await EnemyPokemonFaints();
-                            }
+                        enemyTurnInProgress = true;
 
-                        }
-                        else if (enemyPokemons[enemyIndex].pokemonParalyzed && paralysisChance == 0)
+                        if (enemyPokemons[enemyIndex].pokemonFlinch)
                         {
-                            lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} is fully paralyzed and unable to move!";
-                        }
-                        else if (enemyPokemons[enemyIndex].pokemonSleeping)
-                        {
-                            lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} is fast asleep!";
-                            await EnemyHealing();
+                            lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} is unable to attack!";
+                            enemyPokemons[enemyIndex].pokemonFlinch = false;
                         }
                         else
                         {
-                            switch (enemyMove)
+                            paralysisChance = paralysis.Next(0, 2); //2
+                            confuseChance = confuse.Next(0, 3); //3
+                            if (enemyPokemons[enemyIndex].pokemonConfused)
                             {
-                                case 0: // Karate Chop
-                                    enemyUsedMove1 = true;
-                                    await EnemyHealing();
-                                    if (healing == 0)
-                                    {
+                                if (confuseChance == 0)
+                                {
+                                    lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} is confused, and hurt itself in confusion!";
+                                    randomChance = Random.Next(10, 21);
+                                    enemyPokemons[enemyIndex].pokemonHealth = Math.Max(enemyPokemons[enemyIndex].pokemonHealth - randomChance, 0);
+                                    UpdateEnemyProgressBar();
+                                    await EnemyPokemonFaints();
+                                }
 
-                                    }
-                                    else
-                                    {
-                                        increasedCriticalChance = increasedCritical.Next(0, 9);
-                                        if (increasedCriticalChance == 0)
+                            }
+                            else if (enemyPokemons[enemyIndex].pokemonParalyzed && paralysisChance == 0)
+                            {
+                                lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} is fully paralyzed and unable to move!";
+                            }
+                            else if (enemyPokemons[enemyIndex].pokemonSleeping)
+                            {
+                                lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} is fast asleep!";
+                                await EnemyHealing();
+                            }
+                            else
+                            {
+                                switch (enemyMove)
+                                {
+                                    case 0: //Dragon Claw
+                                        enemyUsedMove1 = true;
+                                        await EnemyHealing();
+                                        if (healing == 0)
                                         {
-                                            lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move1}!";
-                                            enemyPokemons[enemyIndex].pokemonCriticalHit = true;
-                                            EnemyPhysicalDamageCalculation();
-                                            await MoveEffectivenes();
-                                            await PlayerPokemonFaints();
-                                            CriticalHitEnemy();
+
                                         }
                                         else
                                         {
                                             lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move1}!";
                                             EnemyPhysicalDamageCalculation();
                                             await MoveEffectivenes();
-
                                             await PlayerPokemonFaints();
                                         }
-                                    }
-                                    break;
+                                        break;
 
-                                case 1: // Leer
-                                    await EnemyHealing();
-                                    if (healing == 0)
-                                    {
-
-                                    }
-                                    else
-                                    {
-                                        lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move2}!";
-                                        if (enemyLeerIndex <= 3)
+                                    case 1: //Ember
+                                        enemyUsedMove2 = true;
+                                        await EnemyHealing();
+                                        if (healing == 0)
                                         {
-                                            selectedPokemons[0].defense = Math.Max(selectedPokemons[0].defense - selectedPokemons[0].defense - 10, 0);
-                                            await PlayerPokemonFaints();
-                                            enemyLeerIndex++;
+
                                         }
                                         else
                                         {
-                                            await Task.Delay(3000);
-                                            lblText.Text = $"It failed!";
+                                            lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move2}!";
+                                            EnemySpecialDamageCalculation();
+                                            await MoveEffectivenes();
+
+                                            burningChance = burn.Next(0, 10);
+                                            if (burningChance == 0)
+                                            {
+                                                selectedPokemons[0].pokemonBurning = true;
+                                                lblBurning.Visible = true;
+                                            }
+                                            await PlayerPokemonFaints();
+                                        }
+
+                                        break;
+
+                                    case 2: //Dragon Breath
+                                        enemyUsedMove3 = true;
+                                        await EnemyHealing();
+                                        if (healing == 0)
+                                        {
 
                                         }
-                                    }
-                                    break;
+                                        else
+                                        {
+                                            lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move3}!";
+                                            EnemySpecialDamageCalculation();
+                                            await MoveEffectivenes();
 
-                                case 2: // Focus Energy
-                                    await EnemyHealing();
-                                    if (healing == 0)
-                                    {
+                                            paralysisChance = paralysis.Next(0, 3);
+                                            if (paralysisChance == 0)
+                                            {
+                                                selectedPokemons[0].pokemonParalyzed = true;
+                                                lblParalyzed.Visible = true;
+                                                await PokemonParalyzedEnemy();
+                                            }
+                                            await PlayerPokemonFaints();
+                                        }
+                                        break;
 
-                                    }
-                                    else
-                                    {
-                                        lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move3}!";
-                                        criticalIncreased = true;
-                                        await PlayerPokemonFaints();
-                                    }
+                                    case 3: //Growl
+                                        enemyUsedMove4 = true;
+                                        await EnemyHealing();
+                                        if (healing == 0)
+                                        {
 
-                                    break;
-
-                                case 3: // Submission
-                                    await EnemyHealing();
-                                    enemyUsedMove4 = true;
-                                    if (healing == 0)
-                                    {
-
-                                    }
-                                    else
-                                    {
-                                        lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move4}!";
-                                        EnemyPhysicalDamageCalculation();
-                                        await MoveEffectivenes();
-                                        enemyPokemonHealthBar.Value = Math.Max(enemyPokemonHealthBar.Value - calculatedDamage / 4, 0);
-                                        lblEnemyPokemonHealth.Text = $"{enemyPokemons[enemyIndex].pokemonHealth}/{enemyPokemons[enemyIndex].pokemonStartHealth}";
-                                        UpdateEnemyProgressBar();
-                                        await EnemyPokemonFaints();
-                                        await PlayerPokemonFaints();
-                                    }
-                                    break;
+                                        }
+                                        else
+                                        {
+                                            lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move4}!";
+                                            if (enemyAttackFellIndex >= 3)
+                                            {
+                                                await Task.Delay(2000);
+                                                lblText.Text = $"{enemyPokemons[enemyIndex].move4} failed!";
+                                            }
+                                            else
+                                            {
+                                                selectedPokemons[0].move1Damage = selectedPokemons[0].move1Damage - 20;
+                                                selectedPokemons[0].move2Damage = selectedPokemons[0].move2Damage - 20;
+                                                selectedPokemons[0].move3Damage = selectedPokemons[0].move3Damage - 20;
+                                                selectedPokemons[0].move4Damage = selectedPokemons[0].move4Damage - 20;
+                                                enemyAttackFellIndex++;
+                                                attackFell = true;
+                                                PlayerAttackFell();
+                                            }
+                                            await PlayerPokemonFaints();
+                                        }
+                                        break;
+                                }
                             }
                         }
-
+                        await EnemyPokemonStatusCondition();
+                        enemyHasAttacked = true;
+                        enemyTurn = false;
+                        await Task.Delay(turnDelaySec * 1000);
+                        enemyTurnInProgress = false;
+                        await PlayersTurn();
                     }
-                    await EnemyPokemonStatusCondition();
-                    enemyHasAttacked = true;
-                    await Task.Delay(turnDelaySec * 1000);
-                    enemyTurnInProgress = false;
-                    await PlayersTurn();
-                }
 
+                }
+                if (enemyPokemons[enemyIndex].pokemonName == "Zapdos")
+                {
+                    if (!enemyTurnInProgress)
+                    {
+                        enemyTurnInProgress = true;
+
+                        if (enemyPokemons[enemyIndex].pokemonFlinch)
+                        {
+                            lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} is unable to attack!";
+                            enemyPokemons[enemyIndex].pokemonFlinch = false;
+                        }
+                        else
+                        {
+
+                            paralysisChance = paralysis.Next(0, 2); //2
+                            confuseChance = confuse.Next(0, 3); //3
+                            if (enemyPokemons[enemyIndex].pokemonConfused)
+                            {
+                                if (confuseChance == 0)
+                                {
+                                    lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} is confused, and hurt itself in confusion!";
+                                    randomChance = Random.Next(10, 21);
+                                    enemyPokemons[enemyIndex].pokemonHealth = Math.Max(enemyPokemons[enemyIndex].pokemonHealth - randomChance, 0);
+                                    UpdateEnemyProgressBar();
+                                    await EnemyPokemonFaints();
+                                }
+
+                            }
+                            else if (enemyPokemons[enemyIndex].pokemonParalyzed && paralysisChance == 0)
+                            {
+                                lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} is fully paralyzed and unable to move!";
+                            }
+                            else if (enemyPokemons[enemyIndex].pokemonSleeping)
+                            {
+                                lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} is fast asleep!";
+                                await EnemyHealing();
+                            }
+                            else
+                            {
+                                switch (enemyMove)
+                                {
+                                    case 0: //Drill Peck
+                                        enemyUsedMove1 = true;
+                                        await EnemyHealing();
+                                        if (healing == 0)
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move1}!";
+                                            EnemySpecialDamageCalculation();
+                                            await MoveEffectivenes();
+                                            await PlayerPokemonFaints();
+                                        }
+
+                                        break;
+
+                                    case 1: // Thunder Shock
+                                        enemyUsedMove2 = true;
+                                        await EnemyHealing();
+                                        if (healing == 0)
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move2}!";
+                                            EnemySpecialDamageCalculation();
+                                            await MoveEffectivenes();
+                                            paralysisChance = paralysis.Next(0, 10);
+                                            if (paralysisChance == 2)
+                                            {
+                                                selectedPokemons[0].pokemonParalyzed = true;
+                                                lblParalyzed.Visible = true;
+                                                await PokemonParalyzedEnemy();
+                                            }
+                                            await PlayerPokemonFaints();
+                                        }
+                                        break;
+
+                                    case 2: //Thunder Wave
+                                        enemyUsedMove3 = true;
+                                        await EnemyHealing();
+                                        if (healing == 0)
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move3}!";
+                                            selectedPokemons[0].pokemonParalyzed = true;
+                                            lblParalyzed.Visible = true;
+                                            await PokemonParalyzedEnemy();
+                                            await PlayerPokemonFaints();
+
+                                        }
+
+                                        break;
+
+                                    case 3: //Charge
+                                        enemyUsedMove4 = true;
+                                        await EnemyHealing();
+                                        if (healing == 0)
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move4}!";
+                                            if (enemyDefenceUpIndex >= 3)
+                                            {
+                                                await Task.Delay(3000);
+                                                lblText.Text = $"{enemyPokemons[enemyIndex].move4} failed!";
+                                            }
+                                            else
+                                            {
+                                                await Task.Delay(3000);
+                                                lblText.Text = $"It rose it's Special Defence!";
+                                                enemyPokemons[enemyIndex].specialDefence += 10;
+                                                enemyDefenceUpIndex++;
+                                            }
+                                            await PlayerPokemonFaints();
+                                        }
+                                        break;
+                                }
+                            }
+
+                        }
+                        await EnemyPokemonStatusCondition();
+                        enemyHasAttacked = true;
+                        enemyTurn = false;
+                        await Task.Delay(turnDelaySec * 1000);
+                        enemyTurnInProgress = false;
+                        await PlayersTurn();
+                    }
+
+                }
+                if (enemyPokemons[enemyIndex].pokemonName == "Snorlax")
+                {
+                    if (!enemyTurnInProgress)
+                    {
+                        enemyTurnInProgress = true;
+
+                        if (enemyPokemons[enemyIndex].pokemonFlinch)
+                        {
+                            lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} is unable to attack!";
+                            enemyPokemons[enemyIndex].pokemonFlinch = false;
+                        }
+                        else
+                        {
+                            paralysisChance = paralysis.Next(0, 2); //2
+                            confuseChance = confuse.Next(0, 3); //3
+                            if (enemyPokemons[enemyIndex].pokemonConfused)
+                            {
+                                if (confuseChance == 0)
+                                {
+                                    lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} is confused, and hurt itself in confusion!";
+                                    randomChance = Random.Next(10, 21);
+                                    enemyPokemons[enemyIndex].pokemonHealth = Math.Max(enemyPokemons[enemyIndex].pokemonHealth - randomChance, 0);
+                                    UpdateEnemyProgressBar();
+                                    await EnemyPokemonFaints();
+                                }
+
+                            }
+                            else if (enemyPokemons[enemyIndex].pokemonParalyzed && paralysisChance == 0)
+                            {
+                                lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} is fully paralyzed and unable to move!";
+                            }
+                            else if (enemyPokemons[enemyIndex].pokemonSleeping)
+                            {
+                                lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} is fast asleep!";
+                                await EnemyHealing();
+                            }
+                            else
+                            {
+                                switch (enemyMove)
+                                {
+                                    case 0: //Body Slam
+                                        enemyUsedMove1 = true;
+                                        await EnemyHealing();
+                                        if (healing == 0)
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move1}!";
+                                            EnemyPhysicalDamageCalculation();
+                                            await MoveEffectivenes();
+
+                                            paralysisChance = paralysis.Next(0, 3);
+                                            if (paralysisChance == 0)
+                                            {
+                                                selectedPokemons[0].pokemonParalyzed = true;
+                                                lblParalyzed.Visible = true;
+                                                await PokemonParalyzedEnemy();
+                                            }
+                                            await PlayerPokemonFaints();
+                                        }
+                                        break;
+
+                                    case 1: //Belly Drum
+                                        enemyUsedMove2 = true;
+                                        await EnemyHealing();
+                                        if (healing == 0)
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move2}!";
+                                            if (enemyPokemons[enemyIndex].pokemonHealth < enemyPokemons[enemyIndex].pokemonStartHealth / 2)
+                                            {
+                                                await Task.Delay(3000);
+                                                lblText.Text = $"Belly Drum failed!";
+                                            }
+                                            else
+                                            {
+                                                enemyPokemons[enemyIndex].attack += 30;
+                                                enemyPokemons[enemyIndex].pokemonHealth = Math.Max(enemyPokemons[enemyIndex].pokemonHealth / 2, 0);
+                                                enemyPokemonHealthBar.Value = Math.Min(enemyPokemons[enemyIndex].pokemonHealth / 2, enemyPokemonHealthBar.Maximum);
+                                            }
+                                            UpdateEnemyProgressBar();
+                                            UpdateProgressBar();
+                                            await EnemyPokemonFaints();
+                                            await PlayerPokemonFaints();
+                                        }
+                                        break;
+
+                                    case 2: // Double-Edge
+                                        enemyUsedMove3 = true;
+                                        await EnemyHealing();
+                                        if (healing == 0)
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move3}!";
+                                            EnemyPhysicalDamageCalculation();
+                                            await MoveEffectivenes();
+                                            enemyPokemons[enemyIndex].pokemonHealth = Math.Max(enemyPokemons[enemyIndex].pokemonHealth - calculatedDamage / 4, 0);
+                                            lblEnemyPokemonHealth.Text = $"{enemyPokemons[enemyIndex].pokemonHealth}/{enemyPokemons[enemyIndex].pokemonStartHealth}";
+                                            UpdateEnemyProgressBar();
+                                            UpdateProgressBar();
+                                            await EnemyPokemonFaints();
+                                            await PlayerPokemonFaints();
+                                        }
+                                        break;
+
+                                    case 3: // Surf
+                                        enemyUsedMove4 = true;
+                                        await EnemyHealing();
+                                        if (healing == 0)
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move4}!";
+                                            EnemySpecialDamageCalculation();
+                                            await MoveEffectivenes();
+                                            await PlayerPokemonFaints();
+                                        }
+                                        break;
+                                }
+                            }
+
+
+                        }
+                        await EnemyPokemonStatusCondition();
+                        enemyHasAttacked = true;
+                        enemyTurn = false;
+                        await Task.Delay(turnDelaySec * 1000);
+                        enemyTurnInProgress = false;
+                        await PlayersTurn();
+                    }
+
+                }
+                if (enemyPokemons[enemyIndex].pokemonName == "Gengar")
+                {
+                    if (!enemyTurnInProgress)
+                    {
+                        enemyTurnInProgress = true;
+
+                        if (enemyPokemons[enemyIndex].pokemonFlinch)
+                        {
+                            lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} is unable to attack!";
+                            enemyPokemons[enemyIndex].pokemonFlinch = false;
+                        }
+                        else
+                        {
+                            paralysisChance = paralysis.Next(0, 2); //2
+                            confuseChance = confuse.Next(0, 3); //3
+                            if (enemyPokemons[enemyIndex].pokemonConfused)
+                            {
+                                if (confuseChance == 0)
+                                {
+                                    lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} is confused, and hurt itself in confusion!";
+                                    randomChance = Random.Next(10, 21);
+                                    enemyPokemons[enemyIndex].pokemonHealth = Math.Max(enemyPokemons[enemyIndex].pokemonHealth - randomChance, 0);
+                                    UpdateEnemyProgressBar();
+                                    await EnemyPokemonFaints();
+                                }
+
+                            }
+                            else if (enemyPokemons[enemyIndex].pokemonParalyzed && paralysisChance == 0)
+                            {
+                                lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} is fully paralyzed and unable to move!";
+                            }
+                            else if (enemyPokemons[enemyIndex].pokemonSleeping)
+                            {
+                                lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} is fast asleep!";
+                                await EnemyHealing();
+                            }
+                            else
+                            {
+                                switch (enemyMove)
+                                {
+                                    case 0: // Confuse Ray
+                                        enemyUsedMove1 = true;
+                                        await EnemyHealing();
+                                        if (healing == 0)
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move1}!";
+                                            selectedPokemons[0].pokemonConfused = true;
+                                            lblConfused.Visible = true;
+                                            selectedPokemons[0].pokemonParalyzed = false;
+                                            selectedPokemons[0].pokemonSleeping = false;
+                                            selectedPokemons[0].pokemonBurning = false;
+                                            lblParalyzed.Visible = false;
+                                            lblSleeping.Visible = false;
+                                            lblBurning.Visible = false;
+                                        }
+                                        break;
+
+                                    case 1: // Lick
+                                        enemyUsedMove2 = true;
+                                        await EnemyHealing();
+                                        if (healing == 0)
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move2}!";
+                                            EnemyPhysicalDamageCalculation();
+                                            await MoveEffectivenes();
+                                            paralysisChance = paralysis.Next(0, 3);
+                                            if (paralysisChance == 0)
+                                            {
+                                                selectedPokemons[0].pokemonParalyzed = true;
+                                                lblParalyzed.Visible = true;
+                                                await PokemonParalyzedEnemy();
+                                            }
+                                            await PlayerPokemonFaints();
+                                        }
+                                        break;
+
+                                    case 2: // Hypnosis
+                                        enemyUsedMove3 = true;
+                                        await EnemyHealing();
+                                        if (healing == 0)
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            sleepingChance = sleep.Next(0, 3); // 3
+                                            if (sleepingChance == 0)
+                                            {
+                                                lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move3}!";
+                                                selectedPokemons[0].pokemonSleeping = true;
+                                                await PokemonSleeping();
+                                                await PlayerPokemonFaints();
+                                            }
+                                            else
+                                            {
+                                                lblText.Text = $"Hypnosis missed!";
+                                                await PlayerPokemonFaints();
+                                            }
+                                        }
+                                        break;
+
+                                    case 3: // Hex
+                                        enemyUsedMove4 = true;
+                                        await EnemyHealing();
+                                        if (healing == 0)
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            if (selectedPokemons[0].pokemonParalyzed || selectedPokemons[0].pokemonBurning || selectedPokemons[0].pokemonSleeping || selectedPokemons[0].pokemonConfused)
+                                            {
+                                                lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move4}, it does double damage!";
+                                                usedHex = true;
+                                                EnemySpecialDamageCalculation();
+                                                await MoveEffectivenes();
+
+                                                await PlayerPokemonFaints();
+                                            }
+                                            else
+                                            {
+                                                lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move4}!";
+                                                EnemySpecialDamageCalculation();
+                                                await MoveEffectivenes();
+
+                                                await PlayerPokemonFaints();
+                                            }
+                                        }
+                                        break;
+                                }
+                            }
+
+                        }
+                        await EnemyPokemonStatusCondition();
+                        enemyHasAttacked = true;
+                        enemyTurn = false;
+                        await Task.Delay(turnDelaySec * 1000);
+                        enemyTurnInProgress = false;
+                        await PlayersTurn();
+                    }
+
+                }
+                if (enemyPokemons[enemyIndex].pokemonName == "Machamp")
+                {
+                    if (!enemyTurnInProgress)
+                    {
+                        enemyTurnInProgress = true;
+
+                        if (enemyPokemons[enemyIndex].pokemonFlinch)
+                        {
+                            lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} is unable to attack!";
+                            enemyPokemons[enemyIndex].pokemonFlinch = false;
+                        }
+                        else
+                        {
+                            paralysisChance = paralysis.Next(0, 2); //2
+                            confuseChance = confuse.Next(0, 3); //3
+                            if (enemyPokemons[enemyIndex].pokemonConfused)
+                            {
+                                if (confuseChance == 0)
+                                {
+                                    lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} is confused, and hurt itself in confusion!";
+                                    randomChance = Random.Next(10, 21);
+                                    enemyPokemons[enemyIndex].pokemonHealth = Math.Max(enemyPokemons[enemyIndex].pokemonHealth - randomChance, 0);
+                                    UpdateEnemyProgressBar();
+                                    await EnemyPokemonFaints();
+                                }
+
+                            }
+                            else if (enemyPokemons[enemyIndex].pokemonParalyzed && paralysisChance == 0)
+                            {
+                                lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} is fully paralyzed and unable to move!";
+                            }
+                            else if (enemyPokemons[enemyIndex].pokemonSleeping)
+                            {
+                                lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} is fast asleep!";
+                                await EnemyHealing();
+                            }
+                            else
+                            {
+                                switch (enemyMove)
+                                {
+                                    case 0: // Karate Chop
+                                        enemyUsedMove1 = true;
+                                        await EnemyHealing();
+                                        if (healing == 0)
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            increasedCriticalChance = increasedCritical.Next(0, 9);
+                                            if (increasedCriticalChance == 0)
+                                            {
+                                                lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move1}!";
+                                                enemyPokemons[enemyIndex].pokemonCriticalHit = true;
+                                                EnemyPhysicalDamageCalculation();
+                                                await MoveEffectivenes();
+                                                await PlayerPokemonFaints();
+                                                CriticalHitEnemy();
+                                            }
+                                            else
+                                            {
+                                                lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move1}!";
+                                                EnemyPhysicalDamageCalculation();
+                                                await MoveEffectivenes();
+
+                                                await PlayerPokemonFaints();
+                                            }
+                                        }
+                                        break;
+
+                                    case 1: // Leer
+                                        await EnemyHealing();
+                                        if (healing == 0)
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move2}!";
+                                            if (enemyLeerIndex <= 3)
+                                            {
+                                                selectedPokemons[0].defense = Math.Max(selectedPokemons[0].defense - selectedPokemons[0].defense - 10, 0);
+                                                await PlayerPokemonFaints();
+                                                enemyLeerIndex++;
+                                            }
+                                            else
+                                            {
+                                                await Task.Delay(3000);
+                                                lblText.Text = $"It failed!";
+
+                                            }
+                                        }
+                                        break;
+
+                                    case 2: // Focus Energy
+                                        await EnemyHealing();
+                                        if (healing == 0)
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move3}!";
+                                            criticalIncreased = true;
+                                            await PlayerPokemonFaints();
+                                        }
+
+                                        break;
+
+                                    case 3: // Submission
+                                        await EnemyHealing();
+                                        enemyUsedMove4 = true;
+                                        if (healing == 0)
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            lblText.Text = $"Foe {enemyPokemons[enemyIndex].pokemonName} used {enemyPokemons[enemyIndex].move4}!";
+                                            EnemyPhysicalDamageCalculation();
+                                            await MoveEffectivenes();
+                                            enemyPokemonHealthBar.Value = Math.Max(enemyPokemonHealthBar.Value - calculatedDamage / 4, 0);
+                                            lblEnemyPokemonHealth.Text = $"{enemyPokemons[enemyIndex].pokemonHealth}/{enemyPokemons[enemyIndex].pokemonStartHealth}";
+                                            UpdateEnemyProgressBar();
+                                            await EnemyPokemonFaints();
+                                            await PlayerPokemonFaints();
+                                        }
+                                        break;
+                                }
+                            }
+
+                        }
+                        await EnemyPokemonStatusCondition();
+                        enemyHasAttacked = true;
+                        enemyTurn = false;
+                        await Task.Delay(turnDelaySec * 1000);
+                        enemyTurnInProgress = false;
+                        await PlayersTurn();
+                    }
+
+                }
             }
+           
         }
     }
 }
